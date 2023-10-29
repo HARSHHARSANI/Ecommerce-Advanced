@@ -12,6 +12,7 @@ const ForgotPassword = () => {
 
   useEffect(() => {
     if (user && user.token) navigate("/");
+    //eslint-disable-next-line
   }, [user]);
 
   const handleForgetPassword = async (e) => {

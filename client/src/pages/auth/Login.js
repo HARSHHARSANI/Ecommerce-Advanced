@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import firebase from "firebase/compat/app";
 import { toast } from "react-toastify";
 import { auth, googleAuthProvider } from "../../Firebase";
 import { Button } from "antd";
@@ -42,6 +41,7 @@ const Login = () => {
 
   useEffect(() => {
     if (user && user.token) navigate("/");
+    //eslint-disable-next-line
   }, [user]);
 
   const handleGoogleLogin = async () => {

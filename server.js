@@ -6,6 +6,8 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./db.js";
+import authRoutes from "./Routes/AuthRoutes.js";
+import userRoutes from "./Routes/userRoutes.js";
 
 dotenv.config();
 
@@ -21,7 +23,8 @@ app.use(bodyParser.json({ limit: "2mb" }));
 app.use(cors());
 
 ///routes
-// app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/user", userRoutes);
 // app.use("/api/v1/category", categoryRoutes);
 // app.use("/api/v1/products", ProductRoutes);
 

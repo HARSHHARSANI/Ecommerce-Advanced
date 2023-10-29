@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import firebase from "firebase/compat/app";
 import { toast } from "react-toastify";
 import { auth } from "../../Firebase";
 import { useNavigate } from "react-router-dom";

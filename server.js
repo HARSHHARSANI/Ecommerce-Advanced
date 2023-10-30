@@ -23,8 +23,8 @@ app.use(bodyParser.json({ limit: "2mb" }));
 app.use(cors());
 
 ///routes
-app.use("/api/v1/auth", authRoutes);
-app.use("/api/v1/user", userRoutes);
+app.use("/api", authRoutes);
+// app.use("/api", userRoutes);
 // app.use("/api/v1/category", categoryRoutes);
 // app.use("/api/v1/products", ProductRoutes);
 

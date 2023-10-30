@@ -2,9 +2,14 @@ import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { auth } from "../../Firebase";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { createOrUpdateUser } from "../../functions/authFunction";
 
 const RegisterComplete = (props) => {
   const navigate = useNavigate();
+  const { user } = useSelector((state) => ({ ...state }));
+  const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -46,6 +51,20 @@ const RegisterComplete = (props) => {
         ///redux Store
         console.log("user", user, "idTokenResult", idTokenResult);
 
+        createOrUpdateUser(idTokenResult.token)
+          .then((response) => {
+            dispatch({
+              type: "LOGGED_IN_USER",
+              payload: {
+                name: response.data.name,
+                email: response.data.email,
+                token: idTokenResult.token,
+                role: response.data.role,
+                id: response.data._id,
+              },
+            });
+          })
+          .catch();
         ///redirectf
         navigate("/");
       }

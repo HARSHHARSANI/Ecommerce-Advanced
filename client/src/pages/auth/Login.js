@@ -5,6 +5,8 @@ import { Button } from "antd";
 import { MailOutlined, GooglePlusOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { createOrUpdateUser } from "../../functions/authFunction.js";
 
 const Login = () => {
   const [email, setEmail] = useState("dreamoscp@gmail.com");
@@ -20,17 +22,27 @@ const Login = () => {
     // console.table(email, password);
     try {
       const result = await auth.signInWithEmailAndPassword(email, password);
-      console.log(result);
+      // console.log(result);
       const { user } = result;
+      // console.log(user);
       const idTokenResult = await user.getIdTokenResult();
+      // console.log(idTokenResult);
 
-      dispatch({
-        type: "LOGGED_IN_USER",
-        payload: {
-          email: user.email,
-          token: idTokenResult.token,
-        },
-      });
+      createOrUpdateUser(idTokenResult.token)
+        .then((response) => {
+          dispatch({
+            type: "LOGGED_IN_USER",
+            payload: {
+              name: response.data.name,
+              email: response.data.email,
+              token: idTokenResult.token,
+              role: response.data.role,
+              id: response.data._id,
+            },
+          });
+        })
+        .catch();
+
       navigate("/");
     } catch (error) {
       console.log(error);
@@ -50,13 +62,20 @@ const Login = () => {
         const { user } = result;
         const idTokenResult = await user.getIdTokenResult();
 
-        dispatch({
-          type: "LOGGED_IN_USER",
-          payload: {
-            email: user.email,
-            token: idTokenResult.token,
-          },
-        });
+        createOrUpdateUser(idTokenResult.token)
+          .then((response) => {
+            dispatch({
+              type: "LOGGED_IN_USER",
+              payload: {
+                name: response.data.name,
+                email: response.data.email,
+                token: idTokenResult.token,
+                role: response.data.role,
+                id: response.data._id,
+              },
+            });
+          })
+          .catch();
         navigate("/");
       });
     } catch (error) {

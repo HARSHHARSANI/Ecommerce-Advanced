@@ -11,6 +11,7 @@ import { auth } from "./Firebase";
 import { useDispatch } from "react-redux";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import { currentUser } from "./functions/authFunction";
+import History from "./pages/user/History";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -51,6 +52,8 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/register/complete" element={<RegisterComplete />} />
         <Route path="/forgot/password" element={<ForgotPassword />} />
+        <Route path="/user/history" element={<History />} />
+        
       </Routes>
     </>
   );

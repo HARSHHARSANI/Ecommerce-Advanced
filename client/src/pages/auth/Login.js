@@ -16,6 +16,18 @@ const Login = () => {
   const navigate = useNavigate();
   const { user } = useSelector((state) => ({ ...state }));
 
+  const roleBaseRedirect = (response) => {
+    try {
+      if (response.role === "admin") {
+        navigate("/admin/dashboard");
+      } else {
+        navigate("/user/history");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -24,7 +36,7 @@ const Login = () => {
       const result = await auth.signInWithEmailAndPassword(email, password);
       // console.log(result);
       const { user } = result;
-      // console.log(user);
+      console.log(user);
       const idTokenResult = await user.getIdTokenResult();
       // console.log(idTokenResult);
 
@@ -40,10 +52,11 @@ const Login = () => {
               id: response.data._id,
             },
           });
+          roleBaseRedirect(response.data);
         })
         .catch();
 
-      navigate("/");
+      // navigate("/");
     } catch (error) {
       console.log(error);
       toast.error(error);
@@ -74,9 +87,10 @@ const Login = () => {
                 id: response.data._id,
               },
             });
+            roleBaseRedirect(response);
           })
           .catch();
-        navigate("/");
+        // navigate("/");
       });
     } catch (error) {
       console.log(error);

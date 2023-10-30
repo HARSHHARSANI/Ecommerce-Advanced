@@ -64,7 +64,7 @@ const RegisterComplete = (props) => {
               },
             });
           })
-          .catch();
+          .catch((error) => console.log(error));
         ///redirectf
         navigate("/");
       }

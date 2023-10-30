@@ -10,6 +10,7 @@ import RegisterComplete from "./pages/auth/RegisterComplete";
 import { auth } from "./Firebase";
 import { useDispatch } from "react-redux";
 import ForgotPassword from "./pages/auth/ForgotPassword";
+import { currentUser } from "./functions/authFunction";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -19,13 +20,20 @@ const App = () => {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
       if (user) {
         const idTokenResult = await user.getIdTokenResult();
-        dispatch({
-          type: "LOGGED_IN_USER",
-          payload: {
-            email: user.email,
-            token: idTokenResult.token,
-          },
-        });
+        currentUser(idTokenResult.token)
+          .then((response) => {
+            dispatch({
+              type: "LOGGED_IN_USER",
+              payload: {
+                name: response.data.name,
+                email: response.data.email,
+                token: idTokenResult.token,
+                role: response.data.role,
+                id: response.data._id,
+              },
+            });
+          })
+          .catch((error) => console.log(error));
       }
     });
     ///cleanup

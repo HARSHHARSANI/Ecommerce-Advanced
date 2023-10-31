@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import { Route, Outlet } from "react-router-dom";
+import { useSelector } from "react-redux";
+import Spinner from "./Spinner";
 
-const UserRoute = () => {
-  return (
-    <div>UserRoute</div>
-  )
-}
+const UserRoute = ({ children, ...rest }) => {
+  const { user } = useSelector((state) => ({ ...state }));
 
-export default UserRoute
+  return user && user.token ? <Outlet /> : <Spinner />;
+};
+
+export default UserRoute;

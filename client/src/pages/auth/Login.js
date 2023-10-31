@@ -36,7 +36,7 @@ const Login = () => {
       const result = await auth.signInWithEmailAndPassword(email, password);
       // console.log(result);
       const { user } = result;
-      console.log(user);
+      // console.log(user);
       const idTokenResult = await user.getIdTokenResult();
       // console.log(idTokenResult);
 
@@ -55,8 +55,6 @@ const Login = () => {
           roleBaseRedirect(response.data);
         })
         .catch();
-
-      // navigate("/");
     } catch (error) {
       console.log(error);
       toast.error(error);
@@ -67,7 +65,7 @@ const Login = () => {
   useEffect(() => {
     if (user && user.token) navigate("/");
     //eslint-disable-next-line
-  }, [user]);
+  }, []);
 
   const handleGoogleLogin = async () => {
     try {
@@ -90,7 +88,6 @@ const Login = () => {
             roleBaseRedirect(response);
           })
           .catch();
-        // navigate("/");
       });
     } catch (error) {
       console.log(error);

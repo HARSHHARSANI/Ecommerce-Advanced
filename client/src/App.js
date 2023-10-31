@@ -12,6 +12,11 @@ import { useDispatch } from "react-redux";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import { currentUser } from "./functions/authFunction";
 import History from "./pages/user/History";
+import UserRoute from "./components/UserRoute";
+import Spinner from "./components/Spinner";
+import Password from "./pages/user/Password";
+import Wishlist from "./pages/user/Wishlist";
+import AdminRoute from "./components/AdminRoute";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -52,8 +57,16 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/register/complete" element={<RegisterComplete />} />
         <Route path="/forgot/password" element={<ForgotPassword />} />
-        <Route path="/user/history" element={<History />} />
-        
+        <Route path="/" element={<UserRoute />}>
+          <Route path="/user/history" element={<History />} />
+          <Route path="/user/password" element={<Password />} />
+          <Route path="/user/wishlist" element={<Wishlist />} />
+        </Route>
+        {/* <Route path="/" element={<AdminRoute />}>
+          <Route path="/user/history" element={<History />} />
+          <Route path="/user/password" element={<Password />} />
+          <Route path="/user/wishlist" element={<Wishlist />} />
+        </Route> */}
       </Routes>
     </>
   );

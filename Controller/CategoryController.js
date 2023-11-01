@@ -4,17 +4,17 @@ import CategoryModel from "../Models/CategoryModel.js";
 export const createCategoryController = async (req, res) => {
   try {
     const { name } = req.body;
+    const slug = slugify(name);
     ///check if no name
     if (!name) {
       return res.status(401).send({
         success: false,
         message: "Name is required for Creating Category",
-        error,
       });
     }
     ///check if Category already Exist
 
-    const ExistingCategory = await CategoryModel.findOne({ name });
+    const ExistingCategory = await CategoryModel.findOne({ slug });
     if (ExistingCategory) {
       return res.status(200).send({
         success: true,
@@ -36,6 +36,11 @@ export const createCategoryController = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Error in createCategoryController",
+      error,
+    });
   }
 };
 

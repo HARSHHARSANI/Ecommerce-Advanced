@@ -5,6 +5,7 @@ export const getCategories = async (req, res) => {
     const response = await axios.get(
       `${process.env.REACT_APP_API}/category/categories`
     );
+    console.log(response);
     return response;
   } catch (error) {
     console.log(error);
@@ -24,13 +25,14 @@ export const createCategory = async (name, authtoken) => {
   try {
     const response = await axios.post(
       `${process.env.REACT_APP_API}/category/category`,
-      name,
+      { name },
       {
         headers: {
           authtoken,
         },
       }
     );
+    // console.log("createCategory response :->", response);
     return response;
   } catch (error) {
     console.log(error);

@@ -25,7 +25,9 @@ export const createCategoryController = async (req, res) => {
     const category = new CategoryModel({
       name: req.body.name,
       slug: slugify(name).toLowerCase(),
-    }).save();
+    });
+
+    await category.save();
 
     res.status(201).send({
       success: true,
@@ -39,7 +41,7 @@ export const createCategoryController = async (req, res) => {
 
 export const getSingleCategoryController = async (req, res) => {
   try {
-    const { slug } = req.body;
+    const { slug } = req.params;
 
     if (!slug) {
       res.status(401).send({
@@ -54,7 +56,7 @@ export const getSingleCategoryController = async (req, res) => {
     if (categoryExist) {
       res.status(200).send({
         success: true,
-        message: `${categoryExist} category Found`,
+        message: `category Found`,
         categoryExist,
       });
     } else {
@@ -80,6 +82,7 @@ export const getAllCategoryController = async (req, res) => {
     res.status(200).send({
       success: true,
       message: "All categories shown",
+      count: categories.length,
       categories,
     });
   } catch (error) {
@@ -93,19 +96,45 @@ export const getAllCategoryController = async (req, res) => {
 };
 export const updateCategoryConrtoller = async (req, res) => {
   try {
-    const { slug } = req.body;
+    const { slug } = req.params;
+    const { name } = req.body;
     const category = await CategoryModel.findOneAndUpdate(
       { slug },
       {
-        name: req.body.name,
-      }
+        name,
+        slug: slugify(name),
+      },
+      { new: true }
     );
+
+    res.status(200).send({
+      success: true,
+      message: "Category Updated Successfully",
+      category,
+    });
   } catch (error) {
     console.log(error);
     res.status(400).send({
       success: false,
-      message: `Error in updating ${slug} Category`,
+      message: `Error in updating Category`,
     });
   }
 };
-export const deleteCategoryController = () => {};
+export const deleteCategoryController = async (req, res) => {
+  try {
+    const { slug } = req.params;
+
+    await CategoryModel.findOneAndDelete({ slug });
+    res.status(200).send({
+      success: true,
+      messsage: "Category Deleted Succesfully",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      success: false,
+      message: "Error In deleteCategoryController",
+      error,
+    });
+  }
+};

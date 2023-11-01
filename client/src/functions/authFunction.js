@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const createOrUpdateUser = async (authtoken) => {
-  console.log(`${process.env.REACT_APP_API}/create-or-update-user `);
+  // console.log(`${process.env.REACT_APP_API}/create-or-update-user `);
   const response = await axios.post(
     `${process.env.REACT_APP_API}/auth/create-or-update-user`,
     {},

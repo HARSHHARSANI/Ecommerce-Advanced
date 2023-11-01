@@ -12,12 +12,7 @@ const router = express.Router();
 
 ///routes
 router.post("/category", authCheck, adminCheck, createCategoryController);
-router.get(
-  "/category/:slug",
-  authCheck,
-  adminCheck,
-  getSingleCategoryController
-);
+router.get("/category/:slug", getSingleCategoryController);
 router.get("/categories", getAllCategoryController);
 router.put("/category/:slug", authCheck, adminCheck, updateCategoryConrtoller);
 router.delete(

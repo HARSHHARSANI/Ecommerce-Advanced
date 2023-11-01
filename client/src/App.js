@@ -17,6 +17,7 @@ import Spinner from "./components/Spinner";
 import Password from "./pages/user/Password";
 import Wishlist from "./pages/user/Wishlist";
 import AdminRoute from "./components/AdminRoute";
+import AdminDashboard from "./pages/admin/AdminDashboard";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -62,11 +63,10 @@ const App = () => {
           <Route path="/user/password" element={<Password />} />
           <Route path="/user/wishlist" element={<Wishlist />} />
         </Route>
-        {/* <Route path="/" element={<AdminRoute />}>
-          <Route path="/user/history" element={<History />} />
-          <Route path="/user/password" element={<Password />} />
-          <Route path="/user/wishlist" element={<Wishlist />} />
-        </Route> */}
+        <Route path="/" element={<AdminRoute />}>
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/admin/orders" element={<AdminDashboard />} />
+        </Route>
       </Routes>
     </>
   );

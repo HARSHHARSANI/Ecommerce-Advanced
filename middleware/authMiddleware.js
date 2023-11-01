@@ -1,4 +1,5 @@
 import admin from "../firebase/index.js";
+import userModel from "../Models/userModel.js";
 
 export const authCheck = async (req, res, next) => {
   // console.log(req.headers);
@@ -17,5 +18,20 @@ export const authCheck = async (req, res, next) => {
       message: "Error :-> Invalid Token Or Token Expired",
       error,
     });
+  }
+};
+
+export const adminCheck = async (req, res, next) => {
+  const { email } = req.user;
+
+  const adminUser = await userModel.findOne({ email });
+
+  if (adminUser.role !== "admin") {
+    res.status(403).send({
+      success: false,
+      message: "Admin Resource. Access Denied",
+    });
+  } else {
+    next();
   }
 };

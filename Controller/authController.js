@@ -10,7 +10,7 @@ export const createOrUpdateUserController = async (req, res) => {
     );
 
     if (user) {
-      console.log("User Updated :->", user);
+      // console.log("User Updated :->", user);
       res.json(user);
     } else {
       const newUser = await new userModel({
@@ -18,7 +18,7 @@ export const createOrUpdateUserController = async (req, res) => {
         name: email.split("@")[0],
         picture,
       }).save();
-      console.log("User Created :->", newUser);
+      // console.log("User Created :->", newUser);
       res.json(newUser);
     }
   } catch (error) {

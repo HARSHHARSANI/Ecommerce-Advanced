@@ -5,7 +5,7 @@ export const getCategories = async (req, res) => {
     const response = await axios.get(
       `${process.env.REACT_APP_API}/category/categories`
     );
-    console.log(response);
+    // console.log(response);
     return response;
   } catch (error) {
     console.log(error);
@@ -43,11 +43,12 @@ export const removeCategory = async (slug, authtoken) => {
     const response = await axios.delete(
       `${process.env.REACT_APP_API}/category/category/${slug}`,
       {
-        header: {
+        headers: {
           authtoken,
         },
       }
     );
+    console.log("Remove CAtegory Response :->", response);
     return response;
   } catch (error) {
     console.log(error);
@@ -59,7 +60,7 @@ export const updateCategory = async (slug, name, authtoken) => {
       `${process.env.REACT_APP_API}/category/category/${slug}`,
       name,
       {
-        header: {
+        headers: {
           authtoken,
         },
       }

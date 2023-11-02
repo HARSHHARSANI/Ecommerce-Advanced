@@ -20,6 +20,7 @@ import AdminRoute from "./components/AdminRoute";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import categoryFunction from "./functions/categoryFunction";
 import CreateCategory from "./pages/admin/CreateCategory";
+import UpdateCategory from "./pages/admin/UpdateCategory";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -73,6 +74,7 @@ const App = () => {
           <Route path="/admin/products" element={<AdminDashboard />} />
           <Route path="/admin/coupons" element={<AdminDashboard />} />
           <Route path="/admin/password" element={<AdminDashboard />} />
+          <Route path="/admin/category/:slug" element={<UpdateCategory />} />
         </Route>
       </Routes>
     </>

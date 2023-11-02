@@ -3,21 +3,21 @@ import AdminNav from "../../components/AdminNav.js";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import {
-  createCategory,
-  getCategories,
-  removeCategory,
+  getSingleCategories,
+  updateCategory,
 } from "../../functions/categoryFunction";
-import { Link } from "react-router-dom";
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 
-const CreateCategory = () => {
+const UpdateCategory = () => {
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
-  const [categories, setCategories] = useState([]);
   const { user } = useSelector((state) => ({ ...state }));
+  const { slug } = req.params;
+
+  const navigate = useNavigate();
 
   const loadCategories = () => {
-    getCategories().then((response) => {
+    getSingleCategories(slug).then((response) => {
       setCategories(response.data);
     });
   };
@@ -131,4 +131,4 @@ const CreateCategory = () => {
   );
 };
 
-export default CreateCategory;
+export default UpdateCategory;

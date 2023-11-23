@@ -50,7 +50,7 @@ const Header = () => {
                   ? user.role === "admin"
                     ? "/admin/dashboard"
                     : "/user/history"
-                  : null,
+                  : "/",
             },
             {
               label: "Option 2",

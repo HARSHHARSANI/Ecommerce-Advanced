@@ -3,44 +3,49 @@ import AdminNav from "../../components/AdminNav.js";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import {
-  getSingleCategories,
   updateCategory,
+  getSingleCategories,
 } from "../../functions/categoryFunction";
+import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-const UpdateCategory = () => {
+const UpdateCategory = ({ match, history }) => {
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
   const { user } = useSelector((state) => ({ ...state }));
-  const { slug } = req.params;
-
+  let { slug } = useParams();
   const navigate = useNavigate();
 
-  const loadCategories = () => {
-    getSingleCategories(slug).then((response) => {
-      setCategories(response.data);
-    });
-  };
-
   useEffect(() => {
-    loadCategories();
+    loadCategory();
   }, []);
+
+  const loadCategory = () => {
+    getSingleCategories(slug)
+      .then((c) => {
+        setName(c.data.categoryExist.name);
+      })
+      .catch((error) => {
+        console.error("Error loading category:", error);
+      });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    createCategory(name, user.token)
+    updateCategory(slug, { name }, user.token)
       .then((response) => {
         setLoading(false);
         setName("");
         console.log("API Response:", response);
         if (response && response.data && response.data.message) {
           toast.success(response.data.message);
-          loadCategories(); // Reload the categories after creating a new one
         } else {
           console.error("Invalid response format:", response);
         }
+        navigate("/admin/category");
       })
+
       .catch((err) => {
         console.log(err);
         setLoading(false);
@@ -50,21 +55,6 @@ const UpdateCategory = () => {
       });
   };
 
-  const handleRemove = async (slug) => {
-    let answer = window.confirm(`Delete? ${slug}`);
-    console.log(answer, slug);
-    if (answer) {
-      setLoading(true);
-      removeCategory(slug, user.token)
-        .then((response) => {
-          setLoading(false);
-          toast.error(`"${slug}" category Deleted`);
-          loadCategories();
-        })
-        .catch((err) => console.log(err));
-    }
-  };
-
   return (
     <div className="container-fluid">
       <div className="row">
@@ -72,7 +62,7 @@ const UpdateCategory = () => {
           <AdminNav />
         </div>
         <div className="col">
-          <h4>Create Category Page</h4>
+          <h4>Update Category Page</h4>
           <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label>Name</label>
@@ -90,41 +80,6 @@ const UpdateCategory = () => {
               </button>
             </div>
           </form>
-
-          <div>
-            {categories &&
-            categories.categories &&
-            categories.categories.length > 0 ? (
-              <table className="table table-bordered">
-                <thead>
-                  <tr>
-                    <th>Category</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {categories.categories.map((category) => (
-                    <tr key={category._id}>
-                      <td>{category.name}</td>
-                      <td>
-                        <Link to={`/admin/category/${category.slug}`}>
-                          <button className="btn btn-warning">Update</button>
-                        </Link>
-                        <button
-                          className="btn btn-danger"
-                          onClick={() => handleRemove(category.slug)}
-                        >
-                          Delete
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            ) : (
-              <p>No categories found.</p>
-            )}
-          </div>
         </div>
       </div>
     </div>

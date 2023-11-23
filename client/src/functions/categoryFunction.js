@@ -2,10 +2,11 @@ import axios from "axios";
 
 export const getCategories = async (req, res) => {
   try {
+    console.log("im inside getCategories");
     const response = await axios.get(
       `${process.env.REACT_APP_API}/category/categories`
     );
-    // console.log(response);
+    console.log("Sending response from getCategories", response);
     return response;
   } catch (error) {
     console.log(error);
@@ -13,9 +14,11 @@ export const getCategories = async (req, res) => {
 };
 export const getSingleCategories = async (slug) => {
   try {
+    console.log("i am inside getSingleCategories");
     const response = await axios.get(
       `${process.env.REACT_APP_API}/category/category/${slug}`
     );
+    console.log("Sending response from getSingleCategories", response);
     return response;
   } catch (error) {
     console.log(error);
@@ -56,6 +59,7 @@ export const removeCategory = async (slug, authtoken) => {
 };
 export const updateCategory = async (slug, name, authtoken) => {
   try {
+    console.log("inside updateCategory");
     const response = await axios.put(
       `${process.env.REACT_APP_API}/category/category/${slug}`,
       name,
@@ -65,6 +69,7 @@ export const updateCategory = async (slug, name, authtoken) => {
         },
       }
     );
+    console.log("returing response from updateCategory", response);
     return response;
   } catch (error) {
     console.log(error);

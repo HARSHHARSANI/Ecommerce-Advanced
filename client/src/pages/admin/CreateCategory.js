@@ -61,7 +61,11 @@ const CreateCategory = () => {
           toast.error(`"${slug}" category Deleted`);
           loadCategories();
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err);
+          setLoading(false);
+          toast.error(err.response.data);
+        });
     }
   };
 

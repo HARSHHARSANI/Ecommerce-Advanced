@@ -9,15 +9,19 @@ import {
 } from "../../functions/categoryFunction";
 import { Link } from "react-router-dom";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import CategoryForm from "../../components/forms/CategoryForm.js";
 
 const CreateCategory = () => {
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([]);
   const { user } = useSelector((state) => ({ ...state }));
+  ///searching / Filtering
+  const [keyword, setkeyword] = useState("");
 
   const loadCategories = () => {
     getCategories().then((response) => {
+      console.log(response);
       setCategories(response.data);
     });
   };
@@ -69,6 +73,13 @@ const CreateCategory = () => {
     }
   };
 
+  const handleSearchChange = (e) => {
+    e.preventDefault();
+    setkeyword(e.target.value.toLowerCase());
+  };
+
+  const Searched = (keyword) => (c) => c.name.toLowerCase().includes(keyword);
+
   return (
     <div className="container-fluid">
       <div className="row">
@@ -77,23 +88,20 @@ const CreateCategory = () => {
         </div>
         <div className="col">
           <h4>Create Category Page</h4>
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label>Name</label>
-              <input
-                type="text"
-                className="form-control mt-3"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                autoFocus
-                required
-              />
-              <br />
-              <button className="btn btn-primary mt-3" type="submit">
-                Submit
-              </button>
-            </div>
-          </form>
+
+          <CategoryForm
+            name={name}
+            setName={setName}
+            handleSubmit={handleSubmit}
+          />
+
+          <input
+            type="search"
+            placeholder="Filter"
+            value={keyword}
+            onChange={handleSearchChange}
+            className="form-control mt-3 mb-3"
+          />
 
           <div>
             {categories &&
@@ -107,22 +115,24 @@ const CreateCategory = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {categories.categories.map((category) => (
-                    <tr key={category._id}>
-                      <td>{category.name}</td>
-                      <td>
-                        <Link to={`/admin/category/${category.slug}`}>
-                          <button className="btn btn-warning">Update</button>
-                        </Link>
-                        <button
-                          className="btn btn-danger"
-                          onClick={() => handleRemove(category.slug)}
-                        >
-                          Delete
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
+                  {categories.categories
+                    .filter(Searched(keyword))
+                    .map((category) => (
+                      <tr key={category._id}>
+                        <td>{category.name}</td>
+                        <td>
+                          <Link to={`/admin/category/${category.slug}`}>
+                            <button className="btn btn-warning">Update</button>
+                          </Link>
+                          <button
+                            className="btn btn-danger"
+                            onClick={() => handleRemove(category.slug)}
+                          >
+                            Delete
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
             ) : (

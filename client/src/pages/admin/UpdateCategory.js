@@ -8,8 +8,9 @@ import {
 } from "../../functions/categoryFunction";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import CategoryForm from "../../components/forms/CategoryForm.js";
 
-const UpdateCategory = ({ match, history }) => {
+const UpdateCategory = () => {
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
   const { user } = useSelector((state) => ({ ...state }));
@@ -63,23 +64,12 @@ const UpdateCategory = ({ match, history }) => {
         </div>
         <div className="col">
           <h4>Update Category Page</h4>
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label>Name</label>
-              <input
-                type="text"
-                className="form-control mt-3"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                autoFocus
-                required
-              />
-              <br />
-              <button className="btn btn-primary mt-3" type="submit">
-                Submit
-              </button>
-            </div>
-          </form>
+
+          <CategoryForm
+            name={name}
+            setName={setName}
+            handleSubmit={handleSubmit}
+          />
         </div>
       </div>
     </div>

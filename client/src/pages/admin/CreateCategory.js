@@ -10,6 +10,7 @@ import {
 import { Link } from "react-router-dom";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import CategoryForm from "../../components/forms/CategoryForm.js";
+import SearchForm from "../../components/forms/SearchForm.js";
 
 const CreateCategory = () => {
   const [name, setName] = useState("");
@@ -73,11 +74,6 @@ const CreateCategory = () => {
     }
   };
 
-  const handleSearchChange = (e) => {
-    e.preventDefault();
-    setkeyword(e.target.value.toLowerCase());
-  };
-
   const Searched = (keyword) => (c) => c.name.toLowerCase().includes(keyword);
 
   return (
@@ -95,13 +91,7 @@ const CreateCategory = () => {
             handleSubmit={handleSubmit}
           />
 
-          <input
-            type="search"
-            placeholder="Filter"
-            value={keyword}
-            onChange={handleSearchChange}
-            className="form-control mt-3 mb-3"
-          />
+          <SearchForm keyword={keyword} setkeyword={setkeyword} />
 
           <div>
             {categories &&

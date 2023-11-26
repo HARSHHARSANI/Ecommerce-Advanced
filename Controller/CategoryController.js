@@ -12,8 +12,8 @@ export const createCategoryController = async (req, res) => {
         message: "Name is required for Creating Category",
       });
     }
+    
     ///check if Category already Exist
-
     const ExistingCategory = await CategoryModel.findOne({ slug });
     if (ExistingCategory) {
       return res.status(200).send({

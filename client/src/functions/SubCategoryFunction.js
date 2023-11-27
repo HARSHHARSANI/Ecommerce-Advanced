@@ -2,9 +2,9 @@ import axios from "axios";
 
 export const getSubCategories = async (req, res) => {
   try {
-    console.log("im inside getCategories");
+    console.log("im inside getSubCategories");
     const response = await axios.get(
-      `${process.env.REACT_APP_API}/category/subcategory`
+      `${process.env.REACT_APP_API}/subcategory/subcategory`
     );
     console.log("Sending response from getSubCategories", response);
     return response;
@@ -16,7 +16,7 @@ export const getSingleSubCategories = async (slug) => {
   try {
     console.log("i am inside getSingleCategories");
     const response = await axios.get(
-      `${process.env.REACT_APP_API}/category/subcategory/${slug}`
+      `${process.env.REACT_APP_API}/subcategory/subcategory/${slug}`
     );
     console.log("Sending response from getSingleSubCategories", response);
     return response;
@@ -24,11 +24,11 @@ export const getSingleSubCategories = async (slug) => {
     console.log(error);
   }
 };
-export const createSubCategory = async (name, authtoken) => {
+export const createSubCategory = async (data, authtoken) => {
   try {
     const response = await axios.post(
-      `${process.env.REACT_APP_API}/category/subcategory`,
-      { name },
+      `${process.env.REACT_APP_API}/subcategory/subcategory`,
+      data,
       {
         headers: {
           authtoken,
@@ -44,7 +44,7 @@ export const createSubCategory = async (name, authtoken) => {
 export const removeSubCategory = async (slug, authtoken) => {
   try {
     const response = await axios.delete(
-      `${process.env.REACT_APP_API}/category/subcategory/${slug}`,
+      `${process.env.REACT_APP_API}/subcategory/subcategory/${slug}`,
       {
         headers: {
           authtoken,
@@ -61,7 +61,7 @@ export const updateSubCategory = async (slug, name, authtoken) => {
   try {
     console.log("inside updateCategory");
     const response = await axios.put(
-      `${process.env.REACT_APP_API}/category/subcategory/${slug}`,
+      `${process.env.REACT_APP_API}/subcategory/subcategory/${slug}`,
       name,
       {
         headers: {

@@ -1,10 +1,9 @@
 import slugify from "slugify";
-import SubCategoryModel from "../Models/SubCategoryModel";
+import SubCategoryModel from "../Models/SubCategoryModel.js";
 
 export const createSubCategoryController = async (req, res) => {
   try {
-    const { name } = req.body;
-    const slug = slugify(name);
+    const { name, parent } = req.body;
 
     ///check if no name
     if (!name) {
@@ -13,6 +12,8 @@ export const createSubCategoryController = async (req, res) => {
         message: "Name is required for Creating Sub Category",
       });
     }
+
+    const slug = slugify(name);
 
     ///check if Sub Category already Exist
     const ExistingSubCategory = await SubCategoryModel.findOne({ slug });
@@ -25,7 +26,8 @@ export const createSubCategoryController = async (req, res) => {
 
     const category = new SubCategoryModel({
       name: req.body.name,
-      slug: slug.toLowerCase(),
+      parent: req.body.parent,
+      slug: slugify(name).toLowerCase(),
     });
 
     await category.save();

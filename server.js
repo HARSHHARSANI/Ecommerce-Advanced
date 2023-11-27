@@ -8,6 +8,7 @@ import dotenv from "dotenv";
 import connectDB from "./db.js";
 import authRoutes from "./Routes/AuthRoutes.js";
 import categoryRoutes from "./Routes/CategoryRoutes.js";
+import SubCategoryRoutes from "./Routes/SubCategoryRoutes.js";
 
 dotenv.config();
 
@@ -26,6 +27,7 @@ app.use(cors());
 app.use("/api/v1/auth", authRoutes);
 // app.use("/api", userRoutes);
 app.use("/api/v1/category", categoryRoutes);
+app.use("/api/v1/subcategory", SubCategoryRoutes);
 // app.use("/api/v1/products", ProductRoutes);
 
 const port = process.env.PORT || 8080;

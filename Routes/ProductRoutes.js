@@ -1,12 +1,12 @@
 import express from "express";
-import { adminCheck, authCheck } from "../middleware/authMiddleware";
+import { adminCheck, authCheck } from "../middleware/authMiddleware.js";
 import {
   createProductController,
   deleteProductController,
   getAllProductsController,
   getSingleProductController,
   updateProductController,
-} from "../Controller/ProductController";
+} from "../Controller/ProductController.js";
 
 const router = express.Router();
 

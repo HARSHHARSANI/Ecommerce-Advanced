@@ -3,24 +3,18 @@ import AdminNav from "../../components/AdminNav.js";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import {
-  createSubCategory,
-  getSubCategories,
   getSingleSubCategories,
-  removeSubCategory,
   updateSubCategory,
 } from "../../functions/SubCategoryFunction.js";
 import { getCategories } from "../../functions/categoryFunction.js";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { useNavigate, useParams } from "react-router-dom";
 import CategoryForm from "../../components/forms/CategoryForm.js";
-import SearchForm from "../../components/forms/SearchForm.js";
 
 const UpdateSubCategory = () => {
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([]);
   const { user } = useSelector((state) => ({ ...state }));
-  const [category, setCategory] = useState("");
   const [parent, setparent] = useState("");
   const navigate = useNavigate();
 

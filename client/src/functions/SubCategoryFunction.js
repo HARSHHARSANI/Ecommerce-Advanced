@@ -57,12 +57,12 @@ export const removeSubCategory = async (slug, authtoken) => {
     console.log(error);
   }
 };
-export const updateSubCategory = async (slug, name, authtoken) => {
+export const updateSubCategory = async (slug, data, authtoken) => {
   try {
     console.log("inside updateCategory");
     const response = await axios.put(
       `${process.env.REACT_APP_API}/subcategory/subcategory/${slug}`,
-      name,
+      data,
       {
         headers: {
           authtoken,

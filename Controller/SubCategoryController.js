@@ -106,14 +106,23 @@ export const updateSubCategoryController = async (req, res) => {
   try {
     const { slug } = req.params;
     const { name } = req.body;
+    const { parent } = req.body;
     const subCategory = await SubCategoryModel.findOneAndUpdate(
       { slug },
       {
         name,
         slug: slugify(name),
+        parent: parent,
       },
       { new: true }
     );
+
+    if (!subCategory) {
+      return res.status(404).json({
+        success: false,
+        message: "Sub Category not found",
+      });
+    }
 
     res.status(200).send({
       success: true,
@@ -121,10 +130,11 @@ export const updateSubCategoryController = async (req, res) => {
       subCategory,
     });
   } catch (error) {
-    console.log(error);
+    console.log("here is the error ", error);
     res.status(400).send({
       success: false,
       message: `Error in updateSubCategoryController`,
+      error,
     });
   }
 };

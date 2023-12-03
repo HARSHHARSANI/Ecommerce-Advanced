@@ -26,10 +26,20 @@ export const getSingleProduct = async (slug) => {
   }
 };
 
-export const createProduct = (data, authtoken) => {
+export const createProduct = async (product, authtoken) => {
   try {
-      console.log("inside createProduct");
-      
+    console.log("inside createProduct");
+    const response = await axios.post(
+      `${process.env.REACT_APP_API}/product/product`,
+      product,
+      {
+        headers: {
+          authtoken,
+        },
+      }
+    );
+    console.log("createCategory response :->", response);
+    return response;
   } catch (error) {
     console.log(error);
   }

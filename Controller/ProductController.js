@@ -1,4 +1,5 @@
 import ProductModel from "../Models/ProductModel.js";
+import slugify from "slugify";
 
 export const createProductController = async (req, res) => {
   try {
@@ -35,7 +36,7 @@ export const createProductController = async (req, res) => {
       });
     }
 
-    const product = new ProductModel({
+    const product = await new ProductModel({
       title,
       slug,
       description,

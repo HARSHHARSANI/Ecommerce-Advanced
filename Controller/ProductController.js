@@ -7,7 +7,6 @@ export const createProductController = async (req, res) => {
 
     const {
       title,
-      slug,
       description,
       category,
       subcategory,
@@ -16,14 +15,17 @@ export const createProductController = async (req, res) => {
       images,
       shipping,
       brand,
+      color,
     } = req.body;
+
+    const slug = "";
 
     ///check if product already exist
     const productExist = await ProductModel.findOne({ slug });
 
     const product = await new ProductModel({
       title,
-      slug,
+      slug: slugify(title),
       description,
       category,
       subcategory,
@@ -32,6 +34,7 @@ export const createProductController = async (req, res) => {
       images,
       shipping,
       brand,
+      color,
     }).save();
 
     res.status(200).send({
@@ -43,13 +46,13 @@ export const createProductController = async (req, res) => {
     return res.status(500).send({
       success: false,
       message: "Error in createProductController",
-      error,
+      error: error.message,
     });
   }
 };
 export const getAllProductsController = async (req, res) => {
   try {
-    const products = ProductModel.find({});
+    const products = await ProductModel.find({});
     res.status(200).send({
       success: true,
       message: "All products Shown",
@@ -60,6 +63,7 @@ export const getAllProductsController = async (req, res) => {
     return res.status(400).send({
       success: false,
       message: "Error in getAllProductsController",
+      error: error.message,
     });
   }
 };

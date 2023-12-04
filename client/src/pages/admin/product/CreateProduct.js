@@ -11,19 +11,34 @@ import { Link } from "react-router-dom";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import CategoryForm from "../../../components/forms/CategoryForm.js";
 import SearchForm from "../../../components/forms/SearchForm.js";
+import CreateProductForm from "../../../components/forms/CreateProductForm.js";
+import { getCategories } from "../../../functions/categoryFunction.js";
 
 const CreateProduct = () => {
+  const [categories, setCategories] = useState([]);
+
   const { user } = useSelector((state) => ({ ...state }));
 
+  const loadCategories = () => {
+    getCategories().then((response) => {
+      console.log(response);
+      setvalues({ ...values, categories: response.data });
+    });
+  };
+
+  useEffect(() => {
+    loadCategories();
+  }, []);
+
   const initialState = {
-    title: "",
-    description: "",
-    price: "",
+    title: "Macbook Pro",
+    description: "This is best Apple product",
+    price: "4500",
+    categories: [],
     category: "",
     subCategory: [],
-    shipping: ["Yes", "No"],
-    categories: [],
-    quantity: "",
+    shipping: "Yes",
+    quantity: "50",
     images: [],
     colors: ["Black", "Brown", "White", "Silver", "Blue"],
     brands: [
@@ -36,38 +51,23 @@ const CreateProduct = () => {
       "Jio",
       "Samsung",
     ],
-    color: "",
-    brand: "",
+    color: "White",
+    brand: "Apple",
   };
 
   const [values, setvalues] = useState(initialState);
-
-  ///destructuring
-  const {
-    title,
-    description,
-    price,
-    shipping,
-    categories,
-    category,
-    subCategory,
-    quantity,
-    colors,
-    brands,
-    color,
-    brand,
-    images,
-  } = values;
 
   const handleSubmit = (e) => {
     e.preventDefault();
     createProduct(values, user.token)
       .then((response) => {
         console.log(response);
+        toast.success(`${values.title} Created Successfully`);
+        // window.location.reload();
       })
       .catch((error) => {
         console.log(error);
-        if (error.response.status === 400) toast.error(error.response.data);
+        toast.error(error.response.data.error);
       });
   };
   const handleChange = (e) => {
@@ -83,104 +83,15 @@ const CreateProduct = () => {
         </div>
         <div className="col-md-10">
           <h4>Create Product Page</h4>
-          {JSON.stringify(values)}
           <hr />
-          <form onSubmit={handleSubmit}>
-            <div className="form-group mb-3">
-              <label>Title</label>
-              <input
-                type="text"
-                name="title"
-                className="form-control mt-2"
-                value={title}
-                onChange={handleChange}
-              />
-            </div>
 
-            <div className="form-group mb-3">
-              <label>Description</label>
-              <input
-                type="text"
-                name="description"
-                className="form-control mt-2"
-                value={description}
-                onChange={handleChange}
-              />
-            </div>
+          {/* {JSON.stringify(values.categories)} */}
 
-            <div className="form-group mb-3">
-              <label>Price</label>
-              <input
-                type="number"
-                name="price"
-                className="form-control mt-2"
-                value={price}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className="form-group mb-3">
-              <label>Brands</label>
-              <select
-                name="brand"
-                className="form-control mt-2"
-                onChange={handleChange}
-              >
-                {" "}
-                <option>Please Select</option>
-                {brands.map((b) => (
-                  <option key={b} value={b}>
-                    {b}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className="form-group mb-3">
-              <label>Quantity</label>
-              <input
-                type="number"
-                name="quantity"
-                className="form-control mt-2"
-                value={quantity}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className="form-group mb-3">
-              <label>Colors</label>
-              <select
-                name="color"
-                className="form-control mt-2"
-                onChange={handleChange}
-              >
-                {" "}
-                <option>Please Select</option>
-                {colors.map((c) => (
-                  <option key={c} value={c}>
-                    {c}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className="form-group mb-3">
-              <label>Shipping</label>
-              <select
-                name="shipping"
-                className="form-control mt-2"
-                onChange={handleChange}
-              >
-                <option>Please Select</option>
-                <option value="No">No</option>
-                <option value="Yes">Yes</option>
-              </select>
-            </div>
-
-            <div className="btn btn-outline-info" onClick={handleSubmit}>
-              Save
-            </div>
-          </form>
+          <CreateProductForm
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+            values={values}
+          />
         </div>
       </div>
     </div>

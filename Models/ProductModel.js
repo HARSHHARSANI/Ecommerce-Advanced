@@ -29,10 +29,10 @@ const productSchema = new mongoose.Schema(
       maxlength: 32,
     },
 
-    // category: {
-    //   type: ObjectId,
-    //   ref: "Category",
-    // },
+    category: {
+      type: ObjectId,
+      ref: "Category",
+    },
 
     // subCategory: [
     //   {
@@ -57,11 +57,12 @@ const productSchema = new mongoose.Schema(
       enum: ["Yes", "No"],
     },
 
-    color: {
+    colors: {
       type: String,
       enum: ["Black", "Brown", "White", "Silver", "Blue"],
     },
-    brand: {
+
+    brands: {
       type: String,
       enum: [
         "Apple",

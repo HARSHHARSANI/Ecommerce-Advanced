@@ -38,7 +38,7 @@ export const createProduct = async (product, authtoken) => {
         },
       }
     );
-    console.log("createCategory response :->", response);
+    console.log("createProduct response :->", response);
     return response;
   } catch (error) {
     console.log(error);

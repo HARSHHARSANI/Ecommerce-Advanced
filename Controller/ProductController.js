@@ -3,6 +3,8 @@ import slugify from "slugify";
 
 export const createProductController = async (req, res) => {
   try {
+    console.log(req.body);
+
     const {
       title,
       slug,
@@ -18,23 +20,6 @@ export const createProductController = async (req, res) => {
 
     ///check if product already exist
     const productExist = await ProductModel.findOne({ slug });
-
-    if (
-      !title ||
-      !description ||
-      !category ||
-      !subcategory ||
-      !price ||
-      !quantity ||
-      !brand ||
-      !shipping ||
-      !images
-    ) {
-      return res.status(400).send({
-        success: false,
-        message: "InSufficient Details in createProductController",
-      });
-    }
 
     const product = await new ProductModel({
       title,

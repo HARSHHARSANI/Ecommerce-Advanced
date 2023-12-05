@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const getCategories = async (req, res) => {
+export const getCategories = async () => {
   try {
     console.log("im inside getCategories");
     const response = await axios.get(
@@ -73,5 +73,21 @@ export const updateCategory = async (slug, name, authtoken) => {
     return response;
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const getSubCategoryBasedOnParentId = async (_id) => {
+  try {
+    console.log("i am inside getSubCategoryBasedOnParentId");
+    const response = await axios.get(
+      `${process.env.REACT_APP_API}/category/category/subcategory/${_id}`
+    );
+    console.log(
+      "Sending response from getSubCategoryBasedOnParentId",
+      response
+    );
+    return response;
+  } catch (error) {
+    console.log("error -------->", error.message);
   }
 };

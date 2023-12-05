@@ -2,6 +2,7 @@ import express from "express";
 import { authCheck, adminCheck } from "../middleware/authMiddleware.js";
 import {
   createCategoryController,
+  createProductBasedOnCategoryAndSubcategoryController,
   deleteCategoryController,
   getAllCategoryController,
   getSingleCategoryController,
@@ -20,6 +21,11 @@ router.delete(
   authCheck,
   adminCheck,
   deleteCategoryController
+);
+
+router.get(
+  "/category/subcategory/:_id",
+  createProductBasedOnCategoryAndSubcategoryController
 );
 
 export default router;

@@ -1,5 +1,6 @@
 import slugify from "slugify";
 import CategoryModel from "../Models/CategoryModel.js";
+import SubCategoryModel from "../Models/SubCategoryModel.js";
 
 export const createCategoryController = async (req, res) => {
   try {
@@ -12,7 +13,7 @@ export const createCategoryController = async (req, res) => {
         message: "Name is required for Creating Category",
       });
     }
-    
+
     ///check if Category already Exist
     const ExistingCategory = await CategoryModel.findOne({ slug });
     if (ExistingCategory) {
@@ -85,9 +86,6 @@ export const getAllCategoryController = async (req, res) => {
   try {
     const categories = await CategoryModel.find({});
     res.status(200).send({
-      success: true,
-      message: "All categories shown",
-      count: categories.length,
       categories,
     });
   } catch (error) {
@@ -141,6 +139,32 @@ export const deleteCategoryController = async (req, res) => {
       success: false,
       message: "Error In deleteCategoryController",
       error,
+    });
+  }
+};
+
+export const createProductBasedOnCategoryAndSubcategoryController = async (
+  req,
+  res
+) => {
+  try {
+    console.log("Received _id:", req.params._id);
+
+    console.log(
+      "im inside createProductBasedOnCategoryAndSubcategoryController"
+    );
+
+    const subcategory = await SubCategoryModel.find({
+      parent: req.params._id,
+    }).exec();
+
+    res.status(200).send({
+      subcategory,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      error: "Internal Server Error",
     });
   }
 };

@@ -12,24 +12,12 @@ import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import CategoryForm from "../../../components/forms/CategoryForm.js";
 import SearchForm from "../../../components/forms/SearchForm.js";
 import CreateProductForm from "../../../components/forms/CreateProductForm.js";
-import { getCategories } from "../../../functions/categoryFunction.js";
+import {
+  getCategories,
+  getSubCategoryBasedOnParentId,
+} from "../../../functions/categoryFunction.js";
 
 const CreateProduct = () => {
-  const [categories, setCategories] = useState([]);
-
-  const { user } = useSelector((state) => ({ ...state }));
-
-  const loadCategories = () => {
-    getCategories().then((response) => {
-      console.log(response);
-      setvalues({ ...values, categories: response.data });
-    });
-  };
-
-  useEffect(() => {
-    loadCategories();
-  }, []);
-
   const initialState = {
     title: "Macbook Pro",
     description: "This is best Apple product",
@@ -54,8 +42,21 @@ const CreateProduct = () => {
     color: "White",
     brand: "Apple",
   };
-
+  const { user } = useSelector((state) => ({ ...state }));
   const [values, setvalues] = useState(initialState);
+  const [subOption, setsubOption] = useState([]);
+  const [showSub, setshowSub] = useState(false);
+
+  const loadCategories = () => {
+    getCategories().then((response) => {
+      console.log(response);
+      setvalues({ ...values, categories: response.data });
+    });
+  };
+
+  useEffect(() => {
+    loadCategories();
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -75,6 +76,22 @@ const CreateProduct = () => {
     console.log(e.target.name, "------>", e.target.value);
   };
 
+  const handleCategoryChange = (e) => {
+    e.preventDefault();
+    console.log("Clicked Category", e.target.value);
+    setvalues({
+      ...values,
+      category: e.target.value,
+      subCategory: [],
+    });
+    getSubCategoryBasedOnParentId(e.target.value).then((res) => {
+      console.log("SubOptions On getSingleCategoryBasedOnParentId", res);
+      console.log(res);
+      setsubOption(res.data.subcategory);
+    });
+    setshowSub(true);
+  };
+
   return (
     <div className="container-fluid">
       <div className="row">
@@ -87,10 +104,16 @@ const CreateProduct = () => {
 
           {/* {JSON.stringify(values.categories)} */}
 
+          {JSON.stringify(values.subCategory)}
+
           <CreateProductForm
             handleChange={handleChange}
             handleSubmit={handleSubmit}
             values={values}
+            setvalues={setvalues}
+            handleCategoryChange={handleCategoryChange}
+            subOption={subOption}
+            showSub={showSub}
           />
         </div>
       </div>

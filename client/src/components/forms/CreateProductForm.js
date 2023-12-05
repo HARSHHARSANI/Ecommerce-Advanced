@@ -1,6 +1,17 @@
 import React, { useState } from "react";
+import { Select } from "antd";
 
-const CreateProductForm = ({ handleSubmit, handleChange, values }) => {
+const { Option } = Select;
+
+const CreateProductForm = ({
+  handleSubmit,
+  handleChange,
+  values,
+  handleCategoryChange,
+  subOption,
+  showSub,
+  setvalues,
+}) => {
   ///destructuring
   const {
     title,
@@ -19,6 +30,7 @@ const CreateProductForm = ({ handleSubmit, handleChange, values }) => {
   } = values;
 
   console.log(values);
+  console.log(subOption);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -73,21 +85,42 @@ const CreateProductForm = ({ handleSubmit, handleChange, values }) => {
 
       <div className="form-group mb-3">
         <label>Category</label>
-        <select
-          name="category"
-          className="form-control mb-3"
-          onChange={handleChange}
-          required
-        >
-          <option value="">Please Select</option>
-          {categories.categories.length > 0 &&
-            categories.categories.map((c) => (
+        {categories.categories && categories.categories.length > 0 ? (
+          <select
+            name="category"
+            className="form-control mb-3"
+            onChange={handleCategoryChange}
+            required
+          >
+            <option value="">Please Select</option>
+            {categories.categories.map((c) => (
               <option key={c._id} value={c._id}>
                 {c.name}
               </option>
             ))}
-        </select>
+          </select>
+        ) : null}
       </div>
+
+      {showSub && (
+        <div>
+          <label htmlFor="">Sub Categories</label>
+          <Select
+            mode="multiple"
+            style={{ width: "100%" }}
+            placeholder="Please Select"
+            value={subCategory}
+            onChange={(value) => setvalues({ ...values, subCategory: value })}
+          >
+            {subOption.length &&
+              subOption.map((subcategory) => (
+                <Option key={subcategory._id} value={subcategory._id}>
+                  {subcategory.name}
+                </Option>
+              ))}
+          </Select>
+        </div>
+      )}
 
       <div className="form-group mb-3">
         <label>Quantity</label>

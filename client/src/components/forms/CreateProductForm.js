@@ -30,7 +30,7 @@ const CreateProductForm = ({
   } = values;
 
   console.log(values);
-  console.log(subOption);
+  // console.log(subOption);
 
   return (
     <form onSubmit={handleSubmit}>

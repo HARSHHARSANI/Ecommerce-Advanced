@@ -1,13 +1,13 @@
 import express from "express";
-import { adminCheck, authCheck } from "../middleware/authMiddleware";
+import { adminCheck, authCheck } from "../middleware/authMiddleware.js";
 import {
   removeController,
   uploadController,
-} from "../Controller/CloudinaryController";
+} from "../Controller/CloudinaryController.js";
 
 const router = express.Router();
 
 router.post("/uploadimages", authCheck, adminCheck, uploadController);
-router.delete("/removeimages", authCheck, adminCheck, removeController);
+router.post("/removeimages", authCheck, adminCheck, removeController);
 
 export default router;

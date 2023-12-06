@@ -16,6 +16,7 @@ import {
   getCategories,
   getSubCategoryBasedOnParentId,
 } from "../../../functions/categoryFunction.js";
+import FileUpload from "../../../components/forms/FileUpload.js";
 
 const CreateProduct = () => {
   const initialState = {
@@ -46,6 +47,7 @@ const CreateProduct = () => {
   const [values, setvalues] = useState(initialState);
   const [subOption, setsubOption] = useState([]);
   const [showSub, setshowSub] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const loadCategories = () => {
     getCategories().then((response) => {
@@ -104,7 +106,15 @@ const CreateProduct = () => {
 
           {/* {JSON.stringify(values.categories)} */}
 
-          {JSON.stringify(values.subCategory)}
+          {JSON.stringify(values.images)}
+
+          <div className="p-3">
+            <FileUpload
+              values={values}
+              setvalues={setvalues}
+              setLoading={setLoading}
+            />
+          </div>
 
           <CreateProductForm
             handleChange={handleChange}

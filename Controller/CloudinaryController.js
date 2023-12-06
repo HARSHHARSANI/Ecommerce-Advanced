@@ -1,4 +1,6 @@
 import cloudinary from "cloudinary";
+import dotenv from "dotenv";
+dotenv.config();
 
 //config
 cloudinary.config({
@@ -27,8 +29,10 @@ export const removeController = (req, res) => {
   try {
     let image_id = req.body.public_id;
     cloudinary.uploader.destroy(image_id, (err, result) => {
-      if (err) return res.status(400).send({ success: false, err });
-      res.status(200).send("ok deleted");
+      if (err) {
+        return res.json({ success: false, err });
+      }
+      res.json("ok deleted");
     });
   } catch (error) {
     console.log(error);

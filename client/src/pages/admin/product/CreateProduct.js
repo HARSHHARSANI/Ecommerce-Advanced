@@ -17,6 +17,7 @@ import {
   getSubCategoryBasedOnParentId,
 } from "../../../functions/categoryFunction.js";
 import FileUpload from "../../../components/forms/FileUpload.js";
+import { LoadingOutlined } from "@ant-design/icons";
 
 const CreateProduct = () => {
   const initialState = {
@@ -101,7 +102,11 @@ const CreateProduct = () => {
           <AdminNav />
         </div>
         <div className="col-md-10">
-          <h4>Create Product Page</h4>
+          {loading ? (
+            <LoadingOutlined className="text-danger h1" />
+          ) : (
+            <h4>Create Product Page</h4>
+          )}
           <hr />
 
           {/* {JSON.stringify(values.categories)} */}

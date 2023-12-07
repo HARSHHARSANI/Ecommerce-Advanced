@@ -3,6 +3,7 @@ import Resizer from "react-image-file-resizer";
 import axios from "axios";
 import { UseSelector, useSelector } from "react-redux";
 import { Avatar, Badge } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 
 const FileUpload = ({ values, setvalues, setLoading }) => {
   const { user } = useSelector((state) => ({ ...state }));
@@ -73,6 +74,7 @@ const FileUpload = ({ values, setvalues, setLoading }) => {
       )
       .then((res) => {
         setLoading(false);
+
         const { images } = values;
         let filteredImages = images.filter((item) => {
           return item.public_id !== public_id;

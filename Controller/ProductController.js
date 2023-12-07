@@ -56,6 +56,7 @@ export const getAllProductsController = async (req, res) => {
     res.status(200).send({
       success: true,
       message: "All products Shown",
+      count: products.length,
       products,
     });
   } catch (error) {
@@ -123,5 +124,20 @@ export const deleteProductController = async (req, res) => {
       message: "Error in deleteProductController",
       error,
     });
+  }
+};
+
+export const getProductsLimitWiseController = async (req, res) => {
+  try {
+    const products = await ProductModel.find({})
+      .limit(parseInt(req.params.count))
+      .populate("category")
+      .populate("subCategory")
+      .sort([["createdAt", "desc"]])
+      .exec();
+
+    res.status(200).send(products);
+  } catch (error) {
+    console.log(error);
   }
 };

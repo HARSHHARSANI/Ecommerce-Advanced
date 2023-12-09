@@ -40,6 +40,7 @@ const CreateProduct = () => {
       "Hp",
       "Jio",
       "Samsung",
+      "MSI",
     ],
     color: "White",
     brand: "Apple",

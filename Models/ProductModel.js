@@ -73,6 +73,7 @@ const productSchema = new mongoose.Schema(
         "Hp",
         "Jio",
         "Samsung",
+        "MSI",
       ],
     },
 

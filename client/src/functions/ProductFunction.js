@@ -44,3 +44,15 @@ export const createProduct = async (product, authtoken) => {
     console.log(error);
   }
 };
+
+export const getProductByCount = async (count) => {
+  try {
+    const productsByCount = await axios.get(
+      `${process.env.REACT_APP_API}/product/products/${count}`
+    );
+    console.log(productsByCount);
+    return productsByCount.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

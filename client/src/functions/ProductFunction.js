@@ -56,3 +56,28 @@ export const getProductByCount = async (count) => {
     console.log(error);
   }
 };
+
+export const removeProduct = async (slug, authtoken) => {
+  try {
+    const removedproduct = await axios.delete(
+      `${process.env.REACT_APP_API}/product/product/${slug}`,
+      {
+        headers: {
+          authtoken,
+        },
+      }
+    );
+    console.log("inside removeProduct", removedproduct);
+    return removedproduct.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateProduct = async (slug, authtoken) => {
+  try {
+    const updatedProduct = await axios.put()
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -68,7 +68,7 @@ const CreateProduct = () => {
       .then((response) => {
         console.log(response);
         toast.success(`${values.title} Created Successfully`);
-        // window.location.reload();
+        window.location.reload();
       })
       .catch((error) => {
         console.log(error);

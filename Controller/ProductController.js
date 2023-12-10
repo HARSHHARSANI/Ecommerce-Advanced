@@ -89,15 +89,15 @@ export const getSingleProductController = async (req, res) => {
 };
 
 export const updateProductController = async (req, res) => {
-  //     const { slug } = req.params;
-  //     const {}
-  //   if (!slug) {
-  //     return res.status(400).send({
-  //       success: false,
-  //       message: "Error in Getting Product Name in updateProductController",
-  //     });
-  //   }
-  //   const product = ProductModel.findOneAndUpdate({ slug }, {});
+  const { slug } = req.params;
+
+  if (!slug) {
+    return res.status(400).send({
+      success: false,
+      message: "Error in Getting Product Name in updateProductController",
+    });
+  }
+    const product = ProductModel.findOneAndUpdate({ slug }, {});
 };
 export const deleteProductController = async (req, res) => {
   try {
@@ -119,7 +119,7 @@ export const deleteProductController = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    res.status(500).send({
+    return res.status(500).send({
       success: false,
       message: "Error in deleteProductController",
       error,

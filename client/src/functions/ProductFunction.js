@@ -20,7 +20,7 @@ export const getSingleProduct = async (slug) => {
       `${process.env.REACT_APP_API}/product/product/${slug}`
     );
     console.log("sending response from getSingleProduct", response);
-    return response;
+    return response.data;
   } catch (error) {
     console.log(error);
   }
@@ -76,7 +76,7 @@ export const removeProduct = async (slug, authtoken) => {
 
 export const updateProduct = async (slug, authtoken) => {
   try {
-    const updatedProduct = await axios.put()
+    const updatedProduct = await axios.put();
   } catch (error) {
     console.log(error);
   }

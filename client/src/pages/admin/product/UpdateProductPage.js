@@ -26,7 +26,6 @@ const UpdatedProductPage = () => {
     title: "",
     description: "",
     price: "",
-    categories: [],
     category: "",
     subCategory: [],
     shipping: "",
@@ -49,7 +48,11 @@ const UpdatedProductPage = () => {
   };
   const { user } = useSelector((state) => ({ ...state }));
   const { slug } = useParams();
+  const [subOption, setsubOption] = useState([]);
+  const [showSub, setshowSub] = useState(false);
   const [SingleProductValues, setSingleProductValues] = useState(initialState);
+  const [loading, setLoading] = useState(false);
+  const [categories, setcategories] = useState([]);
 
   const LoadProduct = () => {
     getSingleProduct(slug).then((response) => {
@@ -58,8 +61,16 @@ const UpdatedProductPage = () => {
     });
   };
 
+  const loadCategories = () => {
+    getCategories().then((response) => {
+      console.log(response);
+      setcategories(response.data);
+    });
+  };
+
   useEffect(() => {
     LoadProduct();
+    loadCategories();
   }, []);
 
   const handleSubmit = (e) => {
@@ -72,6 +83,21 @@ const UpdatedProductPage = () => {
       [e.target.name]: e.target.value,
     });
     console.log(e.target.name, "------>", e.target.value);
+  };
+
+  const handleCategoryChange = (e) => {
+    e.preventDefault();
+    console.log("Clicked Category", e.target.value);
+    setSingleProductValues({
+      ...SingleProductValues,
+      category: e.target.value,
+      subCategory: [],
+    });
+    getSubCategoryBasedOnParentId(e.target.value).then((res) => {
+      console.log("SubOptions On getSingleCategoryBasedOnParentId", res);
+      console.log(res);
+      setsubOption(res.data.subcategory);
+    });
   };
   return (
     <div className="container-fluid">
@@ -88,6 +114,10 @@ const UpdatedProductPage = () => {
             handleSubmit={handleSubmit}
             SingleProductValues={SingleProductValues}
             setSingleProductValues={setSingleProductValues}
+            handleCategoryChange={handleCategoryChange}
+            subOption={subOption}
+            showSub={showSub}
+            categories={categories}
           />
         </div>
       </div>

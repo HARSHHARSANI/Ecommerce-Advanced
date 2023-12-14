@@ -7,7 +7,11 @@ const ProductUpdateForm = ({
   handleSubmit,
   handleChange,
   SingleProductValues,
+  setSingleProductValues,
   handleCategoryChange,
+  subOption,
+  showSub,
+  categories,
 }) => {
   ///destructuring
   const {
@@ -15,7 +19,6 @@ const ProductUpdateForm = ({
     description,
     price,
     shipping,
-    categories,
     category,
     subCategory,
     quantity,
@@ -27,7 +30,7 @@ const ProductUpdateForm = ({
   } = SingleProductValues;
 
   console.log(SingleProductValues);
-  // console.log(subOption);
+  console.log(categories);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -81,7 +84,7 @@ const ProductUpdateForm = ({
         </select>
       </div>
 
-      {/* <div className="form-group mb-3">
+      <div className="form-group mb-3">
         <label>Category</label>
         {categories.categories && categories.categories.length > 0 ? (
           <select
@@ -90,7 +93,7 @@ const ProductUpdateForm = ({
             onChange={handleCategoryChange}
             required
           >
-            <option value="">Please Select</option>
+            <option>{category ? category.name : "Please Select"} </option>
             {categories.categories.map((c) => (
               <option key={c._id} value={c._id}>
                 {c.name}
@@ -98,9 +101,9 @@ const ProductUpdateForm = ({
             ))}
           </select>
         ) : null}
-      </div> */}
+      </div>
 
-      {/* {showSub && (
+      {showSub && (
         <div>
           <label htmlFor="">Sub Categories</label>
           <Select
@@ -123,7 +126,7 @@ const ProductUpdateForm = ({
               ))}
           </Select>
         </div>
-      )} */}
+      )}
 
       <div className="form-group mb-3">
         <label>Quantity</label>

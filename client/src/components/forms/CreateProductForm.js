@@ -32,8 +32,6 @@ const CreateProductForm = ({
   console.log(values);
   // console.log(subOption);
 
-  
-
   return (
     <form onSubmit={handleSubmit}>
       <div className="form-group mb-3">
@@ -142,7 +140,6 @@ const CreateProductForm = ({
           className="form-control mt-2"
           onChange={handleChange}
         >
-          {" "}
           <option>Please Select</option>
           {colors.map((c) => (
             <option key={c} value={c}>

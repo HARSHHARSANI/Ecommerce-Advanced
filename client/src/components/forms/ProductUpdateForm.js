@@ -68,6 +68,7 @@ const ProductUpdateForm = ({
         <label>Brands</label>
         <select
           name="brand"
+          value={brand}
           className="form-control mt-2"
           onChange={handleChange}
         >
@@ -139,6 +140,7 @@ const ProductUpdateForm = ({
         <label>Colors</label>
         <select
           name="color"
+          value={color}
           className="form-control mt-2"
           onChange={handleChange}
         >
@@ -155,11 +157,11 @@ const ProductUpdateForm = ({
       <div className="form-group mb-3">
         <label>Shipping</label>
         <select
+          value={shipping === "Yes" ? "Yes" : "No"}
           name="shipping"
           className="form-control mt-2"
           onChange={handleChange}
         >
-          <option>Please Select</option>
           <option value="No">No</option>
           <option value="Yes">Yes</option>
         </select>

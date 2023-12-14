@@ -40,6 +40,7 @@ export const createProductController = async (req, res) => {
     res.status(200).send({
       success: true,
       message: "Product Created",
+      product,
     });
   } catch (error) {
     console.log(error);

@@ -21,14 +21,14 @@ import { LoadingOutlined } from "@ant-design/icons";
 
 const CreateProduct = () => {
   const initialState = {
-    title: "Macbook Pro",
-    description: "This is best Apple product",
-    price: "4500",
+    title: "",
+    description: "",
+    price: "",
     categories: [],
     category: "",
     subCategory: [],
-    shipping: "Yes",
-    quantity: "50",
+    shipping: "",
+    quantity: "",
     images: [],
     colors: ["Black", "Brown", "White", "Silver", "Blue"],
     brands: [
@@ -42,8 +42,8 @@ const CreateProduct = () => {
       "Samsung",
       "MSI",
     ],
-    color: "White",
-    brand: "Apple",
+    color: "",
+    brand: "",
   };
   const { user } = useSelector((state) => ({ ...state }));
   const [values, setvalues] = useState(initialState);
@@ -68,7 +68,7 @@ const CreateProduct = () => {
       .then((response) => {
         console.log(response);
         toast.success(`${values.title} Created Successfully`);
-        window.location.reload();
+        // window.location.reload();
       })
       .catch((error) => {
         console.log(error);

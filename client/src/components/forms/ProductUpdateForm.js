@@ -12,6 +12,8 @@ const ProductUpdateForm = ({
   subOption,
   showSub,
   categories,
+  arraysOfSubCategory,
+  setArraysOfSubCategory,
 }) => {
   ///destructuring
   const {
@@ -29,8 +31,8 @@ const ProductUpdateForm = ({
     images,
   } = SingleProductValues;
 
-  console.log(SingleProductValues);
-  console.log(categories);
+  // console.log(SingleProductValues);
+  // console.log(categories);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -103,30 +105,23 @@ const ProductUpdateForm = ({
         ) : null}
       </div>
 
-      {showSub && (
-        <div>
-          <label htmlFor="">Sub Categories</label>
-          <Select
-            mode="multiple"
-            style={{ width: "100%" }}
-            placeholder="Please Select"
-            value={subCategory}
-            onChange={(value) =>
-              setSingleProductValues({
-                ...SingleProductValues,
-                subCategory: value,
-              })
-            }
-          >
-            {subOption.length &&
-              subOption.map((subcategory) => (
-                <Option key={subcategory._id} value={subcategory._id}>
-                  {subcategory.name}
-                </Option>
-              ))}
-          </Select>
-        </div>
-      )}
+      <div>
+        <label htmlFor="">Sub Categories</label>
+        <Select
+          mode="multiple"
+          style={{ width: "100%" }}
+          placeholder="Please Select"
+          value={arraysOfSubCategory}
+          onChange={(value) => setArraysOfSubCategory(value)}
+        >
+          {subOption.length &&
+            subOption.map((subcategory) => (
+              <Option key={subcategory._id} value={subcategory._id}>
+                {subcategory.name}
+              </Option>
+            ))}
+        </Select>
+      </div>
 
       <div className="form-group mb-3">
         <label>Quantity</label>

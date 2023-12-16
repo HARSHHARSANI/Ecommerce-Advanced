@@ -69,7 +69,6 @@ export const getSingleCategoryController = async (req, res) => {
       res.status(400).send({
         success: false,
         message: "Category Doesnt Exist",
-        error,
       });
     }
   } catch (error) {
@@ -143,20 +142,18 @@ export const deleteCategoryController = async (req, res) => {
   }
 };
 
-export const createProductBasedOnCategoryAndSubcategoryController = async (
-  req,
-  res
-) => {
+export const getSubCategoryBasedOnCategoryId = async (req, res) => {
   try {
     console.log("Received _id:", req.params._id);
 
-    console.log(
-      "im inside createProductBasedOnCategoryAndSubcategoryController"
-    );
+    console.log("im inside getSubCategoryBasedOnCategoryId");
 
     const subcategory = await SubCategoryModel.find({
       parent: req.params._id,
-    }).exec();
+    })
+      .populate("name")
+      .populate("parent")
+      .exec();
 
     res.status(200).send({
       subcategory,

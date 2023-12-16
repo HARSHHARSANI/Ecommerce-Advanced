@@ -1,4 +1,4 @@
-import express from "express";
+  import express from "express";
 import { adminCheck, authCheck } from "../middleware/authMiddleware.js";
 import {
   createProductController,

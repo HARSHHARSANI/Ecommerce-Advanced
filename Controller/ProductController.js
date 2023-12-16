@@ -103,6 +103,7 @@ export const updateProductController = async (req, res) => {
   }
   const product = ProductModel.findOneAndUpdate({ slug }, {});
 };
+
 export const deleteProductController = async (req, res) => {
   try {
     const { slug } = req.params;

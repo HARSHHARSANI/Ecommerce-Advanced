@@ -2,10 +2,10 @@ import express from "express";
 import { authCheck, adminCheck } from "../middleware/authMiddleware.js";
 import {
   createCategoryController,
-  createProductBasedOnCategoryAndSubcategoryController,
   deleteCategoryController,
   getAllCategoryController,
   getSingleCategoryController,
+  getSubCategoryBasedOnCategoryId,
   updateCategoryConrtoller,
 } from "../Controller/CategoryController.js";
 
@@ -23,9 +23,6 @@ router.delete(
   deleteCategoryController
 );
 
-router.get(
-  "/category/subcategory/:_id",
-  createProductBasedOnCategoryAndSubcategoryController
-);
+router.get("/category/subcategory/:_id", getSubCategoryBasedOnCategoryId);
 
 export default router;

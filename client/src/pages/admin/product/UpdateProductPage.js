@@ -53,11 +53,26 @@ const UpdatedProductPage = () => {
   const [SingleProductValues, setSingleProductValues] = useState(initialState);
   const [loading, setLoading] = useState(false);
   const [categories, setcategories] = useState([]);
+  const [arraysOfSubCategory, setArraysOfSubCategory] = useState([]);
 
   const LoadProduct = () => {
     getSingleProduct(slug).then((response) => {
       console.log(response);
+      ///load single product
       setSingleProductValues({ ...SingleProductValues, ...response.product });
+
+      getSubCategoryBasedOnParentId(response.product.category._id).then(
+        (res) => {
+          console.log(res);
+          setsubOption(res.data.subcategory); // on first load show default subCategory
+        }
+      );
+      let arr = [];
+      response.product.subCategory.map((s) => {
+        arr.push(s._id);
+      });
+      setArraysOfSubCategory((prev) => arr);
+      console.log("arraysOfSubCategory", arr);
     });
   };
 
@@ -98,7 +113,9 @@ const UpdatedProductPage = () => {
       console.log(res);
       setsubOption(res.data.subcategory);
     });
+    setArraysOfSubCategory([]);
   };
+
   return (
     <div className="container-fluid">
       <div className="row">
@@ -118,6 +135,8 @@ const UpdatedProductPage = () => {
             subOption={subOption}
             showSub={showSub}
             categories={categories}
+            arraysOfSubCategory={arraysOfSubCategory}
+            setArraysOfSubCategory={setArraysOfSubCategory}
           />
         </div>
       </div>

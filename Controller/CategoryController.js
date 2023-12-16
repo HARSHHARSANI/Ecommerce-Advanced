@@ -151,9 +151,7 @@ export const getSubCategoryBasedOnCategoryId = async (req, res) => {
     const subcategory = await SubCategoryModel.find({
       parent: req.params._id,
     })
-      .populate("name")
-      .populate("parent")
-      .exec();
+    .exec();
 
     res.status(200).send({
       subcategory,

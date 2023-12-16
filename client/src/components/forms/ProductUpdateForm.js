@@ -94,8 +94,8 @@ const ProductUpdateForm = ({
             className="form-control mb-3"
             onChange={handleCategoryChange}
             required
+            value={category._id}
           >
-            <option>{category ? category.name : "Please Select"} </option>
             {categories.categories.map((c) => (
               <option key={c._id} value={c._id}>
                 {c.name}

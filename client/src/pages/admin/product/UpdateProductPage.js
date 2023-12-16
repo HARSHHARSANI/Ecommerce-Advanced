@@ -46,6 +46,7 @@ const UpdatedProductPage = () => {
     color: "",
     brand: "",
   };
+
   const { user } = useSelector((state) => ({ ...state }));
   const { slug } = useParams();
   const [subOption, setsubOption] = useState([]);
@@ -105,14 +106,15 @@ const UpdatedProductPage = () => {
     console.log("Clicked Category", e.target.value);
     setSingleProductValues({
       ...SingleProductValues,
-      category: e.target.value,
       subCategory: [],
+      category: e.target.value,
     });
+
     getSubCategoryBasedOnParentId(e.target.value).then((res) => {
       console.log("SubOptions On getSingleCategoryBasedOnParentId", res);
-      console.log(res);
       setsubOption(res.data.subcategory);
     });
+
     setArraysOfSubCategory([]);
   };
 

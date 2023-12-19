@@ -20,6 +20,8 @@ import FileUpload from "../../../components/forms/FileUpload.js";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useParams } from "react-router-dom";
 import ProductUpdateForm from "../../../components/forms/ProductUpdateForm.js";
+import { updateProduct } from "../../../functions/ProductFunction.js";
+import { useNavigate } from "react-router-dom";
 
 const UpdatedProductPage = () => {
   const initialState = {
@@ -56,6 +58,8 @@ const UpdatedProductPage = () => {
   const [categories, setcategories] = useState([]);
   const [arraysOfSubCategory, setArraysOfSubCategory] = useState([]);
 
+  const navigate = useNavigate();
+
   const LoadProduct = () => {
     getSingleProduct(slug).then((response) => {
       console.log(response);
@@ -91,6 +95,17 @@ const UpdatedProductPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
+    SingleProductValues.subCategory = arraysOfSubCategory;
+    // SingleProductValues.category  ;
+
+    updateProduct(slug, SingleProductValues, user.token)
+      .then((res) => {
+        setLoading(false);
+        toast.success(`${res.data.title} is updated`);
+        navigate("/admin/products");
+      })
+      .catch((err) => console.log(err));
   };
 
   const handleChange = (e) => {
@@ -125,9 +140,22 @@ const UpdatedProductPage = () => {
           <AdminNav />
         </div>
         <div className="col-md-10">
-          <h4>Update Product Form</h4>
+          {loading ? (
+            <LoadingOutlined className="text-danger h1" />
+          ) : (
+            <h4>Create update Page</h4>
+          )}
           <hr />
-          {JSON.stringify(SingleProductValues)}
+          {/* {JSON.stringify(SingleProductValues)} */}
+
+          <div className="p-3">
+            <FileUpload
+              values={SingleProductValues}
+              setvalues={setSingleProductValues}
+              setLoading={setLoading}
+            />
+          </div>
+
           <ProductUpdateForm
             handleChange={handleChange}
             handleSubmit={handleSubmit}

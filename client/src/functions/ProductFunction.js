@@ -74,9 +74,19 @@ export const removeProduct = async (slug, authtoken) => {
   }
 };
 
-export const updateProduct = async (slug, authtoken) => {
+export const updateProduct = async (slug, product, authtoken) => {
   try {
-    const updatedProduct = await axios.put();
+    const updatedProduct = await axios.put(
+      `${process.env.REACT_APP_API}/product/product/${slug}`,
+      product,
+      {
+        headers: {
+          authtoken,
+        },
+      }
+    );
+
+    return updatedProduct;
   } catch (error) {
     console.log(error);
   }

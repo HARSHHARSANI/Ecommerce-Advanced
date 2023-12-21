@@ -158,3 +158,22 @@ export const getProductsLimitWiseController = async (req, res) => {
     console.log(error);
   }
 };
+
+export const listOfProductsWithSortOrdersAndLimitController = async (
+  req,
+  res
+) => {
+  try {
+    const { sort, order, limit } = req.body;
+    const products = await ProductModel.find({})
+      .populate("category")
+      .populate("subCategory")
+      .sort([[sort, order]])
+      .limit(limit)
+      .exec();
+
+    res.status(200).send(products);
+  } catch (error) {
+    console.log(error);
+  }
+};

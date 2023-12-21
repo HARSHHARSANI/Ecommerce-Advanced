@@ -91,3 +91,6 @@ export const updateProduct = async (slug, product, authtoken) => {
     console.log(error);
   }
 };
+
+
+export const 

@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { getSortedProducts } from "../../functions/ProductFunction";
+import {
+  getSortedProducts,
+  totalProducts,
+} from "../../functions/ProductFunction";
 import ProductCard from "../Cards/ProductCard";
 import LoadingCard from "../Cards/LoadingCard";
+import { Pagination } from "antd";
 
 const NewArrivals = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [ProductsCount, setProductsCount] = useState(0);
 
   const loadAllProduct = () => {
     setLoading(true);
     ///sort ,order, limit
-    getSortedProducts("createdAt", "desc", 3).then((res) => {
+    getSortedProducts("createdAt", "desc", page).then((res) => {
       setProducts(res);
       setLoading(false);
     });
@@ -18,10 +24,20 @@ const NewArrivals = () => {
 
   useEffect(() => {
     loadAllProduct();
+  }, [page]);
+
+  useEffect(() => {
+    totalProducts().then((response) => {
+      setProductsCount(response);
+    });
   }, []);
 
   return (
     <>
+      {JSON.stringify(ProductsCount)}
+      {JSON.stringify(ProductsCount)}
+      {JSON.stringify(ProductsCount)}
+      {JSON.stringify(ProductsCount)}
       <div className="container">
         {loading ? (
           <LoadingCard count={6} />
@@ -36,6 +52,11 @@ const NewArrivals = () => {
           </div>
         )}
       </div>
+      <Pagination
+        current={page}
+        total={(ProductsCount / 3) * 10}
+        onChange={(value) => setPage(value)}
+      />
     </>
   );
 };

@@ -92,12 +92,12 @@ export const updateProduct = async (slug, product, authtoken) => {
   }
 };
 
-export const getSortedProducts = async (sort, order, limit) => {
+export const getSortedProducts = async (sort, order, page) => {
   try {
     console.log("im inside getSortedProducts");
     const response = await axios.post(
       `${process.env.REACT_APP_API}/product/sortedProducts`,
-      { sort, order, limit }
+      { sort, order, page }
     );
 
     console.log("Sending Response from getSortedProducts", response);
@@ -105,4 +105,14 @@ export const getSortedProducts = async (sort, order, limit) => {
   } catch (error) {
     console.log(error);
   }
+};
+
+export const totalProducts = async () => {
+  console.log("inside totalProducts");
+  const response = axios.get(
+    `${process.env.REACT_APP_API}/product/products/total`
+  );
+  console.log("Sending response from totalProducts", response);
+
+  return response.data;
 };

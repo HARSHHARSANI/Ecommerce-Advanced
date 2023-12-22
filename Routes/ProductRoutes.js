@@ -7,6 +7,7 @@ import {
   getProductsLimitWiseController,
   getSingleProductController,
   listOfProductsWithSortOrdersAndLimitController,
+  totalNoOfProductsController,
   updateProductController,
 } from "../Controller/ProductController.js";
 
@@ -14,6 +15,7 @@ const router = express.Router();
 
 ///routes
 router.post("/product", authCheck, adminCheck, createProductController);
+router.get("/products/total", totalNoOfProductsController);
 router.get("/products", getAllProductsController);
 router.get("/products/:count", getProductsLimitWiseController);
 router.get("/product/:slug", getSingleProductController);

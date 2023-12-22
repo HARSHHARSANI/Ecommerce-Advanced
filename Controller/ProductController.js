@@ -159,21 +159,60 @@ export const getProductsLimitWiseController = async (req, res) => {
   }
 };
 
+///without pagination
+// export const listOfProductsWithSortOrdersAndLimitController = async (
+//   req,
+//   res
+// ) => {
+//   try {
+//     const { sort, order, limit } = req.body;
+//     const products = await ProductModel.find({})
+//       .populate("category")
+//       .populate("subCategory")
+//       .sort([[sort, order]])
+//       .limit(limit)
+//       .exec();
+
+//     res.status(200).send(products);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
+///with pagination
 export const listOfProductsWithSortOrdersAndLimitController = async (
   req,
   res
 ) => {
   try {
-    const { sort, order, limit } = req.body;
+    const { sort, order, page } = req.body;
+    const currentPage = page || 1;
+    const perPage = 3;
     const products = await ProductModel.find({})
+      .skip((currentPage - 1) * perPage)
       .populate("category")
       .populate("subCategory")
       .sort([[sort, order]])
-      .limit(limit)
+      .limit(perPage)
       .exec();
 
     res.status(200).send(products);
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const totalNoOfProductsController = async (req, res) => {
+  try {
+    console.log("inside totalNoOfProductsController");
+    const total = await ProductModel.estimatedDocumentCount().exec();
+    console.log("Sending Response from totalNoOfProductsController -->", total);
+    res.status(200).send({ total });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      error,
+    });
   }
 };

@@ -19,6 +19,6 @@ router.get("/products/:count", getProductsLimitWiseController);
 router.get("/product/:slug", getSingleProductController);
 router.put("/product/:slug", authCheck, adminCheck, updateProductController);
 router.delete("/product/:slug", authCheck, adminCheck, deleteProductController);
-router.post("/productss", listOfProductsWithSortOrdersAndLimitController);
+router.post("/sortedProducts", listOfProductsWithSortOrdersAndLimitController);
 
 export default router;

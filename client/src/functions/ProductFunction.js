@@ -107,12 +107,12 @@ export const getSortedProducts = async (sort, order, page) => {
   }
 };
 
-export const totalProducts = async () => {
+export const totalProducts = async (req, res) => {
   console.log("inside totalProducts");
   const response = axios.get(
     `${process.env.REACT_APP_API}/product/products/total`
   );
   console.log("Sending response from totalProducts", response);
 
-  return response.data;
+  return response;
 };

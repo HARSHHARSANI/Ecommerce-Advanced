@@ -27,16 +27,11 @@ const NewArrivals = () => {
   }, [page]);
 
   useEffect(() => {
-    totalProducts().then((response) => {
-      setProductsCount(response);
-    });
+    totalProducts().then((response) => setProductsCount(response.data.total));
   }, []);
 
   return (
     <>
-      {JSON.stringify(ProductsCount)}
-      {JSON.stringify(ProductsCount)}
-      {JSON.stringify(ProductsCount)}
       {JSON.stringify(ProductsCount)}
       <div className="container">
         {loading ? (
@@ -54,7 +49,7 @@ const NewArrivals = () => {
       </div>
       <Pagination
         current={page}
-        total={(ProductsCount / 3) * 10}
+        total={Math.round((ProductsCount / 3) * 10)}
         onChange={(value) => setPage(value)}
       />
     </>

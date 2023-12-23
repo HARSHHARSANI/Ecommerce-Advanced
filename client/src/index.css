@@ -17,3 +17,8 @@ p {
   align-items: center; /* Align items vertically */
   margin-right: 10px; /* Add margin to create space */
 }
+
+.slider img {
+  height: 850px;
+  object-fit: cover;
+}

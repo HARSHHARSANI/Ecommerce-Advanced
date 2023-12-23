@@ -47,11 +47,15 @@ const NewArrivals = () => {
           </div>
         )}
       </div>
-      <Pagination
-        current={page}
-        total={Math.round((ProductsCount / 3) * 10)}
-        onChange={(value) => setPage(value)}
-      />
+      <div className="row">
+        <div className="col-md-4 offset-md-4 text-center p-3 pt-3">
+          <Pagination
+            current={page}
+            total={Math.round((ProductsCount / 3) * 10)}
+            onChange={(value) => setPage(value)}
+          />
+        </div>
+      </div>
     </>
   );
 };

@@ -52,8 +52,8 @@ const SingleProductPage = () => {
           <SingleProductCard product={SingleProductValues} />
         </div>
 
-        <div className="row">
-          <div>Related Products</div>
+        <div className="row h3 p-5">
+          <div className="col text-center pt-1 pb-1">Related Products</div>
         </div>
       </div>
     </>

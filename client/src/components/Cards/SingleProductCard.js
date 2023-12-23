@@ -1,36 +1,43 @@
 import React from "react";
-import { Card } from "antd";
+import { Card, Tabs } from "antd";
 import laptop from "../../images/default image.jpg";
 import { HeartOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import ProductListItems from "./ProductListItems";
 
 const { Meta } = Card;
+const { TabPane } = Tabs;
 
 const SingleProductCard = ({ product }) => {
-  const {
-    title,
-    images,
-    slug,
-    description,
-    price,
-    category,
-    subCategory,
-    quantity,
-    shipping,
-    color,
-    brand,
-  } = product;
+  const { title, images, description } = product;
 
   return (
     <>
       <div className="col-md-7">
-        <Carousel showArrows={true} autoPlay infiniteLoop>
-          {images && images.map((i) => <img src={i.url} key={i.public_id} />)}
-        </Carousel>
+        {images && images.length ? (
+          <Carousel showArrows={true} autoPlay infiniteLoop>
+            {images && images.map((i) => <img src={i.url} key={i.public_id} />)}
+          </Carousel>
+        ) : (
+          <Card
+            cover={
+              <img alt="example" src={laptop} className="mb-3 card-image" />
+            }
+          ></Card>
+        )}
+        <Tabs type="card">
+          <TabPane tab="description" key={1} className="h5">
+            {description && description}
+          </TabPane>
+          <TabPane tab="More" key={2} className="fw-bold h5">
+            Contact Us on harshharsani007@gmail.com for any other info
+          </TabPane>
+        </Tabs>
       </div>
       <div className="col">
+        <h1 className="text-bg-info">{title}</h1>
         <Card
           actions={[
             <Link to={`/`}>
@@ -48,14 +55,7 @@ const SingleProductCard = ({ product }) => {
             </>,
           ]}
         >
-          <Meta
-            title={title}
-            description={`${description && description.substring(0, 80)}...`}
-          />
-          <p>
-            price / category / shipping / color / brand / quantity / available /
-            sold
-          </p>
+          <ProductListItems product={product} />
         </Card>
       </div>
     </>

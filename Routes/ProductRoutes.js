@@ -1,6 +1,7 @@
 import express from "express";
 import { adminCheck, authCheck } from "../middleware/authMiddleware.js";
 import {
+  ProductStarReviewController,
   createProductController,
   deleteProductController,
   getAllProductsController,
@@ -22,5 +23,6 @@ router.get("/product/:slug", getSingleProductController);
 router.put("/product/:slug", authCheck, adminCheck, updateProductController);
 router.delete("/product/:slug", authCheck, adminCheck, deleteProductController);
 router.post("/sortedProducts", listOfProductsWithSortOrdersAndLimitController);
-
+///rating
+router.put("/product/star/:productId", authCheck, ProductStarReviewController);
 export default router;

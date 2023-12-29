@@ -1,5 +1,6 @@
 import ProductModel from "../Models/ProductModel.js";
 import slugify from "slugify";
+import userModel from "../Models/userModel.js";
 
 export const createProductController = async (req, res) => {
   try {
@@ -160,6 +161,7 @@ export const getProductsLimitWiseController = async (req, res) => {
 };
 
 ///without pagination
+
 // export const listOfProductsWithSortOrdersAndLimitController = async (
 //   req,
 //   res
@@ -204,14 +206,76 @@ export const listOfProductsWithSortOrdersAndLimitController = async (
 
 export const totalNoOfProductsController = async (req, res) => {
   try {
-    console.log("inside totalNoOfProductsController");
+    // console.log("inside totalNoOfProductsController");
     const total = await ProductModel.estimatedDocumentCount().exec();
-    console.log("Sending Response from totalNoOfProductsController -->", total);
+    // console.log("Sending Response from totalNoOfProductsController -->", total);
     res.status(200).send({ total });
   } catch (error) {
     console.log(error);
     res.status(500).send({
       success: false,
+      error,
+    });
+  }
+};
+
+export const ProductStarReviewController = async (req, res) => {
+  try {
+    const { productId } = req.params;
+    const user = await userModel.findOne({ email: req.user.email });
+    const product = await ProductModel.findById(productId);
+    const { star } = req.body;
+
+    ///check if product exist
+    if (!product) {
+      return res.status(400).send({
+        success: false,
+        message: "Product Not found",
+      });
+    }
+
+    if (!user) {
+      return res.status(400).send({
+        success: false,
+        message: "User Not Found",
+      });
+    }
+
+    //who is adding
+    /// check if the currently logged in user has already given the rating to the product if yes then update the existing rating or give the new rating
+
+    let existingRatingObject = ProductModel.rating.find(
+      (ele) => ele.PostedBy.toString() === user._id.toString()
+    );
+
+    /// if user havent left any rating yet
+
+    if (existingRatingObject === undefined) {
+      let ratingAdded = await ProductModel.findByIdAndUpdate(
+        productId,
+        {
+          $push: { rating: { star, PostedBy: user._id } },
+        },
+        { new: true }
+      ).exec();
+      console.log("ratingAdded", ratingAdded);
+      res.json(ratingAdded);
+    } else {
+      ///if user already have left rating and want to update that
+      const ratingUpdated = await ProductModel.updateOne(
+        {
+          rating: { $elemMatch: existingRatingObject },
+        },
+        { $set: { "rating.$.star": star } },
+        { new: true }
+      ).exec();
+      console.log("ratingUpdated", ratingUpdated);
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({
+      success: false,
+      message: "Error in ProductStarReviewController",
       error,
     });
   }

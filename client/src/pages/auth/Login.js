@@ -4,7 +4,7 @@ import { auth, googleAuthProvider } from "../../Firebase";
 import { Button } from "antd";
 import { MailOutlined, GooglePlusOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { createOrUpdateUser } from "../../functions/authFunction.js";
 
@@ -14,14 +14,16 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+
   const { user } = useSelector((state) => ({ ...state }));
 
   const roleBaseRedirect = (response) => {
     try {
       if (response.role === "admin") {
-        navigate("/admin/dashboard");
+        navigate(location.state || "/admin/dashboard");
       } else {
-        navigate("/user/history");
+        navigate(location.state || "/user/history");
       }
     } catch (error) {
       console.log(error);

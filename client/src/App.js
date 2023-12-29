@@ -65,6 +65,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/products/:slug" element={<SingleProductPage />} />
         <Route path="/register/complete" element={<RegisterComplete />} />
         <Route path="/forgot/password" element={<ForgotPassword />} />
         <Route path="/" element={<UserRoute />}>
@@ -87,7 +88,7 @@ const App = () => {
             path="/admin/subcategory/:slug"
             element={<UpdateSubCategory />}
           />
-          <Route path="/products/:slug" element={<SingleProductPage />} />
+
           <Route path="/admin/product" element={<CreateProduct />} />
           <Route path="/admin/coupons" element={<AdminDashboard />} />
           <Route path="/admin/password" element={<AdminDashboard />} />

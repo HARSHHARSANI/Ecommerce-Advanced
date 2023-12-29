@@ -12,7 +12,7 @@ import StarRatings from "react-star-ratings";
 const { Meta } = Card;
 const { TabPane } = Tabs;
 
-const SingleProductCard = ({ product }) => {
+const SingleProductCard = ({ product, onStarClick, star }) => {
   const { title, images, description, _id } = product;
 
   return (
@@ -62,10 +62,8 @@ const SingleProductCard = ({ product }) => {
                   classname="text-danger"
                   name={_id}
                   numberOfStars={5}
-                  rating={3}
-                  changeRating={(newRating, name) =>
-                    console.log("newRating", newRating, "name", name)
-                  }
+                  rating={star}
+                  changeRating={onStarClick}
                   isSelectable={true}
                   starRatedColor="red"
                 />
@@ -78,6 +76,6 @@ const SingleProductCard = ({ product }) => {
       </div>
     </>
   );
-}; 
+};
 
 export default SingleProductCard;

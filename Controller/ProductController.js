@@ -243,14 +243,13 @@ export const ProductStarReviewController = async (req, res) => {
 
     //who is adding
     /// check if the currently logged in user has already given the rating to the product if yes then update the existing rating or give the new rating
-
-    let existingRatingObject = ProductModel.rating.find(
-      (ele) => ele.PostedBy.toString() === user._id.toString()
+    const existingRatingObject = product.rating?.find(
+      (ele) => ele.PostedBy?.toString() === user?._id?.toString()
     );
 
     /// if user havent left any rating yet
 
-    if (existingRatingObject === undefined) {
+    if (!existingRatingObject) {
       let ratingAdded = await ProductModel.findByIdAndUpdate(
         productId,
         {
@@ -270,13 +269,14 @@ export const ProductStarReviewController = async (req, res) => {
         { new: true }
       ).exec();
       console.log("ratingUpdated", ratingUpdated);
+      res.json(ratingUpdated);
     }
   } catch (error) {
     console.log(error);
     return res.status(500).send({
       success: false,
       message: "Error in ProductStarReviewController",
-      error,
+      error: error.message,
     });
   }
 };

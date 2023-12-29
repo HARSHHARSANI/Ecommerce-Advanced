@@ -116,3 +116,21 @@ export const totalProducts = async (req, res) => {
 
   return response;
 };
+
+export const updateProductRating = async (productId, star, authtoken) => {
+  try {
+    const updatedProductRating = await axios.put(
+      `${process.env.REACT_APP_API}/product/product/star/${productId}`,
+      { star },
+      {
+        headers: {
+          authtoken,
+        },
+      }
+    );
+    console.log("response form updateProductRating", updatedProductRating.data);
+    return updatedProductRating;
+  } catch (error) {
+    console.log(error);
+  }
+};

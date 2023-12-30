@@ -8,6 +8,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import ProductListItems from "./ProductListItems";
 import RatingModel from "../../models/RatingModel";
 import StarRatings from "react-star-ratings";
+import { AverageRating } from "../../functions/AverageRating";
 
 const { Meta } = Card;
 const { TabPane } = Tabs;
@@ -40,7 +41,11 @@ const SingleProductCard = ({ product, onStarClick, star }) => {
       </div>
       <div className="col-md-5">
         <h1 className="text-bg-info">{title}</h1>
-
+        {product && product.rating && product.rating.length > 0 ? (
+          AverageRating(product)
+        ) : (
+          <div className="text-center pt-1 pb-3"> No Rating Yet</div>
+        )}
         <Card
           actions={[
             <Link to={`/`}>

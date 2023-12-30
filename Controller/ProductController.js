@@ -24,6 +24,14 @@ export const createProductController = async (req, res) => {
     ///check if product already exist
     const productExist = await ProductModel.findOne({ slug });
 
+    if (productExist) {
+      return res.status(400).send({
+        success: false,
+        message: "Product With Same Name Already Exist",
+        productExist,
+      });
+    }
+
     const product = await new ProductModel({
       title,
       slug: slugify(title),
@@ -52,6 +60,7 @@ export const createProductController = async (req, res) => {
     });
   }
 };
+
 export const getAllProductsController = async (req, res) => {
   try {
     const products = await ProductModel.find({});
@@ -244,7 +253,7 @@ export const ProductStarReviewController = async (req, res) => {
     //who is adding
     /// check if the currently logged in user has already given the rating to the product if yes then update the existing rating or give the new rating
     const existingRatingObject = product.rating.find(
-      (ele) => ele.postedBy.toString() === user._id.toString()
+      (ele) => ele.postedBy.toString() === user.id.toString()
     );
 
     console.log("existingRatingObject", existingRatingObject);

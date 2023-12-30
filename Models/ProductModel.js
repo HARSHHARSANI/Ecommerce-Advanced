@@ -80,7 +80,7 @@ const productSchema = new mongoose.Schema(
     rating: [
       {
         star: Number,
-        PostedBy: {
+        postedBy: {
           type: ObjectId,
           ref: "Users",
         },

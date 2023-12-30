@@ -243,24 +243,25 @@ export const ProductStarReviewController = async (req, res) => {
 
     //who is adding
     /// check if the currently logged in user has already given the rating to the product if yes then update the existing rating or give the new rating
-    const existingRatingObject = product.rating?.find(
-      (ele) => ele.PostedBy?.toString() === user?._id?.toString()
+    const existingRatingObject = product.rating.find(
+      (ele) => ele.postedBy.toString() === user._id.toString()
     );
 
+    console.log("existingRatingObject", existingRatingObject);
     /// if user havent left any rating yet
 
-    if (!existingRatingObject) {
+    if (existingRatingObject === undefined) {
       let ratingAdded = await ProductModel.findByIdAndUpdate(
-        productId,
+        product._id,
         {
-          $push: { rating: { star, PostedBy: user._id } },
+          $push: { rating: { star, postedBy: user._id } },
         },
         { new: true }
       ).exec();
       console.log("ratingAdded", ratingAdded);
       res.json(ratingAdded);
     } else {
-      ///if user already have left rating and want to update that
+      // if user have already left rating, update it
       const ratingUpdated = await ProductModel.updateOne(
         {
           rating: { $elemMatch: existingRatingObject },
@@ -268,6 +269,7 @@ export const ProductStarReviewController = async (req, res) => {
         { $set: { "rating.$.star": star } },
         { new: true }
       ).exec();
+
       console.log("ratingUpdated", ratingUpdated);
       res.json(ratingUpdated);
     }

@@ -32,6 +32,7 @@ const SingleProductPage = () => {
     ],
     color: "",
     brand: "",
+    rating: [],
   };
   const { slug } = useParams();
   const { user } = useSelector((state) => ({ ...state }));
@@ -51,6 +52,16 @@ const SingleProductPage = () => {
     loadSingleProduct();
   }, [slug]);
 
+  useEffect(() => {
+    const existingRatingObject = SingleProductValues.rating.find(
+      (ele) => ele.postedBy.toString() === user.id.toString()
+    );
+
+    if (existingRatingObject) {
+      setstar(existingRatingObject.star);
+    }
+  }, [SingleProductValues.rating, user]);
+
   const onStarClick = (newRating, name) => {
     // console.table(newRating, name);
     setstar(newRating);
@@ -62,6 +73,9 @@ const SingleProductPage = () => {
 
   return (
     <>
+      {JSON.stringify(SingleProductValues)}
+      <br />
+      {JSON.stringify(star)}
       <div className="conatainer">
         <div className="row pt-4">
           <SingleProductCard

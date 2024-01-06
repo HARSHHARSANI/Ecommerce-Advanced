@@ -70,6 +70,7 @@ const SingleProductCard = ({ product, onStarClick, star }) => {
                   rating={star}
                   changeRating={onStarClick}
                   isSelectable={true}
+                  asdasdasd
                   starRatedColor="red"
                 />
               </RatingModel>

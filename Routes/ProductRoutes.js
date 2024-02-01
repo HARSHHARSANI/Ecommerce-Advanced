@@ -8,6 +8,7 @@ import {
   getProductsLimitWiseController,
   getSingleProductController,
   listOfProductsWithSortOrdersAndLimitController,
+  relatedProductController,
   totalNoOfProductsController,
   updateProductController,
 } from "../Controller/ProductController.js";
@@ -25,4 +26,7 @@ router.delete("/product/:slug", authCheck, adminCheck, deleteProductController);
 router.post("/sortedProducts", listOfProductsWithSortOrdersAndLimitController);
 ///rating
 router.put("/product/star/:productId", authCheck, ProductStarReviewController);
+///for related product
+router.get("/products/related/:productId", relatedProductController);
+
 export default router;

@@ -7,6 +7,8 @@ import {
 import { getSubCategoryBasedOnParentId } from "../functions/categoryFunction";
 import SingleProductCard from "../components/Cards/SingleProductCard";
 import { useSelector } from "react-redux";
+import { getRelatedProducts } from "../functions/ProductFunction";
+import ProductCard from "../components/Cards/ProductCard";
 
 const SingleProductPage = () => {
   const initialState = {
@@ -39,12 +41,18 @@ const SingleProductPage = () => {
 
   const [SingleProductValues, setSingleProductValues] = useState(initialState);
   const [star, setstar] = useState(0);
+  const [relatedProducts, setRelatedProducts] = useState(null);
 
   const loadSingleProduct = () => {
     getSingleProduct(slug).then((response) => {
       console.log(response);
       ///load single product
       setSingleProductValues({ ...SingleProductValues, ...response.product });
+
+      getRelatedProducts(response.product._id).then((res) => {
+        console.log(res);
+        setRelatedProducts(res.data);
+      });
     });
   };
 
@@ -82,8 +90,19 @@ const SingleProductPage = () => {
           />
         </div>
 
-        <div className="row h3 p-5">
+        <div className="row h3 p-5 flex-row">
           <div className="col text-center pt-1 pb-1">Related Products</div>
+        </div>
+        <div className="row pb-5">
+          {" "}
+          {relatedProducts &&
+            relatedProducts.map((product) => {
+              return (
+                <div className="col-md-4 mx1 p-3" key={product._id}>
+                  <ProductCard product={product} />
+                </div>
+              );
+            })}
         </div>
       </div>
     </>

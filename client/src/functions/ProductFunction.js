@@ -134,3 +134,16 @@ export const updateProductRating = async (productId, star, authtoken) => {
     console.log(error);
   }
 };
+
+export const getRelatedProducts = async (productId) => {
+  try {
+    const response = axios.get(
+      `${process.env.REACT_APP_API}/product/products/related/${productId}`
+    );
+
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};

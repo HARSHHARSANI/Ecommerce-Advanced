@@ -291,3 +291,27 @@ export const ProductStarReviewController = async (req, res) => {
     });
   }
 };
+
+export const relatedProductController = async (req, res) => {
+  try {
+    const { productId } = req.params;
+
+    const Product = await ProductModel.findById(productId);
+
+    const relatedProductArray = await ProductModel.find({
+      _id: { $ne: productId }, /// this is used to not include the current product as it is already shown above in the page
+      category: Product.category,
+    })
+      .limit(3)
+      .populate("category")
+      .populate("subCategory"); 
+
+    res.status(200).json(relatedProductArray);
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      message: "Error at relatedProductController",
+      error,
+    });
+  }
+};

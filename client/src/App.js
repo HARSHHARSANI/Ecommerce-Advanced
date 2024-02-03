@@ -27,6 +27,9 @@ import CreateProduct from "./pages/admin/product/CreateProduct";
 import AllProducts from "./pages/admin/product/AllProducts";
 import UpdatedProductPage from "./pages/admin/product/UpdateProductPage";
 import SingleProductPage from "./pages/SingleProductPage";
+import { Category } from "./components/Home/Category";
+import Subcategory from "./components/Home/Subcategory";
+import ProductsBasedOnCategory from "./components/ProductsBasedOnCategory";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -68,6 +71,8 @@ const App = () => {
         <Route path="/products/:slug" element={<SingleProductPage />} />
         <Route path="/register/complete" element={<RegisterComplete />} />
         <Route path="/forgot/password" element={<ForgotPassword />} />
+        <Route path="/category/:slug" element={<ProductsBasedOnCategory />} />
+        <Route path="/subcategory/:slug" element={<Subcategory />} />
         <Route path="/" element={<UserRoute />}>
           <Route path="/user/history" element={<History />} />
           <Route path="/user/password" element={<Password />} />

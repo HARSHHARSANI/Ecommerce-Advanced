@@ -88,7 +88,7 @@ export const getAllSubCategoryController = async (req, res) => {
     const subCategories = await SubCategoryModel.find({});
     res.status(200).send({
       success: true,
-      message: "All categories shown",
+      message: "All Subcategories shown",
       count: subCategories.length,
       subCategories,
     });
@@ -157,5 +157,3 @@ export const deleteSubCategoryController = async (req, res) => {
     });
   }
 };
-
-

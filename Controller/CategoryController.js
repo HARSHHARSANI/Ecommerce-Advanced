@@ -1,6 +1,7 @@
 import slugify from "slugify";
 import CategoryModel from "../Models/CategoryModel.js";
 import SubCategoryModel from "../Models/SubCategoryModel.js";
+import ProductModel from "../Models/ProductModel.js";
 
 export const createCategoryController = async (req, res) => {
   try {
@@ -150,8 +151,7 @@ export const getSubCategoryBasedOnCategoryId = async (req, res) => {
 
     const subcategory = await SubCategoryModel.find({
       parent: req.params._id,
-    })
-    .exec();
+    }).exec();
 
     res.status(200).send({
       subcategory,
@@ -161,5 +161,30 @@ export const getSubCategoryBasedOnCategoryId = async (req, res) => {
     res.status(500).send({
       error: "Internal Server Error",
     });
+  }
+};
+
+export const getProductsBasedOnCategoryController = async (req, res) => {
+  try {
+    const { slug } = req.params;
+
+    // Find the category based on the slug
+    const category = await CategoryModel.findOne({ slug });
+
+    // Check if the category exists
+    if (!category) {
+      return res.status(404).json({ message: "Category not found" });
+    }
+
+    // Extract the categoryId from the found category
+    const categoryId = category._id.toString();
+
+    // Find products with the specified categoryId
+    const products = await ProductModel.find({ category: categoryId });
+
+    res.status(200).json(products);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };

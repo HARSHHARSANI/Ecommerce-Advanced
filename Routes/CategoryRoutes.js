@@ -4,6 +4,7 @@ import {
   createCategoryController,
   deleteCategoryController,
   getAllCategoryController,
+  getProductsBasedOnCategoryController,
   getSingleCategoryController,
   getSubCategoryBasedOnCategoryId,
   updateCategoryConrtoller,
@@ -24,5 +25,6 @@ router.delete(
 );
 
 router.get("/category/subcategory/:_id", getSubCategoryBasedOnCategoryId);
+router.get("/categoryproducts/:slug", getProductsBasedOnCategoryController);
 
 export default router;

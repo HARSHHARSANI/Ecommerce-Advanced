@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import Jumbotron from "../components/Cards/Jumbotron";
 import NewArrivals from "../components/Home/NewArrivals";
 import BestSellers from "../components/Home/BestSellers";
+import { Category } from "../components/Home/Category";
+import Subcategory from "../components/Home/Subcategory";
 
 const Home = () => {
   return (
@@ -23,6 +25,17 @@ const Home = () => {
       </h4>
 
       <BestSellers />
+
+      <h4 className="text-center p-3 mt-4 mb-5 display-3 bg-dark-subtle">
+        Category
+      </h4>
+
+      <Category />
+      <h4 className="text-center p-3 mt-4 mb-5 display-3 bg-dark-subtle">
+        Sub Categories
+      </h4>
+
+      <Subcategory />
     </>
   );
 };

@@ -91,3 +91,17 @@ export const getSubCategoryBasedOnParentId = async (_id) => {
     console.log("error -------->", error.message);
   }
 };
+
+export const getProductsBasedOnCategory = async (slug) => {
+  try {
+    console.log("im inside getProductsBasedOnCategory");
+    const response = await axios.get(
+      `${process.env.REACT_APP_API}/category/categoryproducts/${slug}`
+    );
+
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};

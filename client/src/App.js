@@ -30,6 +30,7 @@ import SingleProductPage from "./pages/SingleProductPage";
 import { Category } from "./components/Home/Category";
 import Subcategory from "./components/Home/Subcategory";
 import ProductsBasedOnCategory from "./components/ProductsBasedOnCategory";
+import ProductBasedOnSubcategory from "./components/ProductBasedOnSubcategory";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -72,7 +73,10 @@ const App = () => {
         <Route path="/register/complete" element={<RegisterComplete />} />
         <Route path="/forgot/password" element={<ForgotPassword />} />
         <Route path="/category/:slug" element={<ProductsBasedOnCategory />} />
-        <Route path="/subcategory/:slug" element={<Subcategory />} />
+        <Route
+          path="/subcategory/:slug"
+          element={<ProductBasedOnSubcategory />}
+        />
         <Route path="/" element={<UserRoute />}>
           <Route path="/user/history" element={<History />} />
           <Route path="/user/password" element={<Password />} />

@@ -1,5 +1,6 @@
 import slugify from "slugify";
 import SubCategoryModel from "../Models/SubCategoryModel.js";
+import ProductModel from "../Models/ProductModel.js";
 
 export const createSubCategoryController = async (req, res) => {
   try {
@@ -155,5 +156,23 @@ export const deleteSubCategoryController = async (req, res) => {
       message: "Error In deleteSubCategoryController",
       error,
     });
+  }
+};
+
+export const getProductsBasedOnSubcategoryController = async (req, res) => {
+  try {
+    const { slug } = req.params;
+
+    const subcategory = await SubCategoryModel.findOne({ slug });
+
+    console.log(subcategory);
+
+    const subCategoryId = subcategory._id.toString();
+
+    const products = await ProductModel.find({ subCategory: subCategoryId });
+
+    res.status(200).json(products);
+  } catch (error) {
+    console.log(error);
   }
 };

@@ -23,18 +23,16 @@ const Home = () => {
       <h4 className="text-center p-3 mt-4 mb-5 display-3 bg-dark-subtle">
         Best Sellers
       </h4>
-
       <BestSellers />
 
       <h4 className="text-center p-3 mt-4 mb-5 display-3 bg-dark-subtle">
         Category
       </h4>
-
       <Category />
+
       <h4 className="text-center p-3 mt-4 mb-5 display-3 bg-dark-subtle">
         Sub Categories
       </h4>
-
       <Subcategory />
     </>
   );

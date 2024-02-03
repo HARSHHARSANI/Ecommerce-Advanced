@@ -4,6 +4,7 @@ import {
   createSubCategoryController,
   deleteSubCategoryController,
   getAllSubCategoryController,
+  getProductsBasedOnSubcategoryController,
   getSingleSubCategoryController,
   updateSubCategoryController,
 } from "../Controller/SubCategoryController.js";
@@ -25,6 +26,11 @@ router.delete(
   authCheck,
   adminCheck,
   deleteSubCategoryController
+);
+
+router.get(
+  "/subcategoryProducts/:slug",
+  getProductsBasedOnSubcategoryController
 );
 
 export default router;

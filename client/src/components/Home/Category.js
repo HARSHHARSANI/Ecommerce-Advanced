@@ -16,14 +16,25 @@ export const Category = () => {
   return (
     <>
       {/* {JSON.stringify(categories)} */}
+      {categories.length ? (
+        <div
+          style={{
+            display: "flex",
 
-      {categories?.map((Category, id) => (
-        <div key={id}>
-          <Button onClick={() => navigate(`/category/${Category.slug}`)}>
-            {Category.name}
-          </Button>
+            flexWrap: "wrap",
+          }}
+        >
+          {categories?.map((Category, id) => (
+            <div key={id} style={{ margin: "3px", padding: "5px" }}>
+              <Button onClick={() => navigate(`/category/${Category.slug}`)}>
+                {Category.name}
+              </Button>
+            </div>
+          ))}
         </div>
-      ))}
+      ) : (
+        "No Category Found"
+      )}
     </>
   );
 };

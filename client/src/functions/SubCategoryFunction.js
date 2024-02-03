@@ -75,3 +75,18 @@ export const updateSubCategory = async (slug, data, authtoken) => {
     console.log(error);
   }
 };
+
+export const getProductsBasedOnSubcategory = async (slug) => {
+  try {
+    console.log("im inside getProductsBasedOnSubcategory");
+
+    const response = await axios.get(
+      `${process.env.REACT_APP_API}/subcategory/subcategoryProducts/${slug}`
+    );
+
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};

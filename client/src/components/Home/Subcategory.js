@@ -17,18 +17,31 @@ const Subcategory = () => {
   return (
     <>
       {/* {JSON.stringify(subcategory)} */}
-      {Object.keys(subcategory).map((key) => {
-        const singleSubcategory = subcategory[key];
-        return (
-          <div key={subcategory._id}>
-            <Button
-              onClick={() => navigate(`subcategory/${singleSubcategory.slug}`)}
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+        }}
+      >
+        {subcategory.length ? (
+          subcategory.map((singleSubcategory) => (
+            <div
+              key={singleSubcategory._id}
+              style={{ margin: "3px", padding: "5px" }}
             >
-              {singleSubcategory.name}
-            </Button>
-          </div>
-        );
-      })}
+              <Button
+                onClick={() =>
+                  navigate(`subcategory/${singleSubcategory.slug}`)
+                }
+              >
+                {singleSubcategory.name}
+              </Button>
+            </div>
+          ))
+        ) : (
+          <div>No Subcategory Found</div>
+        )}
+      </div>
     </>
   );
 };

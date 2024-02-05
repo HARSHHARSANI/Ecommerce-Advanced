@@ -9,6 +9,7 @@ import {
   getSingleProductController,
   listOfProductsWithSortOrdersAndLimitController,
   relatedProductController,
+  searchFiltersController,
   totalNoOfProductsController,
   updateProductController,
 } from "../Controller/ProductController.js";
@@ -28,5 +29,7 @@ router.post("/sortedProducts", listOfProductsWithSortOrdersAndLimitController);
 router.put("/product/star/:productId", authCheck, ProductStarReviewController);
 ///for related product
 router.get("/products/related/:productId", relatedProductController);
+
+router.post("/search/filters", searchFiltersController);
 
 export default router;

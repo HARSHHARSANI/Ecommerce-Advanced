@@ -165,7 +165,7 @@ export const getProductsBasedOnSubcategoryController = async (req, res) => {
 
     const subcategory = await SubCategoryModel.findOne({ slug });
 
-    console.log(subcategory);
+    // console.log(subcategory);
 
     const subCategoryId = subcategory._id.toString();
 

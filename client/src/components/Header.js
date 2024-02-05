@@ -5,6 +5,8 @@ import {
   SettingOutlined,
   UsergroupAddOutlined,
   LogoutOutlined,
+  SearchOutlined,
+  ShoppingOutlined,
 } from "@ant-design/icons";
 import { Menu } from "antd";
 import { Link } from "react-router-dom";
@@ -12,6 +14,7 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Search from "./forms/Search";
 
 const Header = () => {
   const [current, setCurrent] = useState("home");
@@ -32,6 +35,22 @@ const Header = () => {
       icon: <HomeOutlined />,
       to: "/",
     },
+    {
+      label: (
+        <Link to="/shop" style={{ textDecoration: "none" }}>
+          Shop
+        </Link>
+      ),
+      key: "shop",
+      icon: <ShoppingOutlined />,
+      to: "/shop",
+    },
+
+    {
+      label: <Search />,
+      style: { marginLeft: "auto" },
+    },
+
     {
       label: "Username",
       key: "SubMenu",
@@ -77,6 +96,11 @@ const Header = () => {
       key: "home",
       icon: <HomeOutlined />,
       to: "/",
+    },
+
+    {
+      label: <Search />,
+      style: { marginLeft: "auto" },
     },
 
     {
@@ -153,13 +177,15 @@ const Header = () => {
   });
 
   return (
-    <Menu
-      onClick={onClick}
-      selectedKeys={[current]}
-      mode="horizontal"
-      items={user ? items2WithDynamicUsername : items1}
-      className="ml-auto"
-    />
+    <>
+      <Menu
+        onClick={onClick}
+        selectedKeys={[current]}
+        mode="horizontal"
+        items={user ? items2WithDynamicUsername : items1}
+        className="ml-auto"
+      />
+    </>
   );
 };
 

@@ -20,8 +20,8 @@ const AllProducts = () => {
     setloading(true);
     getProductByCount(10)
       .then((res) => {
-        console.log(res);
-        setproducts(res);
+        console.log(res.data);
+        setproducts(res.data);
         setloading(false);
       })
       .catch((err) => console.log(err));
@@ -43,9 +43,7 @@ const AllProducts = () => {
     }
   };
 
-  const handleUpdate = (slug) => {
-    
-  };
+  const handleUpdate = (slug) => {};
 
   return (
     <>

@@ -23,3 +23,14 @@ p {
   height: 850px;
   object-fit: cover;
 }
+
+
+#root > ul > span > form > span > svg {
+  position: relative;
+  top: -39px;
+  left: 165px;
+}
+
+#root>ul>span {
+  height: 40px;
+}

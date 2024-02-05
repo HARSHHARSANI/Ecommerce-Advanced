@@ -3,7 +3,6 @@ import { toast } from "react-toastify";
 import { auth } from "../../Firebase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
 import { createOrUpdateUser } from "../../functions/authFunction";
 
 const RegisterComplete = (props) => {

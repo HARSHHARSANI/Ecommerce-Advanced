@@ -6,10 +6,13 @@ import { useNavigate } from "react-router-dom";
 export const Category = () => {
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     getCategories().then((res) => {
       setCategories(res.data.categories);
+      setLoading(false);
     });
   }, []);
 
@@ -20,7 +23,6 @@ export const Category = () => {
         <div
           style={{
             display: "flex",
-
             flexWrap: "wrap",
           }}
         >

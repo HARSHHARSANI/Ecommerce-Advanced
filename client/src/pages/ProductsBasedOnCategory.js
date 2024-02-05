@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getProductsBasedOnCategory } from "../functions/categoryFunction";
 import { useParams } from "react-router-dom";
-import ProductCard from "./Cards/ProductCard";
+import ProductCard from "../components/Cards/ProductCard";
 
 const ProductsBasedOnCategory = () => {
   const [ProductsBasedOnCategory, setProductsBasedOnCategory] = useState([]);

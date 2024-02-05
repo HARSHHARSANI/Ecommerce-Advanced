@@ -51,7 +51,7 @@ export const getProductByCount = async (count) => {
       `${process.env.REACT_APP_API}/product/products/${count}`
     );
     console.log(productsByCount);
-    return productsByCount.data;
+    return productsByCount;
   } catch (error) {
     console.log(error);
   }
@@ -141,6 +141,20 @@ export const getRelatedProducts = async (productId) => {
       `${process.env.REACT_APP_API}/product/products/related/${productId}`
     );
 
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const searchProducts = async (query) => {
+  try {
+    console.log("im inside searchProducts");
+    const response = await axios.post(
+      `${process.env.REACT_APP_API}/product/search/filters`,
+      { query }
+    );
     console.log(response);
     return response;
   } catch (error) {

@@ -304,7 +304,7 @@ export const relatedProductController = async (req, res) => {
     })
       .limit(3)
       .populate("category")
-      .populate("subCategory"); 
+      .populate("subCategory");
 
     res.status(200).json(relatedProductArray);
   } catch (error) {
@@ -313,5 +313,55 @@ export const relatedProductController = async (req, res) => {
       message: "Error at relatedProductController",
       error,
     });
+  }
+};
+
+const handleQuery = async (req, res, query) => {
+  if (query === "") {
+    const products = await ProductModel.find({});
+  }
+
+  const products = await ProductModel.find({
+    $text: { $search: query },
+  })
+    .populate("category", "_id name")
+    .populate("subCategory", "_id name")
+    .exec();
+
+  res.status(200).json(products);
+};
+
+const handlePrice = async (req, res, price) => {
+  try {
+    const products = await ProductModel.find({
+      price: {
+        $gte: price[0],
+        $lte: price[1],
+      },
+    })
+      .populate("category", "_id name")
+      .populate("subCategory", "_id name")
+      .exec();
+
+    res.json(products);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const searchFiltersController = async (req, res) => {
+  try {
+    const { query, price } = req.body;
+    if (query) {
+      console.log("query", query);
+      await handleQuery(req, res, query);
+    }
+
+    if (price !== undefined) {
+      console.log("Price ->", price);
+      await handlePrice(req, res, price);
+    }
+  } catch (error) {
+    console.log(error);
   }
 };

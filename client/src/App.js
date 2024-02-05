@@ -29,8 +29,9 @@ import UpdatedProductPage from "./pages/admin/product/UpdateProductPage";
 import SingleProductPage from "./pages/SingleProductPage";
 import { Category } from "./components/Home/Category";
 import Subcategory from "./components/Home/Subcategory";
-import ProductsBasedOnCategory from "./components/ProductsBasedOnCategory";
-import ProductBasedOnSubcategory from "./components/ProductBasedOnSubcategory";
+import ProductBasedOnSubcategory from "./pages/ProductBasedOnSubcategory";
+import ProductsBasedOnCategory from "./pages/ProductsBasedOnCategory";
+import Shop from "./pages/Shop";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -73,6 +74,7 @@ const App = () => {
         <Route path="/register/complete" element={<RegisterComplete />} />
         <Route path="/forgot/password" element={<ForgotPassword />} />
         <Route path="/category/:slug" element={<ProductsBasedOnCategory />} />
+        <Route path="/shop" element={<Shop />} />
         <Route
           path="/subcategory/:slug"
           element={<ProductBasedOnSubcategory />}

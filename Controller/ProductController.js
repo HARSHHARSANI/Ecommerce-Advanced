@@ -352,12 +352,7 @@ const handlePrice = async (req, res, price) => {
 
 const handleCategory = async (req, res, category) => {
   try {
-    const categoryyyy = await CategoryModel.findOne({ slug: category });
-
-    const categoryId = categoryyyy._id.toString();
-    console.log(categoryId);
-
-    const products = await ProductModel.find({ category: categoryId })
+    const products = await ProductModel.find({ category })
       .populate("category", "_id name")
       .populate("subCategory", "_id name")
       .exec();
@@ -373,6 +368,7 @@ export const searchFiltersController = async (req, res) => {
     const { query, price, category } = req.body;
     console.log(query);
     console.log(price);
+    console.log(category);
 
     if (query) {
       console.log("query ---->", query);

@@ -29,7 +29,7 @@ router.post("/sortedProducts", listOfProductsWithSortOrdersAndLimitController);
 router.put("/product/star/:productId", authCheck, ProductStarReviewController);
 ///for related product
 router.get("/products/related/:productId", relatedProductController);
-
+///search
 router.post("/search/filters", searchFiltersController);
 
 export default router;

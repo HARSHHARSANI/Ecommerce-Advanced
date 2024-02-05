@@ -33,6 +33,7 @@ const Search = () => {
         onChange={handleChange}
       />
       <SearchOutlined onClick={handleSubmit} style={{ cursor: "pointer" }} />
+      
     </form>
   );
 };

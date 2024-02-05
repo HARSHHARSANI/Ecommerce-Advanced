@@ -3,7 +3,7 @@ import { getProductByCount } from "../functions/ProductFunction";
 import ProductCard from "../components/Cards/ProductCard";
 import { useDispatch, useSelector } from "react-redux";
 import { searchProducts } from "../functions/ProductFunction";
-import _ from "lodash";
+import _, { values } from "lodash";
 import { Menu, Slider, Checkbox } from "antd";
 import { DollarOutlined, DownSquareOutlined } from "@ant-design/icons";
 import { getCategories } from "../functions/categoryFunction";
@@ -11,128 +11,119 @@ const { SubMenu, ItemGroup } = Menu;
 
 const Shop = () => {
   const [initialProducts, setInitialProducts] = useState([]);
-  const [searchedProducts, setSearchedProducts] = useState([]);
+  const [products, setProducts] = useState([]);
   const [loading, setloading] = useState(false);
   const [price, setPrice] = useState([0, 0]);
-  const [priceOk, setPriceOk] = useState(false);
-  const [category, setCategory] = useState("");
+  const [priceok, setPriceok] = useState(false);
+  const [categoryIds, setCategoryIds] = useState([]);
   const [categories, setCategories] = useState([]);
   const dispatch = useDispatch();
 
   const { search } = useSelector((state) => ({ ...state }));
   const { text } = search;
 
-  ///load products by default on page load
   useEffect(() => {
+    loadAllProducts();
+  }, []);
+
+  //1load products by default on page load
+  const loadAllProducts = () => {
     getProductByCount(10).then((res) => {
-      setInitialProducts(res.data);
+      setProducts(res.data);
+      getCategories().then((res) => {
+        setCategories(res.data.categories);
+      });
       setloading(false);
     });
-  }, []);
-
-  const fetchProducts = (args) => {
-    searchProducts(args).then((res) => {
-      setInitialProducts(res.data);
-    });
   };
-  useEffect(() => {
-    getCategories().then((res) => {
-      setCategories(res.data.categories);
-    });
-  }, []);
 
-  //load products on user search input
+  //2 load products based on user search inputs
   useEffect(() => {
     const delayed = setTimeout(() => {
-      fetchProducts({ query: text });
-    }, 1000);
+      fetchproducts({ query: text });
+    }, 700);
+
+    return () => clearTimeout(delayed);
   }, [text]);
 
+  const fetchproducts = (arg) => {
+    searchProducts(arg).then((response) => {
+      setProducts(response.data);
+    });
+  };
+
   ///whenever we change the price slider the state of text in the redux state should be empty ""
-  ///load products based on price range
-  // useEffect(() => {
-  //   dispatch({
-  //     type: "SEARCH_QUERY",
-  //     payload: { text: "" },
-  //   });
-  //   const delayed = setTimeout(() => {
-  //     fetchProducts({ price });
-  //   }, 1000);
-  // }, [price]);
 
-  ///load products based on category
+  useEffect(() => {
+    const delayed = setTimeout(() => {
+      fetchproducts({ price });
+    }, 700);
 
-  // useEffect(() => {
-  //   dispatch({
-  //     type: "SEARCH_QUERY",
-  //     payload: { text: "" },
-  //   });
-  //   const delayed = setTimeout(() => {
-  //     fetchProducts({ category });
-  //   }, 1000);
-  // }, [category]);
+    return () => clearTimeout(delayed);
+  }, [priceok]);
 
-  //load product based on category
+  const handleSlider = (value) => {
+    dispatch({
+      type: "SEARCH_QUERY",
+      payload: { text: "" },
+    });
+    setPrice(value);
 
-  const showCategories = categories.map((category) => (
-    <div key={category._id}>
-      <Checkbox className="pt-2 pb-2 pr-4" value={category._id} name="category">
-        {category.name}
-      </Checkbox>
-    </div>
-  ));
+    setTimeout(() => {
+      setPriceok(!priceok);
+    }, 700);
+  };
+
   return (
     <>
-      {JSON.stringify(categories)}
-      <div className="container-fluid ">
+      <div className="container-fluid">
         <div className="row">
-          <div className="col-md-3 pt-2 ">
-            <h4>Filter Menu</h4>
+          <div className="col-md-3 pt-3">
+            <h3 clas>Filter Menu</h3>
             <hr />
-            <Menu defaultOpenKeys={["1", "2"]} mode="inline">
+            <Menu mode="inline" defaultOpenKeys={["1", "2"]}>
               <SubMenu
                 key="1"
                 title={
                   <span className="h6">
-                    <DollarOutlined /> Price
+                    <DollarOutlined /> price
                   </span>
                 }
               >
                 <div>
                   <Slider
-                    className="ml-4 mr-4"
                     range
-                    value={price}
-                    onChange={(value) => {
-                      setPrice(value);
-                    }}
+                    defaultValue={[20, 50]}
+                    className="mr-4 m-lg-4"
                     max="4999"
+                    value={price}
+                    onChange={handleSlider}
                   />
                 </div>
               </SubMenu>
-              <SubMenu
-                key="2"
-                title={
-                  <span className="h6">
-                    <DownSquareOutlined /> Categories
-                  </span>
-                }
-              >
-                <div className="h4">{showCategories}</div>
+              <SubMenu key="2">
+                <div>
+                  <Slider
+                    range
+                    defaultValue={[20, 50]}
+                    className="mr-4 m-lg-4"
+                    max="4999"
+                    value={price}
+                    onChange={(value) => setPrice(value)}
+                  />
+                </div>
               </SubMenu>
             </Menu>
           </div>
-          <div className="col-md-9 flex-column pt-2  ">
+          <div className="col-md-9 pt-3">
             {loading ? (
-              <h4 className="text-danger "> Loading..!! </h4>
+              <h4 className="text-danger">Loading....!</h4>
             ) : (
               <h4 className="text-danger">Products</h4>
             )}
-
-            {initialProducts.length < 1 && <p>No Products Found</p>}
             <div className="row pb-3">
-              {initialProducts.map((product, _id) => (
-                <div key={_id} className="col-md-4 mt-5">
+              {products?.map((product, id) => (
+                <div key={id} className="col-md-5 pb-4 pt-2">
                   <ProductCard product={product} />
                 </div>
               ))}

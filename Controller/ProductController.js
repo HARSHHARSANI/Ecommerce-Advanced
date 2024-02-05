@@ -317,9 +317,9 @@ export const relatedProductController = async (req, res) => {
 };
 
 const handleQuery = async (req, res, query) => {
-  if (query === "") {
-    const products = await ProductModel.find({});
-  }
+  // if (query === "") {
+  //   const products = await ProductModel.find({});
+  // }
 
   const products = await ProductModel.find({
     $text: { $search: query },
@@ -352,8 +352,11 @@ const handlePrice = async (req, res, price) => {
 export const searchFiltersController = async (req, res) => {
   try {
     const { query, price } = req.body;
+    console.log(query);
+    console.log(price);
+    
     if (query) {
-      console.log("query", query);
+      console.log("query ---->", query);
       await handleQuery(req, res, query);
     }
 

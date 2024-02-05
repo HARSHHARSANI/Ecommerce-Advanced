@@ -148,12 +148,12 @@ export const getRelatedProducts = async (productId) => {
   }
 };
 
-export const searchProducts = async (query) => {
+export const searchProducts = async (args) => {
   try {
     console.log("im inside searchProducts");
     const response = await axios.post(
       `${process.env.REACT_APP_API}/product/search/filters`,
-      { query }
+      args
     );
     console.log(response);
     return response;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getProductByCount } from "../functions/ProductFunction";
 import ProductCard from "../components/Cards/ProductCard";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { searchProducts } from "../functions/ProductFunction";
 import _ from "lodash";
 import { Menu, Slider } from "antd";
@@ -13,6 +13,8 @@ const Shop = () => {
   const [searchedProducts, setSearchedProducts] = useState([]);
   const [loading, setloading] = useState(false);
   const [price, setPrice] = useState([0, 0]);
+  const [priceOk, setPriceOk] = useState(false);
+  const dispatch = useDispatch();
 
   const { search } = useSelector((state) => ({ ...state }));
   const { text } = search;
@@ -26,10 +28,9 @@ const Shop = () => {
   }, []);
 
   ///load products on user search input
-
   useEffect(() => {
     const delayedSearch = _.debounce(() => {
-      searchProducts(text).then((response) => {
+      searchProducts({ query: text }).then((response) => {
         setInitialProducts(response.data);
       });
     }, 1000);
@@ -41,7 +42,27 @@ const Shop = () => {
     };
   }, [text]);
 
+  ///whenever we change the price slider the state of text in the redux state should be empty ""
+
   ///load products based on price range
+  useEffect(() => {
+    dispatch({
+      type: "SEARCH_QUERY",
+      payload: { text: "" },
+    });
+
+    const delayedPriceSearch = _.debounce(() => {
+      searchProducts({ price }).then((response) => {
+        setInitialProducts(response.data);
+      });
+    }, 1000);
+
+    delayedPriceSearch();
+
+    return () => {
+      delayedPriceSearch.cancel();
+    };
+  }, [price]);
 
   return (
     <>
@@ -62,7 +83,6 @@ const Shop = () => {
                 <div>
                   <Slider
                     className="ml-4 mr-4"
-                    tipFormatter={(v) => `$${v}`}
                     range
                     value={price}
                     onChange={(value) => {
@@ -74,7 +94,7 @@ const Shop = () => {
               </SubMenu>
             </Menu>
           </div>
-          <div className="col-md-9 flex-column pt-2 ">
+          <div className="col-md-9 flex-column pt-2  ">
             {loading ? (
               <h4 className="text-danger "> Loading..!! </h4>
             ) : (

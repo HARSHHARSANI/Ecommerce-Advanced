@@ -1,6 +1,7 @@
 import ProductModel from "../Models/ProductModel.js";
 import slugify from "slugify";
 import userModel from "../Models/userModel.js";
+import CategoryModel from "../Models/CategoryModel.js";
 
 export const createProductController = async (req, res) => {
   try {
@@ -349,12 +350,30 @@ const handlePrice = async (req, res, price) => {
   }
 };
 
+const handleCategory = async (req, res, category) => {
+  try {
+    const categoryyyy = await CategoryModel.findOne({ slug: category });
+
+    const categoryId = categoryyyy._id.toString();
+    console.log(categoryId);
+
+    const products = await ProductModel.find({ category: categoryId })
+      .populate("category", "_id name")
+      .populate("subCategory", "_id name")
+      .exec();
+
+    res.json(products);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const searchFiltersController = async (req, res) => {
   try {
-    const { query, price } = req.body;
+    const { query, price, category } = req.body;
     console.log(query);
     console.log(price);
-    
+
     if (query) {
       console.log("query ---->", query);
       await handleQuery(req, res, query);
@@ -363,6 +382,11 @@ export const searchFiltersController = async (req, res) => {
     if (price !== undefined) {
       console.log("Price ->", price);
       await handlePrice(req, res, price);
+    }
+
+    if (category) {
+      console.log("category ---->", category);
+      await handleCategory(req, res, category);
     }
   } catch (error) {
     console.log(error);

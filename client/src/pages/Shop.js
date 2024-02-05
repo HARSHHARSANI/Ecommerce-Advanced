@@ -4,8 +4,9 @@ import ProductCard from "../components/Cards/ProductCard";
 import { useDispatch, useSelector } from "react-redux";
 import { searchProducts } from "../functions/ProductFunction";
 import _ from "lodash";
-import { Menu, Slider } from "antd";
-import { DollarOutlined } from "@ant-design/icons";
+import { Menu, Slider, Checkbox } from "antd";
+import { DollarOutlined, DownSquareOutlined } from "@ant-design/icons";
+import { getCategories } from "../functions/categoryFunction";
 const { SubMenu, ItemGroup } = Menu;
 
 const Shop = () => {
@@ -14,6 +15,8 @@ const Shop = () => {
   const [loading, setloading] = useState(false);
   const [price, setPrice] = useState([0, 0]);
   const [priceOk, setPriceOk] = useState(false);
+  const [category, setCategory] = useState("");
+  const [categories, setCategories] = useState([]);
   const dispatch = useDispatch();
 
   const { search } = useSelector((state) => ({ ...state }));
@@ -27,45 +30,60 @@ const Shop = () => {
     });
   }, []);
 
-  ///load products on user search input
+  const fetchProducts = (args) => {
+    searchProducts(args).then((res) => {
+      setInitialProducts(res.data);
+    });
+  };
   useEffect(() => {
-    const delayedSearch = _.debounce(() => {
-      searchProducts({ query: text }).then((response) => {
-        setInitialProducts(response.data);
-      });
+    getCategories().then((res) => {
+      setCategories(res.data.categories);
+    });
+  }, []);
+
+  //load products on user search input
+  useEffect(() => {
+    const delayed = setTimeout(() => {
+      fetchProducts({ query: text });
     }, 1000);
-
-    delayedSearch();
-
-    return () => {
-      delayedSearch.cancel();
-    };
   }, [text]);
 
   ///whenever we change the price slider the state of text in the redux state should be empty ""
-
   ///load products based on price range
-  useEffect(() => {
-    dispatch({
-      type: "SEARCH_QUERY",
-      payload: { text: "" },
-    });
+  // useEffect(() => {
+  //   dispatch({
+  //     type: "SEARCH_QUERY",
+  //     payload: { text: "" },
+  //   });
+  //   const delayed = setTimeout(() => {
+  //     fetchProducts({ price });
+  //   }, 1000);
+  // }, [price]);
 
-    const delayedPriceSearch = _.debounce(() => {
-      searchProducts({ price }).then((response) => {
-        setInitialProducts(response.data);
-      });
-    }, 1000);
+  ///load products based on category
 
-    delayedPriceSearch();
+  // useEffect(() => {
+  //   dispatch({
+  //     type: "SEARCH_QUERY",
+  //     payload: { text: "" },
+  //   });
+  //   const delayed = setTimeout(() => {
+  //     fetchProducts({ category });
+  //   }, 1000);
+  // }, [category]);
 
-    return () => {
-      delayedPriceSearch.cancel();
-    };
-  }, [price]);
+  //load product based on category
 
+  const showCategories = categories.map((category) => (
+    <div key={category._id}>
+      <Checkbox className="pt-2 pb-2 pr-4" value={category._id} name="category">
+        {category.name}
+      </Checkbox>
+    </div>
+  ));
   return (
     <>
+      {JSON.stringify(categories)}
       <div className="container-fluid ">
         <div className="row">
           <div className="col-md-3 pt-2 ">
@@ -91,6 +109,16 @@ const Shop = () => {
                     max="4999"
                   />
                 </div>
+              </SubMenu>
+              <SubMenu
+                key="2"
+                title={
+                  <span className="h6">
+                    <DownSquareOutlined /> Categories
+                  </span>
+                }
+              >
+                <div className="h4">{showCategories}</div>
               </SubMenu>
             </Menu>
           </div>

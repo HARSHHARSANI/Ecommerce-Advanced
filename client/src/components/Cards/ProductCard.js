@@ -56,7 +56,7 @@ const ProductCard = ({ product }) => {
         ]}
       >
         <Meta
-          title={title}
+          title={`${title}  -   $${price}`}
           description={`${description && description.substring(0, 80)}...`}
         />
       </Card>

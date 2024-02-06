@@ -7,33 +7,41 @@ import _, { values } from "lodash";
 import { Menu, Slider, Checkbox } from "antd";
 import { DollarOutlined, DownSquareOutlined } from "@ant-design/icons";
 import { getCategories } from "../functions/categoryFunction";
+
 const { SubMenu, ItemGroup } = Menu;
 
 const Shop = () => {
-  const [initialProducts, setInitialProducts] = useState([]);
   const [products, setProducts] = useState([]);
   const [loading, setloading] = useState(false);
   const [price, setPrice] = useState([0, 0]);
   const [priceok, setPriceok] = useState(false);
-  const [categoryIds, setCategoryIds] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [categoryIds, setCategoryIds] = useState([]);
   const dispatch = useDispatch();
 
   const { search } = useSelector((state) => ({ ...state }));
   const { text } = search;
 
-  useEffect(() => {
-    loadAllProducts();
-  }, []);
-
   //1load products by default on page load
   const loadAllProducts = () => {
     getProductByCount(10).then((res) => {
       setProducts(res.data);
-      getCategories().then((res) => {
-        setCategories(res.data.categories);
-      });
+
       setloading(false);
+    });
+  };
+
+  useEffect(() => {
+    loadAllProducts();
+    //fetch Categories
+    getCategories().then((res) => {
+      setCategories(res.data.categories);
+    });
+  }, []);
+
+  const fetchproducts = (arg) => {
+    searchProducts(arg).then((response) => {
+      setProducts(response.data);
     });
   };
 
@@ -46,20 +54,10 @@ const Shop = () => {
     return () => clearTimeout(delayed);
   }, [text]);
 
-  const fetchproducts = (arg) => {
-    searchProducts(arg).then((response) => {
-      setProducts(response.data);
-    });
-  };
-
   ///whenever we change the price slider the state of text in the redux state should be empty ""
 
   useEffect(() => {
-    const delayed = setTimeout(() => {
-      fetchproducts({ price });
-    }, 700);
-
-    return () => clearTimeout(delayed);
+    fetchproducts({ price });
   }, [priceok]);
 
   const handleSlider = (value) => {
@@ -74,8 +72,38 @@ const Shop = () => {
     }, 700);
   };
 
+  const handleCheck = (e) => {
+    if (e.target.checked) {
+      setCategoryIds((prev) => [...prev, e.target.value]);
+    } else {
+      setCategoryIds((prev) => prev.filter((id) => id !== e.target.value));
+    }
+  };
+
+  useEffect(() => {
+    fetchproducts({ categoryIds });
+  }, [categoryIds]);
+
+  ///4 load product based on category
+  const showCategories = () =>
+    categories?.map((category, _id) => (
+      <div key={category._id}>
+        <Checkbox
+          className="pb-2 pl-4 pr-4 pt-3"
+          value={category._id}
+          name="category"
+          onChange={handleCheck}
+        >
+          {category.name}
+        </Checkbox>
+        <br />
+      </div>
+    ));
+
   return (
     <>
+      {JSON.stringify(categories)}
+
       <div className="container-fluid">
         <div className="row">
           <div className="col-md-3 pt-3">
@@ -101,16 +129,16 @@ const Shop = () => {
                   />
                 </div>
               </SubMenu>
-              <SubMenu key="2">
-                <div>
-                  <Slider
-                    range
-                    defaultValue={[20, 50]}
-                    className="mr-4 m-lg-4"
-                    max="4999"
-                    value={price}
-                    onChange={(value) => setPrice(value)}
-                  />
+              <SubMenu
+                key="2"
+                title={
+                  <span className="h6">
+                    <DownSquareOutlined /> Categories
+                  </span>
+                }
+              >
+                <div style={{ marginTop: "-10px" }}>
+                  {showCategories()} {JSON.stringify(categoryIds)}
                 </div>
               </SubMenu>
             </Menu>

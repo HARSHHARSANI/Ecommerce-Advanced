@@ -350,9 +350,10 @@ const handlePrice = async (req, res, price) => {
   }
 };
 
-const handleCategory = async (req, res, category) => {
+const handleCategory = async (req, res, categoryIds) => {
   try {
-    const products = await ProductModel.find({ category })
+    console.log("im inside handleCategory");
+    const products = await ProductModel.find({ category: categoryIds })
       .populate("category", "_id name")
       .populate("subCategory", "_id name")
       .exec();
@@ -365,11 +366,8 @@ const handleCategory = async (req, res, category) => {
 
 export const searchFiltersController = async (req, res) => {
   try {
-    const { query, price, category } = req.body;
-    console.log(query);
-    console.log(price);
-    console.log(category);
-
+    const { query, price, categoryIds } = req.body;
+    console.log(categoryIds);
     if (query) {
       console.log("query ---->", query);
       await handleQuery(req, res, query);
@@ -380,9 +378,9 @@ export const searchFiltersController = async (req, res) => {
       await handlePrice(req, res, price);
     }
 
-    if (category) {
-      console.log("category ---->", category);
-      await handleCategory(req, res, category);
+    if (categoryIds) {
+      console.log("categoryIds ---->", categoryIds);
+      await handleCategory(req, res, categoryIds);
     }
   } catch (error) {
     console.log(error);

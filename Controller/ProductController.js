@@ -364,9 +364,26 @@ const handleCategory = async (req, res, categoryIds) => {
   }
 };
 
+const handleSubCategory = async (req, res, subCategoryIds) => {
+  try {
+    console.log("i m inside handleSubCategory");
+
+    const products = await ProductModel.find({
+      subCategory: { $in: subCategoryIds },
+    })
+      .populate("category", "_id name")
+      .populate("subCategory", "_id name")
+      .exec();
+
+    res.json(products);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const searchFiltersController = async (req, res) => {
   try {
-    const { query, price, categoryIds } = req.body;
+    const { query, price, categoryIds, subCategoryIds } = req.body;
     console.log(categoryIds);
     if (query) {
       console.log("query ---->", query);
@@ -381,6 +398,11 @@ export const searchFiltersController = async (req, res) => {
     if (categoryIds) {
       console.log("categoryIds ---->", categoryIds);
       await handleCategory(req, res, categoryIds);
+    }
+
+    if (subCategoryIds) {
+      console.log("subCategoryIds", subCategoryIds);
+      await handleSubCategory(req, res, subCategoryIds);
     }
   } catch (error) {
     console.log(error);

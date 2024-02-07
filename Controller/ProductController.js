@@ -430,10 +430,10 @@ const handleShipping = async (req, res, shippingStatus) => {
   }
 };
 
-const handleColor = async (req, res, color) => {
+const handleColor = async (req, res, selectedColor) => {
   try {
     const products = await ProductModel.find({
-      color,
+      color: selectedColor,
     })
       .populate("category", "_id name")
       .populate("subCategory", "_id name")
@@ -455,7 +455,7 @@ export const searchFiltersController = async (req, res) => {
       stars,
       selectedBrands,
       shippingStatus,
-      color,
+      selectedColor,
     } = req.body;
     console.log(categoryIds);
     if (query) {
@@ -491,9 +491,9 @@ export const searchFiltersController = async (req, res) => {
       console.log("shippingStatus", shippingStatus);
       await handleShipping(req, res, shippingStatus);
     }
-    if (color) {
-      console.log("color", color);
-      await handleColor(req, res, color);
+    if (selectedColor) {
+      console.log("color", selectedColor);
+      await handleColor(req, res, selectedColor);
     }
   } catch (error) {
     console.log(error);

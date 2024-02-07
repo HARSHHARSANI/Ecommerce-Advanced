@@ -21,7 +21,7 @@ const Shop = () => {
   const [categoryIds, setCategoryIds] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
   const [subCategoryIds, setSubCategoryIds] = useState([]);
-  const [star, setStar] = useState("");
+  // const [star, setStar] = useState("");
   const [brands, setBrands] = useState([
     "Apple",
     "Microsoft",
@@ -43,6 +43,7 @@ const Shop = () => {
   ]);
   const [selectedBrands, setSelectedBrands] = useState([]);
   const [shippingStatus, setShippingStatus] = useState([]);
+  const [selectedColor, setSelectedColor] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -253,8 +254,20 @@ const Shop = () => {
   };
 
   const handleColors = (e) => {
-    console.log(e.target.value);
+    const color = e.target.value;
+    const selected = e.target.checked;
+    if (selected) {
+      setSelectedColor((prev) => [...prev, color]);
+    } else {
+      setSelectedColor((prevSelected) =>
+        prevSelected.filter((prevColor) => prevColor !== color)
+      );
+    }
   };
+
+  useEffect(() => {
+    fetchproducts({ selectedColor });
+  }, [selectedColor]);
 
   const showColors = () => {
     return (
@@ -263,6 +276,7 @@ const Shop = () => {
           <Checkbox
             className="pb-2 pl-4 pr-4 pt-3"
             name="color"
+            value={color}
             onChange={handleColors}
           >
             {color}
@@ -273,7 +287,7 @@ const Shop = () => {
   };
   return (
     <>
-      {JSON.stringify(shippingStatus)}
+      {JSON.stringify(selectedColor)}
       <div className="container-fluid">
         <div className="row">
           <div className="col-md-3 pt-3">

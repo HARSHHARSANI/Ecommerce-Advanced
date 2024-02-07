@@ -8,6 +8,7 @@ import { getSubCategories } from "../functions/SubCategoryFunction";
 import { Menu, Slider, Checkbox } from "antd";
 import { DollarOutlined, DownSquareOutlined } from "@ant-design/icons";
 import { getCategories } from "../functions/categoryFunction";
+import Star from "../components/forms/Star";
 
 const { SubMenu, ItemGroup } = Menu;
 
@@ -20,7 +21,27 @@ const Shop = () => {
   const [categoryIds, setCategoryIds] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
   const [subCategoryIds, setSubCategoryIds] = useState([]);
-  const [categoryIdsChanged, setCategoryIdsChanged] = useState(false);
+  const [star, setStar] = useState("");
+  const [brands, setBrands] = useState([
+    "Apple",
+    "Microsoft",
+    "Lenovo",
+    "Asus",
+    "Dell",
+    "Hp",
+    "Jio",
+    "Samsung",
+    "MSI",
+  ]);
+  const [shipping, setShipping] = useState(["Yes", "No"]);
+  const [colors, setColors] = useState([
+    "Black",
+    "Brown",
+    "White",
+    "Silver",
+    "Blue",
+  ]);
+  const [selectedBrands, setSelectedBrands] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -29,14 +50,15 @@ const Shop = () => {
 
   //1load products by default on page load
   const loadAllProducts = () => {
+    setloading(true);
     getProductByCount(10).then((res) => {
       setProducts(res.data);
-
       setloading(false);
     });
   };
 
   useEffect(() => {
+    setloading(true);
     loadAllProducts();
     //fetch Categories
     getCategories().then((res) => {
@@ -45,6 +67,7 @@ const Shop = () => {
         setSubCategories(response.data.subCategories);
       });
     });
+    setloading(false);
   }, []);
 
   const fetchproducts = (arg) => {
@@ -81,6 +104,11 @@ const Shop = () => {
   };
 
   const handleCheck = (e) => {
+    setPrice([0, 0]);
+    dispatch({
+      type: "SEARCH_QUERY",
+      payload: { text: "" },
+    });
     if (e.target.checked) {
       setCategoryIds((prev) => [...prev, e.target.value]);
     } else {
@@ -89,12 +117,8 @@ const Shop = () => {
   };
 
   useEffect(() => {
-    if (categoryIdsChanged) {
-      fetchproducts({ categoryIds });
-    } else {
-      setCategoryIdsChanged(true); // Set to true after the initial render
-    }
-  }, [categoryIds, categoryIdsChanged]);
+    fetchproducts({ categoryIds });
+  }, [categoryIds]);
 
   ///4 load product based on category
   const showCategories = () =>
@@ -141,15 +165,106 @@ const Shop = () => {
     }
   };
 
+  ///product By Star rating
+  // const handleStarClick = (num) => {
+  //   console.log(num);
+  // };
+  // const showstars = () => (
+  //   <div className="pb-4 pl-4 pr-4">
+  //     <Star starClick={handleStarClick} numberOfstars={5} />
+  //   </div>
+  // );
+
+  //show products based on brands
+
+  const handleBrand = (e, brand) => {
+    const checked = e.target.checked;
+
+    if (checked) {
+      setSelectedBrands((prevBrands) => [...prevBrands, brand]);
+    } else {
+      setSelectedBrands((prevBrands) =>
+        prevBrands.filter((prevBrand) => prevBrand !== brand)
+      );
+    }
+  };
+
+  useEffect(() => {
+    fetchproducts({ selectedBrands });
+  }, [selectedBrands]);
+
+  const showBrands = () => {
+    return brands?.map((brand) => (
+      <div key={brand}>
+        <Checkbox
+          className="pb-2 pl-4 pr-4 pt-3"
+          value={brand}
+          name="brands"
+          onChange={(e) => handleBrand(e, brand)}
+        >
+          {brand}
+        </Checkbox>
+      </div>
+    ));
+  };
+
+  const handleShipping = () => {
+    //
+  };
+
+  const showShipping = () => {
+    return (
+      <>
+        <div>
+          <Checkbox
+            className="pb-2 pl-4 pr-4 pt-3"
+            name="Shipping"
+            onChange={handleShipping}
+          >
+            Yes
+          </Checkbox>
+        </div>
+        <div>
+          <Checkbox
+            className="pb-2 pl-4 pr-4 pt-3"
+            name="Shipping"
+            onChange={handleShipping}
+          >
+            no
+          </Checkbox>
+        </div>
+      </>
+    );
+  };
+
+  const handleColors = (e) => {
+    console.log(e.target.value);
+  };
+
+  const showColors = () => {
+    return (
+      <>
+        {colors.map((color) => (
+          <Checkbox
+            className="pb-2 pl-4 pr-4 pt-3"
+            name="color"
+            onChange={handleColors}
+          >
+            {color}
+          </Checkbox>
+        ))}
+      </>
+    );
+  };
   return (
     <>
-      {JSON.stringify(subCategoryIds)}
+      {JSON.stringify(selectedBrands)}
       <div className="container-fluid">
         <div className="row">
           <div className="col-md-3 pt-3">
             <h3 clas>Filter Menu</h3>
             <hr />
-            <Menu mode="inline" defaultOpenKeys={["1", "2", "3"]}>
+            <Menu mode="inline" defaultOpenKeys={["1", "2"]}>
               <SubMenu
                 key="1"
                 title={
@@ -179,8 +294,18 @@ const Shop = () => {
               >
                 <div style={{ marginTop: "-10px" }}>{showCategories()}</div>
               </SubMenu>
-              <SubMenu
+              {/* <SubMenu
                 key="3"
+                title={
+                  <span className="h6">
+                    <StarOutlined /> Ratings
+                  </span>
+                }
+              >
+                <div style={{ marginTop: "-10px" }}>{showstars()}</div>
+              </SubMenu> */}
+              <SubMenu
+                key="4"
                 title={
                   <span className="h6">
                     <DownSquareOutlined /> SubCategories
@@ -188,6 +313,36 @@ const Shop = () => {
                 }
               >
                 <div style={{ marginTop: "-10px" }}>{showSubCategory()}</div>
+              </SubMenu>
+              <SubMenu
+                key="5"
+                title={
+                  <span className="h6">
+                    <DownSquareOutlined /> Brands
+                  </span>
+                }
+              >
+                <div style={{ marginTop: "-10px" }}>{showBrands()}</div>
+              </SubMenu>
+              <SubMenu
+                key="6"
+                title={
+                  <span className="h6">
+                    <DownSquareOutlined /> Colors
+                  </span>
+                }
+              >
+                <div style={{ marginTop: "-10px" }}>{showColors()}</div>
+              </SubMenu>
+              <SubMenu
+                key="7"
+                title={
+                  <span className="h6">
+                    <DownSquareOutlined /> Shipping
+                  </span>
+                }
+              >
+                <div style={{ marginTop: "-10px" }}>{showShipping()}</div>
               </SubMenu>
             </Menu>
           </div>

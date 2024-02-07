@@ -32,4 +32,5 @@ router.get("/products/related/:productId", relatedProductController);
 ///search
 router.post("/search/filters", searchFiltersController);
 
+
 export default router;

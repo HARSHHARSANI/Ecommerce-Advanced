@@ -318,10 +318,6 @@ export const relatedProductController = async (req, res) => {
 };
 
 const handleQuery = async (req, res, query) => {
-  // if (query === "") {
-  //   const products = await ProductModel.find({});
-  // }
-
   const products = await ProductModel.find({
     $text: { $search: query },
   })
@@ -381,9 +377,85 @@ const handleSubCategory = async (req, res, subCategoryIds) => {
   }
 };
 
+const handlestars = async (req, res, stars) => {
+  try {
+    console.log("im inside handlestars");
+    const AggregatedProducts = await ProductModel.aggregate([
+      {
+        $project: {
+          document: "$$ROOT",
+          floorAverage: { $floor: { $avg: "rating.star" } },
+        },
+      },
+      { $match: { floorAverage: stars } },
+    ])
+      .populate("category", "_id name")
+      .populate("subCategory", "_id name")
+      .exec();
+
+    const Products = AggregatedProducts.map((result) => result.document);
+
+    res.json(Products);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const handleBrands = async (req, res, selectedBrands) => {
+  try {
+    const products = await ProductModel.find({
+      brand: selectedBrands,
+    })
+      .populate("category", "_id name")
+      .populate("subCategory", "_id name")
+      .exec();
+
+    res.json(products);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const handleShipping = async (req, res, shipping) => {
+  try {
+    const products = await ProductModel.find({ shipping })
+      .populate("category", "_id name")
+      .populate("subCategory", "_id name")
+      .exec();
+
+    res.json(products);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const handleColor = async (req, res, color) => {
+  try {
+    const products = await ProductModel.find({
+      color,
+    })
+      .populate("category", "_id name")
+      .populate("subCategory", "_id name")
+      .exec();
+
+    res.json(products);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const searchFiltersController = async (req, res) => {
   try {
-    const { query, price, categoryIds, subCategoryIds } = req.body;
+    const {
+      query,
+      price,
+      categoryIds,
+      subCategoryIds,
+      stars,
+      selectedBrands,
+      shipping,
+      color,
+    } = req.body;
     console.log(categoryIds);
     if (query) {
       console.log("query ---->", query);
@@ -403,6 +475,24 @@ export const searchFiltersController = async (req, res) => {
     if (subCategoryIds) {
       console.log("subCategoryIds", subCategoryIds);
       await handleSubCategory(req, res, subCategoryIds);
+    }
+
+    if (stars) {
+      console.log("stars", stars);
+      await handlestars(req, res, stars);
+    }
+
+    if (selectedBrands) {
+      console.log("brands", selectedBrands);
+      await handleBrands(req, res, selectedBrands);
+    }
+    if (shipping) {
+      console.log("shipping", shipping);
+      await handleShipping(req, res, shipping);
+    }
+    if (color) {
+      console.log("color", color);
+      await handleColor(req, res, color);
     }
   } catch (error) {
     console.log(error);

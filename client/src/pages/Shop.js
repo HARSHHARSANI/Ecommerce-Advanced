@@ -42,6 +42,7 @@ const Shop = () => {
     "Blue",
   ]);
   const [selectedBrands, setSelectedBrands] = useState([]);
+  const [shippingStatus, setShippingStatus] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -208,17 +209,30 @@ const Shop = () => {
     ));
   };
 
-  const handleShipping = () => {
-    //
+  const handleShipping = (e) => {
+    const shippingvalues = e.target.value;
+    const checked = e.target.checked;
+    if (checked) {
+      setShippingStatus((prev) => [...prev, shippingvalues]);
+    } else {
+      setShippingStatus((prev) =>
+        prev.filter((prevShipping) => prevShipping !== shippingvalues)
+      );
+    }
   };
 
-  const showShipping = () => {
+  useEffect(() => {
+    fetchproducts({ shippingStatus });
+  }, [shippingStatus]);
+
+  const showShipping = (e) => {
     return (
       <>
         <div>
           <Checkbox
             className="pb-2 pl-4 pr-4 pt-3"
             name="Shipping"
+            value="Yes"
             onChange={handleShipping}
           >
             Yes
@@ -228,9 +242,10 @@ const Shop = () => {
           <Checkbox
             className="pb-2 pl-4 pr-4 pt-3"
             name="Shipping"
+            value="No"
             onChange={handleShipping}
           >
-            no
+            No
           </Checkbox>
         </div>
       </>
@@ -258,7 +273,7 @@ const Shop = () => {
   };
   return (
     <>
-      {JSON.stringify(selectedBrands)}
+      {JSON.stringify(shippingStatus)}
       <div className="container-fluid">
         <div className="row">
           <div className="col-md-3 pt-3">

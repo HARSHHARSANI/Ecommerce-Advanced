@@ -5,10 +5,10 @@ import {
   SettingOutlined,
   UsergroupAddOutlined,
   LogoutOutlined,
-  SearchOutlined,
+  ShoppingCartOutlined,
   ShoppingOutlined,
 } from "@ant-design/icons";
-import { Menu } from "antd";
+import { Badge, Menu } from "antd";
 import { Link } from "react-router-dom";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
@@ -20,7 +20,7 @@ const Header = () => {
   const [current, setCurrent] = useState("home");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  let { user } = useSelector((state) => ({ ...state }));
+  let { user, cart } = useSelector((state) => ({ ...state }));
 
   const userRole = user && user.token;
 
@@ -44,6 +44,19 @@ const Header = () => {
       key: "shop",
       icon: <ShoppingOutlined />,
       to: "/shop",
+    },
+
+    {
+      label: (
+        <Badge count={cart.length} offset={[9, 0]}>
+          <Link to="/cart" style={{ textDecoration: "none" }}>
+            Cart
+          </Link>
+        </Badge>
+      ),
+      key: "cart",
+      icon: <ShoppingOutlined />,
+      to: "/cart",
     },
 
     {
@@ -96,6 +109,31 @@ const Header = () => {
       key: "home",
       icon: <HomeOutlined />,
       to: "/",
+    },
+
+    {
+      label: (
+        <Link to="/shop" style={{ textDecoration: "none" }}>
+          Shop
+        </Link>
+      ),
+      key: "shop",
+      icon: <ShoppingOutlined />,
+      to: "/shop",
+    },
+
+    {
+      label: (
+        <Badge count={cart.length}>
+          {" "}
+          <Link to="/cart" style={{ textDecoration: "none" }}>
+            Cart
+          </Link>
+        </Badge>
+      ),
+      key: "cart",
+      icon: <ShoppingOutlined />,
+      to: "/cart",
     },
 
     {

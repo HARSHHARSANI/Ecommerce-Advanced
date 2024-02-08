@@ -1,12 +1,16 @@
-import { Card } from "antd";
-import React from "react";
+import { Card, Tooltip, Badge } from "antd";
+import React, { useState } from "react";
 import { EyeOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import laptop from "../../images/default image.jpg";
 import { AverageRating } from "../../functions/AverageRating";
+import _ from "lodash";
+import { useDispatch, useSelector } from "react-redux";
 const { Meta } = Card;
 
 const ProductCard = ({ product }) => {
+  const dispatch = useDispatch();
+  const [tooltip, setTooltip] = useState("Add To Cart");
   const {
     title,
     images,
@@ -20,6 +24,35 @@ const ProductCard = ({ product }) => {
     color,
     brand,
   } = product;
+
+  const { cart } = useSelector((state) => ({ ...state }));
+
+  const handleAddToCart = () => {
+    ///create cart array
+    let cart = [];
+    if (typeof window !== undefined) {
+      if (localStorage.getItem("cart")) {
+        cart = JSON.parse(localStorage.getItem("cart"));
+      }
+
+      cart.push({
+        ...product,
+        count: 1,
+      });
+
+      ///remove the dublicatte
+      const unique = _.uniqWith(cart, _.isEqual);
+      ///save to localStorage
+      localStorage.setItem("cart", JSON.stringify(unique));
+
+      setTooltip("Added");
+
+      dispatch({
+        type: "ADD_TO_CART",
+        payload: unique,
+      });
+    }
+  };
 
   return (
     <>
@@ -48,11 +81,17 @@ const ProductCard = ({ product }) => {
             <br />
             View Product
           </Link>,
-          <>
-            <ShoppingCartOutlined className="text-danger" onClick={() => {}} />
-            <br />
-            Add to Cart
-          </>,
+
+          <Tooltip title={tooltip}>
+            <a onClick={handleAddToCart}>
+              <ShoppingCartOutlined
+                className="text-danger"
+                onClick={() => {}}
+              />
+              <br />
+              Add to Cart
+            </a>
+          </Tooltip>,
         ]}
       >
         <Meta

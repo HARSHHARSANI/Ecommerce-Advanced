@@ -21,6 +21,12 @@ const Shop = () => {
   const [categoryIds, setCategoryIds] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
   const [subCategoryIds, setSubCategoryIds] = useState([]);
+  const [showBasedOnSelectedColor, setShowBasedOnSelectedColor] =
+    useState(false);
+  const [showBasedOnSelectedBrand, setShowBasedOnSelectedBrand] =
+    useState(false);
+  const [showBasedOnSelectedShipping, setShowBasedOnSelectedShipping] =
+    useState(false);
   // const [star, setStar] = useState("");
   const [brands, setBrands] = useState([
     "Apple",
@@ -192,7 +198,11 @@ const Shop = () => {
   };
 
   useEffect(() => {
-    fetchproducts({ selectedBrands });
+    if (showBasedOnSelectedBrand) {
+      fetchproducts({ selectedBrands });
+    } else {
+      setShowBasedOnSelectedBrand(true);
+    }
   }, [selectedBrands]);
 
   const showBrands = () => {
@@ -223,7 +233,11 @@ const Shop = () => {
   };
 
   useEffect(() => {
-    fetchproducts({ shippingStatus });
+    if (showBasedOnSelectedShipping) {
+      fetchproducts({ shippingStatus });
+    } else {
+      setShowBasedOnSelectedShipping(true);
+    }
   }, [shippingStatus]);
 
   const showShipping = (e) => {
@@ -266,7 +280,11 @@ const Shop = () => {
   };
 
   useEffect(() => {
-    fetchproducts({ selectedColor });
+    if (showBasedOnSelectedColor) {
+      fetchproducts({ selectedColor });
+    } else {
+      setShowBasedOnSelectedColor(true);
+    }
   }, [selectedColor]);
 
   const showColors = () => {

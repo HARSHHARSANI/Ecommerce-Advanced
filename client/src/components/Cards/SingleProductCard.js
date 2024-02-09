@@ -47,6 +47,12 @@ const SingleProductCard = ({ product, onStarClick, star }) => {
         type: "ADD_TO_CART",
         payload: unique,
       });
+
+      ///side drawer
+      dispatch({
+        type: "SET_VISIBLE",
+        payload: true,
+      });
     }
   };
 

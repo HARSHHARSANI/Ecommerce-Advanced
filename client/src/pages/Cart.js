@@ -48,7 +48,7 @@ const Cart = () => {
 
   return (
     <>
-      {JSON.stringify(cart)}
+      {/* {JSON.stringify(cart)} */}
       <div className="container-fluid">
         <div className="row ">Cart / {cart.length} products </div>
         <div className="row">

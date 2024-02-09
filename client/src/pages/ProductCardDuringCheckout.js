@@ -1,10 +1,12 @@
 import React from "react";
 import ModalImage from "react-modal-image";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 const ProductCardDuringCheckout = ({ product }) => {
   const dispatch = useDispatch();
-  const { title, price, images, count, color, brand, shipping } = product;
+  const { title, price, images, count, color, brand, shipping, quantity } =
+    product;
 
   const colors = ["Black", "Brown", "White", "Silver", "Blue"];
 
@@ -33,6 +35,39 @@ const ProductCardDuringCheckout = ({ product }) => {
       });
     }
   };
+
+  const handleQuantityChange = (e) => {
+    console.log(quantity);
+
+    let count = e.target.value < 1 ? 1 : e.target.value;
+
+    if (count > quantity) {
+      toast.error(`Max available quantity ${quantity}`);
+      return;
+    }
+
+    let cart = [];
+
+    if (typeof window != undefined) {
+      if (localStorage.getItem("cart")) {
+        cart = JSON.parse(localStorage.getItem("cart"));
+      }
+
+      cart.map((cartItem, i) => {
+        if (cartItem._id === product._id) {
+          cart[i].count = count;
+        }
+      });
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+
+      dispatch({
+        type: "ADD_TO_CART",
+        payload: cart,
+      });
+    }
+  };
+
   return (
     <tbody>
       <tr>
@@ -72,7 +107,14 @@ const ProductCardDuringCheckout = ({ product }) => {
               ))}
           </select>
         </td>
-        <td>{count}</td>
+        <td className="text-center ">
+          <input
+            type="number"
+            value={count}
+            onChange={handleQuantityChange}
+            className="form-control"
+          />
+        </td>
         <td>Shipping Icon</td>
         <td>Delete Icon</td>
       </tr>

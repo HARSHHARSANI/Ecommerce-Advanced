@@ -47,6 +47,7 @@ export const createProduct = async (product, authtoken) => {
 
 export const getProductByCount = async (count) => {
   try {
+    console.log("im inside getProductByCount ");
     const productsByCount = await axios.get(
       `${process.env.REACT_APP_API}/product/products/${count}`
     );

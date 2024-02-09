@@ -32,6 +32,7 @@ import Subcategory from "./components/Home/Subcategory";
 import ProductBasedOnSubcategory from "./pages/ProductBasedOnSubcategory";
 import ProductsBasedOnCategory from "./pages/ProductsBasedOnCategory";
 import Shop from "./pages/Shop";
+import Cart from "./pages/Cart";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -75,6 +76,7 @@ const App = () => {
         <Route path="/forgot/password" element={<ForgotPassword />} />
         <Route path="/category/:slug" element={<ProductsBasedOnCategory />} />
         <Route path="/shop" element={<Shop />} />
+        <Route path="/cart" element={<Cart />} />
         <Route
           path="/subcategory/:slug"
           element={<ProductBasedOnSubcategory />}

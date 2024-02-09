@@ -50,6 +50,15 @@ const Shop = () => {
   const [selectedBrands, setSelectedBrands] = useState([]);
   const [shippingStatus, setShippingStatus] = useState([]);
   const [selectedColor, setSelectedColor] = useState([]);
+  const [showProductsBasedOnText, setShowProductsBasedOnText] = useState(false);
+  const [showProductsBasedOnCategoryIds, setShowProductsBasedOnCategoryIds] =
+    useState(false);
+  const [
+    showProductsBasedOnSubCategoryIds,
+    setShowProductsBasedOnSubCategoryIds,
+  ] = useState(false);
+  const [showproductsBasedOnprice, setShowproductsBasedOnprice] =
+    useState(false);
 
   const dispatch = useDispatch();
 
@@ -59,7 +68,7 @@ const Shop = () => {
   //1load products by default on page load
   const loadAllProducts = () => {
     setloading(true);
-    getProductByCount(10).then((res) => {
+    getProductByCount(15).then((res) => {
       setProducts(res.data);
       setloading(false);
     });
@@ -86,17 +95,25 @@ const Shop = () => {
 
   //2 load products based on user search inputs
   useEffect(() => {
-    const delayed = setTimeout(() => {
-      fetchproducts({ query: text });
-    }, 700);
+    if (showProductsBasedOnText) {
+      const delayed = setTimeout(() => {
+        fetchproducts({ query: text });
+      }, 700);
 
-    return () => clearTimeout(delayed);
+      return () => clearTimeout(delayed);
+    } else {
+      setShowProductsBasedOnText(true);
+    }
   }, [text]);
 
   ///whenever we change the price slider the state of text in the redux state should be empty ""
 
   useEffect(() => {
-    fetchproducts({ price });
+    if (showproductsBasedOnprice) {
+      fetchproducts({ price });
+    } else {
+      setShowproductsBasedOnprice(true);
+    }
   }, [priceok]);
 
   const handleSlider = (value) => {
@@ -125,7 +142,11 @@ const Shop = () => {
   };
 
   useEffect(() => {
-    fetchproducts({ categoryIds });
+    if (showProductsBasedOnCategoryIds) {
+      fetchproducts({ categoryIds });
+    } else {
+      setShowProductsBasedOnCategoryIds(true);
+    }
   }, [categoryIds]);
 
   ///4 load product based on category
@@ -145,7 +166,11 @@ const Shop = () => {
     ));
 
   useEffect(() => {
-    fetchproducts({ subCategoryIds });
+    if (showProductsBasedOnSubCategoryIds) {
+      fetchproducts({ subCategoryIds });
+    } else {
+      setShowProductsBasedOnSubCategoryIds(true);
+    }
   }, [subCategoryIds]);
 
   /// load products based on subcategory

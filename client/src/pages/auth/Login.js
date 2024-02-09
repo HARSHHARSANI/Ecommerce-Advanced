@@ -21,15 +21,14 @@ const Login = () => {
   const roleBaseRedirect = (response) => {
     try {
       if (response.role === "admin") {
-        navigate(location.state || "/admin/dashboard");
+        navigate(location.state?.from || "/admin/dashboard");
       } else {
-        navigate(location.state || "/user/history");
+        navigate(location.state?.from || "/user/history");
       }
     } catch (error) {
       console.log(error);
     }
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -54,7 +53,13 @@ const Login = () => {
               id: response.data._id,
             },
           });
-          roleBaseRedirect(response.data);
+          // Redirect back to the previous page after successful login
+          if (location.state) {
+            navigate(location.state);
+          } else {
+            // If there's no previous page, perform role-based redirection
+            roleBaseRedirect(response.data);
+          }
         })
         .catch();
     } catch (error) {

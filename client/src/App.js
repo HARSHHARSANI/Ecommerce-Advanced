@@ -75,8 +75,8 @@ const App = () => {
         <Route path="/register/complete" element={<RegisterComplete />} />
         <Route path="/forgot/password" element={<ForgotPassword />} />
         <Route path="/category/:slug" element={<ProductsBasedOnCategory />} />
-        <Route path="/shop" element={<Shop />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/shop" element={<Shop />} />
         <Route
           path="/subcategory/:slug"
           element={<ProductBasedOnSubcategory />}

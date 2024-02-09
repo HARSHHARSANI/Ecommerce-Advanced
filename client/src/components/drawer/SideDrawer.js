@@ -53,11 +53,18 @@ const SideDrawer = () => {
           </div>
         </div>
       ))}
-      <Link
-        to={"/cart"}
-        className="text-center btn btn-primary btn-block d-block"
-      >
-        Add to Cart
+      <Link to={"/cart"} className="d-block">
+        <button
+          className="text-center btn btn-primary btn-block"
+          onClick={() =>
+            dispatch({
+              type: "SET_VISIBLE",
+              payload: false,
+            })
+          }
+        >
+          Go to Cart
+        </button>
       </Link>
     </Drawer>
   );

@@ -21,7 +21,7 @@ const Cart = () => {
   };
 
   const showCartItems = () => (
-    <table class="table table-success" style={{ border: "1px solid black" }}>
+    <table class="table " style={{ border: "1px solid black" }}>
       <thead class="thead-dark">
         <tr>
           <th>Image</th>
@@ -48,6 +48,7 @@ const Cart = () => {
 
   return (
     <>
+      {JSON.stringify(cart)}
       <div className="container-fluid">
         <div className="row ">Cart / {cart.length} products </div>
         <div className="row">

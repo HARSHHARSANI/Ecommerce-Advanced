@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import ProductCardDuringCheckout from "./ProductCardDuringCheckout";
+import { userCart } from "../functions/User";
 
 const Cart = () => {
   const { user, cart } = useSelector((state) => ({ ...state }));
@@ -10,7 +11,19 @@ const Cart = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const handleCheckout = () => {};
+  const handleCheckout = () => {
+    try {
+      console.log("cart", JSON.stringify(cart, null, 4));
+      userCart(cart, user.token).then((response) => {
+        console.log("response", response);
+        if (response.data.sucess) {
+          navigate("/checkout");
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleCheckLogin = () => {
     navigate("/login", {

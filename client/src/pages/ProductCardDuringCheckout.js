@@ -16,7 +16,7 @@ const ProductCardDuringCheckout = ({ product }) => {
   const colors = ["Black", "Brown", "White", "Silver", "Blue"];
 
   const handleColorChange = (e) => {
-    console.log("color changed", e.target.value);
+    // console.log("color changed", e.target.value);
 
     let cart = [];
     if (typeof window !== undefined) {
@@ -30,7 +30,7 @@ const ProductCardDuringCheckout = ({ product }) => {
         }
       });
 
-      console.log("update cart value", cart);
+      // console.log("update cart value", cart);
 
       localStorage.setItem("cart", JSON.stringify(cart));
 
@@ -42,7 +42,7 @@ const ProductCardDuringCheckout = ({ product }) => {
   };
 
   const handleQuantityChange = (e) => {
-    console.log(quantity);
+    // console.log(quantity);
 
     let count = e.target.value < 1 ? 1 : e.target.value;
 

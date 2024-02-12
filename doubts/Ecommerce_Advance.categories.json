@@ -1,0 +1,70 @@
+[{
+  "_id": {
+    "$oid": "657404bf003f50829321cbc1"
+  },
+  "name": "laptop",
+  "slug": "laptop",
+  "createdAt": {
+    "$date": "2023-12-09T06:10:07.954Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-09T06:10:07.954Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "657404c4003f50829321cbc6"
+  },
+  "name": "mobile",
+  "slug": "mobile",
+  "createdAt": {
+    "$date": "2023-12-09T06:10:12.734Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-09T06:10:12.734Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "657404cb003f50829321cbcb"
+  },
+  "name": "earbuds",
+  "slug": "earbuds",
+  "createdAt": {
+    "$date": "2023-12-09T06:10:19.560Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-09T06:10:19.560Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "657404cf003f50829321cbd0"
+  },
+  "name": "speaker",
+  "slug": "speaker",
+  "createdAt": {
+    "$date": "2023-12-09T06:10:23.867Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-09T06:10:23.867Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65740533003f50829321cbe2"
+  },
+  "name": "mouse and keyboard",
+  "slug": "mouse-and-keyboard",
+  "createdAt": {
+    "$date": "2023-12-09T06:12:03.982Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-09T06:12:03.982Z"
+  },
+  "__v": 0
+}]

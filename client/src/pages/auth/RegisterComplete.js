@@ -15,8 +15,8 @@ const RegisterComplete = (props) => {
 
   useEffect(() => {
     setEmail(window.localStorage.getItem("emailForRegistration"));
-    console.log(window.location.href);
-    console.log(window.localStorage.getItem("emailForRegistration"));
+    // console.log(window.location.href);
+    // console.log(window.localStorage.getItem("emailForRegistration"));
   }, []);
 
   const handleSubmit = async (e) => {
@@ -37,7 +37,7 @@ const RegisterComplete = (props) => {
         email,
         window.location.href
       );
-      console.log("Result", result);
+      // console.log("Result", result);
       if (result.user.emailVerified) {
         ///remove the emaiil from the local storage
         window.localStorage.removeItem("emailForRegistration");
@@ -48,7 +48,7 @@ const RegisterComplete = (props) => {
         const idTokenResult = await user.getIdTokenResult();
 
         ///redux Store
-        console.log("user", user, "idTokenResult", idTokenResult);
+        // console.log("user", user, "idTokenResult", idTokenResult);
 
         createOrUpdateUser(idTokenResult.token)
           .then((response) => {

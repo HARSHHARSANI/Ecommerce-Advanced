@@ -5,7 +5,7 @@ import CategoryModel from "../Models/CategoryModel.js";
 
 export const createProductController = async (req, res) => {
   try {
-    console.log(req.body);
+    // console.log(req.body);
 
     const {
       title,
@@ -122,7 +122,7 @@ export const updateProductController = async (req, res) => {
     );
     res.status(200).send(UpdatedProduct);
   } catch (error) {
-    console.log("PRODUCT UPDATE ERROR", error);
+    // console.log("PRODUCT UPDATE ERROR", error);
     return res.status(400).send("PRODUCT UPDATE FAILED");
   }
 };

@@ -38,7 +38,7 @@ const UpdateCategory = () => {
       .then((response) => {
         setLoading(false);
         setName("");
-        console.log("API Response:", response);
+        // console.log("API Response:", response);
         if (response && response.data && response.data.message) {
           toast.success(response.data.message);
         } else {

@@ -20,7 +20,7 @@ const AllProducts = () => {
     setloading(true);
     getProductByCount(10)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setproducts(res.data);
         setloading(false);
       })
@@ -30,7 +30,7 @@ const AllProducts = () => {
   const handleRemove = (slug) => {
     let answer = window.confirm("Delete?");
     if (answer) {
-      console.log("Send Delete Request", slug);
+      // console.log("Send Delete Request", slug);
       removeProduct(slug, user.token)
         .then((response) => {
           loadProductByCount();

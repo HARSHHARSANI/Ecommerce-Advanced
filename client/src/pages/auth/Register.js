@@ -17,10 +17,12 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // console.log(process.env.REACT_APP_REDIRECTING_URL);
+
     const config = {
       url:
         process.env.REACT_APP_REDIRECTING_URL ||
-        "http://localhost:3000/register/complete",
+        "http://13.234.231.67/register/complete",
       handleCodeInApp: true,
     };
 

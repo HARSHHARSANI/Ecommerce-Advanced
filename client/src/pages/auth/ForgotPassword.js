@@ -25,7 +25,7 @@ const ForgotPassword = () => {
       };
       const response = await auth.sendPasswordResetEmail(email, config);
       if (response?.error) {
-        console.log(response.error);
+        // console.log(response.error);
       }
       setEmail("");
       setLoading(false);

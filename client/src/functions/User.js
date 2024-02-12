@@ -11,7 +11,7 @@ export const userCart = async (cart, authtoken) => {
     }
   );
 
-  console.log("response from userCart", response);
+  // console.log("response from userCart", response);
 
   return response;
 };

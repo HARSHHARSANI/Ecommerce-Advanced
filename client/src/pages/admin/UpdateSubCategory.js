@@ -22,14 +22,14 @@ const UpdateSubCategory = () => {
 
   const loadCategories = () => {
     getCategories().then((response) => {
-      console.log(response);
+      // console.log(response);
       setCategories(response.data.categories);
     });
   };
 
   const loadSingleSubCategory = () => {
     getSingleSubCategories(slug).then((response) => {
-      console.log(response);
+      // console.log(response);
       setName(response.data.categoryExist.name);
       setparent(response.data.categoryExist.parent);
     });
@@ -47,7 +47,7 @@ const UpdateSubCategory = () => {
       .then((response) => {
         setLoading(false);
         setName("");
-        console.log("API Response:", response);
+        // console.log("API Response:", response);
         if (response && response.data && response.data.message) {
           toast.success(response.data.message);
         } else {

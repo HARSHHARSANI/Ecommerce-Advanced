@@ -29,7 +29,7 @@ const CreateProductForm = ({
     images,
   } = values;
 
-  console.log(values);
+  // console.log(values);
   // console.log(subOption);
 
   return (

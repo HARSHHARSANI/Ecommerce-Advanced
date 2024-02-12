@@ -22,7 +22,7 @@ const CreateCategory = () => {
 
   const loadCategories = () => {
     getCategories().then((response) => {
-      console.log(response);
+      // console.log(response);
       setCategories(response.data);
     });
   };
@@ -38,7 +38,7 @@ const CreateCategory = () => {
       .then((response) => {
         setLoading(false);
         setName("");
-        console.log("API Response:", response);
+        // console.log("API Response:", response);
         if (response && response.data && response.data.message) {
           toast.success(response.data.message);
           loadCategories(); // Reload the categories after creating a new one
@@ -57,7 +57,7 @@ const CreateCategory = () => {
 
   const handleRemove = async (slug) => {
     let answer = window.confirm(`Delete? ${slug}`);
-    console.log(answer, slug);
+    // console.log(answer, slug);
     if (answer) {
       setLoading(true);
       removeCategory(slug, user.token)

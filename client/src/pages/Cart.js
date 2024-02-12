@@ -13,9 +13,9 @@ const Cart = () => {
 
   const handleCheckout = () => {
     try {
-      console.log("cart", JSON.stringify(cart, null, 4));
+      // console.log("cart", JSON.stringify(cart, null, 4));
       userCart(cart, user.token).then((response) => {
-        console.log("response", response);
+        // console.log("response", response);
         if (response.data.sucess) {
           navigate("/checkout");
         }
@@ -30,7 +30,7 @@ const Cart = () => {
       state: location.pathname,
     });
 
-    console.log(location.pathname);
+    // console.log(location.pathname);
   };
 
   const showCartItems = () => (

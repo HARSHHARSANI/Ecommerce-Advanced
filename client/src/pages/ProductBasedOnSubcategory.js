@@ -11,7 +11,7 @@ const ProductBasedOnSubcategory = () => {
 
   useEffect(() => {
     getProductsBasedOnSubcategory(slug).then((res) => {
-      console.log(res);
+      // console.log(res);
       setProductBasedOnSubcategory(res.data);
     });
   }, []);

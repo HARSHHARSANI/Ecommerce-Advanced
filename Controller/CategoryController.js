@@ -145,9 +145,9 @@ export const deleteCategoryController = async (req, res) => {
 
 export const getSubCategoryBasedOnCategoryId = async (req, res) => {
   try {
-    console.log("Received _id:", req.params._id);
+    // console.log("Received _id:", req.params._id);
 
-    console.log("im inside getSubCategoryBasedOnCategoryId");
+    // console.log("im inside getSubCategoryBasedOnCategoryId");
 
     const subcategory = await SubCategoryModel.find({
       parent: req.params._id,

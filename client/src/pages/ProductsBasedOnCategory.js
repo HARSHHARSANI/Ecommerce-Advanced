@@ -9,7 +9,7 @@ const ProductsBasedOnCategory = () => {
   useEffect(() => {
     getProductsBasedOnCategory(slug).then((res) => {
       setProductsBasedOnCategory(res.data);
-      console.log(res);
+      // console.log(res);
     });
   }, []);
 

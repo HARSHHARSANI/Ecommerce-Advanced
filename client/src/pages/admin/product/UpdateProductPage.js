@@ -62,13 +62,13 @@ const UpdatedProductPage = () => {
 
   const LoadProduct = () => {
     getSingleProduct(slug).then((response) => {
-      console.log(response);
+      // console.log(response);
       ///load single product
       setSingleProductValues({ ...SingleProductValues, ...response.product });
 
       getSubCategoryBasedOnParentId(response.product.category._id).then(
         (res) => {
-          console.log(res);
+          // console.log(res);
           setsubOption(res.data.subcategory); // on first load show default subCategory
         }
       );
@@ -77,13 +77,13 @@ const UpdatedProductPage = () => {
         arr.push(s._id);
       });
       setArraysOfSubCategory((prev) => arr);
-      console.log("arraysOfSubCategory", arr);
+      // console.log("arraysOfSubCategory", arr);
     });
   };
 
   const loadCategories = () => {
     getCategories().then((response) => {
-      console.log(response);
+      // console.log(response);
       setcategories(response.data);
     });
   };
@@ -113,12 +113,12 @@ const UpdatedProductPage = () => {
       ...SingleProductValues,
       [e.target.name]: e.target.value,
     });
-    console.log(e.target.name, "------>", e.target.value);
+    // console.log(e.target.name, "------>", e.target.value);
   };
 
   const handleCategoryChange = (e) => {
     e.preventDefault();
-    console.log("Clicked Category", e.target.value);
+    // console.log("Clicked Category", e.target.value);
     setSingleProductValues({
       ...SingleProductValues,
       subCategory: [],
@@ -126,7 +126,7 @@ const UpdatedProductPage = () => {
     });
 
     getSubCategoryBasedOnParentId(e.target.value).then((res) => {
-      console.log("SubOptions On getSingleCategoryBasedOnParentId", res);
+      // console.log("SubOptions On getSingleCategoryBasedOnParentId", res);
       setsubOption(res.data.subcategory);
     });
 

@@ -41,7 +41,7 @@ const FileUpload = ({ values, setvalues, setLoading }) => {
                 }
               )
               .then((response) => {
-                console.log("IMAGE UPLOAD RESPONSE DATA", response);
+                // console.log("IMAGE UPLOAD RESPONSE DATA", response);
                 setLoading(false);
                 allUploadedFiles.push(response.data);
                 setvalues({ ...values, images: allUploadedFiles });
@@ -59,7 +59,7 @@ const FileUpload = ({ values, setvalues, setLoading }) => {
 
   const handleImageRemove = (public_id) => {
     setLoading(true);
-    console.log("Remove Image", public_id);
+    // console.log("Remove Image", public_id);
     axios
       .post(
         `${process.env.REACT_APP_API}/cloudinary/removeimages`,

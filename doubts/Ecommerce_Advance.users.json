@@ -1,0 +1,32 @@
+[{
+  "_id": {
+    "$oid": "65ab1875bfb69d9d56da0a55"
+  },
+  "name": "dreamoscp",
+  "email": "dreamoscp@gmail.com",
+  "role": "admin",
+  "cart": [],
+  "createdAt": {
+    "$date": "2024-01-20T00:48:53.659Z"
+  },
+  "updatedAt": {
+    "$date": "2024-02-03T06:52:15.136Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65ab18c8bfb69d9d56da0a7d"
+  },
+  "name": "harshharsani007",
+  "email": "harshharsani007@gmail.com",
+  "role": "Subscriber",
+  "cart": [],
+  "createdAt": {
+    "$date": "2024-01-20T00:50:16.233Z"
+  },
+  "updatedAt": {
+    "$date": "2024-01-20T01:10:28.658Z"
+  },
+  "__v": 0
+}]

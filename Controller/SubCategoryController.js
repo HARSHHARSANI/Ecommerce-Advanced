@@ -131,7 +131,7 @@ export const updateSubCategoryController = async (req, res) => {
       subCategory,
     });
   } catch (error) {
-    console.log("here is the error ", error);
+    // console.log("here is the error ", error);
     res.status(400).send({
       success: false,
       message: `Error in updateSubCategoryController`,

@@ -45,12 +45,12 @@ const SingleProductPage = () => {
 
   const loadSingleProduct = () => {
     getSingleProduct(slug).then((response) => {
-      console.log(response);
+      // console.log(response);
       ///load single product
       setSingleProductValues({ ...SingleProductValues, ...response.product });
 
       getRelatedProducts(response.product._id).then((res) => {
-        console.log(res);
+        // console.log(res);
         setRelatedProducts(res.data);
       });
     });

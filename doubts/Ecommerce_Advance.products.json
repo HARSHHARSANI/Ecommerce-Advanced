@@ -1,0 +1,475 @@
+[{
+  "_id": {
+    "$oid": "657a9b849538fe1fc0fa2d4e"
+  },
+  "title": "Macbook Pro",
+  "slug": "macbook-pro",
+  "description": "This is best Apple product",
+  "price": 4500,
+  "category": {
+    "$oid": "657404bf003f50829321cbc1"
+  },
+  "subCategory": [
+    {
+      "$oid": "6574064d003f50829321cc12"
+    },
+    {
+      "$oid": "657404f6003f50829321cbdc"
+    }
+  ],
+  "quantity": 50,
+  "sold": 6,
+  "images": [
+    {
+      "public_id": "lkr4dhow6d1btsbl64pz",
+      "url": "https://res.cloudinary.com/drtsskg28/image/upload/v1702534003/lkr4dhow6d1btsbl64pz.jpg"
+    }
+  ],
+  "shipping": "No",
+  "color": "Black",
+  "brand": "Apple",
+  "createdAt": {
+    "$date": "2023-12-14T06:07:00.448Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-30T15:55:20.516Z"
+  },
+  "__v": 0,
+  "rating": [
+    {
+      "star": 5,
+      "postedBy": {
+        "$oid": "653fbe4ca50435624a180ac0"
+      },
+      "_id": {
+        "$oid": "65903d68a5c9225cd51d265d"
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "657a9d79b9d2a049a1b8fa98"
+  },
+  "title": "MSI GAMING LAPTOP",
+  "slug": "msi-gaming-laptop",
+  "description": "MSI GAMING LAPTOP best gaming lapop at affordable price",
+  "price": 123,
+  "category": {
+    "$oid": "657404bf003f50829321cbc1"
+  },
+  "subCategory": [
+    {
+      "$oid": "657404f1003f50829321cbd7"
+    },
+    {
+      "$oid": "657404f6003f50829321cbdc"
+    }
+  ],
+  "quantity": 123,
+  "sold": 2,
+  "images": [
+    {
+      "public_id": "uiweexik6ytltlycc1xk",
+      "url": "https://res.cloudinary.com/drtsskg28/image/upload/v1703235751/uiweexik6ytltlycc1xk.jpg"
+    }
+  ],
+  "shipping": "Yes",
+  "color": "White",
+  "brand": "MSI",
+  "createdAt": {
+    "$date": "2023-12-14T06:15:21.077Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-30T15:55:10.191Z"
+  },
+  "__v": 0,
+  "rating": [
+    {
+      "star": 5,
+      "postedBy": {
+        "$oid": "653fbe4ca50435624a180ac0"
+      },
+      "_id": {
+        "$oid": "65903d5ea5c9225cd51d2642"
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "6585b7a7db5b11faf850dc39"
+  },
+  "title": "Mechanical keyboard",
+  "slug": "mechanical-keyboard",
+  "description": "blue key Mechanical keyboard",
+  "price": 123,
+  "category": {
+    "$oid": "65740533003f50829321cbe2"
+  },
+  "subCategory": [
+    {
+      "$oid": "65740547003f50829321cbee"
+    },
+    {
+      "$oid": "6574055c003f50829321cbfd"
+    }
+  ],
+  "quantity": 31,
+  "sold": 0,
+  "images": [
+    {
+      "public_id": "x3xwjyxno36qoma5bequ",
+      "url": "https://res.cloudinary.com/drtsskg28/image/upload/v1703262079/x3xwjyxno36qoma5bequ.jpg"
+    }
+  ],
+  "shipping": "Yes",
+  "color": "Black",
+  "brand": "Asus",
+  "createdAt": {
+    "$date": "2023-12-22T16:21:59.543Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-22T16:21:59.543Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6585ba7df35702898f45f0b9"
+  },
+  "title": "Regular Keyboard",
+  "slug": "regular-keyboard",
+  "description": "Regular Keyboard",
+  "price": 123,
+  "category": {
+    "$oid": "65740533003f50829321cbe2"
+  },
+  "subCategory": [
+    {
+      "$oid": "65740554003f50829321cbf8"
+    }
+  ],
+  "quantity": 12,
+  "sold": 0,
+  "images": [
+    {
+      "public_id": "butmyvtgnofo2nzvituv",
+      "url": "https://res.cloudinary.com/drtsskg28/image/upload/v1703262808/butmyvtgnofo2nzvituv.jpg"
+    }
+  ],
+  "shipping": "Yes",
+  "color": "Silver",
+  "brand": "Lenovo",
+  "createdAt": {
+    "$date": "2023-12-22T16:34:05.459Z"
+  },
+  "updatedAt": {
+    "$date": "2024-02-05T05:19:21.861Z"
+  },
+  "__v": 0,
+  "rating": [
+    {
+      "star": 4,
+      "postedBy": {
+        "$oid": "65ab1875bfb69d9d56da0a55"
+      },
+      "_id": {
+        "$oid": "65c06fd9c0676eb304341edd"
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "6585babff35702898f45f0cd"
+  },
+  "title": "Gaming Laptop",
+  "slug": "gaming-laptop",
+  "description": "Gaming Laptop",
+  "price": 444,
+  "category": {
+    "$oid": "657404bf003f50829321cbc1"
+  },
+  "subCategory": [
+    {
+      "$oid": "657404f1003f50829321cbd7"
+    },
+    {
+      "$oid": "657404f6003f50829321cbdc"
+    }
+  ],
+  "quantity": 34,
+  "sold": 10,
+  "images": [
+    {
+      "public_id": "dcb83br7wev4s7apiqit",
+      "url": "https://res.cloudinary.com/drtsskg28/image/upload/v1703262886/dcb83br7wev4s7apiqit.jpg"
+    }
+  ],
+  "shipping": "Yes",
+  "color": "Black",
+  "brand": "Asus",
+  "createdAt": {
+    "$date": "2023-12-22T16:35:11.191Z"
+  },
+  "updatedAt": {
+    "$date": "2024-02-05T05:19:00.157Z"
+  },
+  "__v": 0,
+  "rating": [
+    {
+      "star": 5,
+      "postedBy": {
+        "$oid": "65ab1875bfb69d9d56da0a55"
+      },
+      "_id": {
+        "$oid": "65c06fc3c0676eb304341ea0"
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "65867a5142fe34f0348da76a"
+  },
+  "title": "Lenovo Yoga laptop",
+  "slug": "lenovo-yoga-laptop",
+  "description": "360 degree laptop",
+  "price": 3400,
+  "category": {
+    "$oid": "657404bf003f50829321cbc1"
+  },
+  "subCategory": [
+    {
+      "$oid": "657404f6003f50829321cbdc"
+    }
+  ],
+  "quantity": 123,
+  "sold": 0,
+  "images": [
+    {
+      "public_id": "thljwcldyewkln01c06f",
+      "url": "https://res.cloudinary.com/drtsskg28/image/upload/v1703311915/thljwcldyewkln01c06f.jpg"
+    }
+  ],
+  "shipping": "Yes",
+  "color": "Silver",
+  "brand": "Lenovo",
+  "createdAt": {
+    "$date": "2023-12-23T06:12:33.181Z"
+  },
+  "updatedAt": {
+    "$date": "2024-02-05T16:15:53.870Z"
+  },
+  "__v": 0,
+  "rating": [
+    {
+      "star": 2,
+      "postedBy": {
+        "$oid": "65ab1875bfb69d9d56da0a55"
+      },
+      "_id": {
+        "$oid": "65c109b94e0660f02b930324"
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "6586a3e48e50025bf9c15b44"
+  },
+  "title": " Gaming Laptop With Keyboard And Mouse ",
+  "slug": "laptop-with-keyboard",
+  "description": "laptop with keyboard",
+  "price": 1212,
+  "category": {
+    "$oid": "657404bf003f50829321cbc1"
+  },
+  "subCategory": [
+    {
+      "$oid": "657404f1003f50829321cbd7"
+    },
+    {
+      "$oid": "657404f6003f50829321cbdc"
+    }
+  ],
+  "quantity": 122,
+  "sold": 0,
+  "images": [
+    {
+      "public_id": "reyex7lofbthrkajrzrr",
+      "url": "https://res.cloudinary.com/drtsskg28/image/upload/v1703322556/reyex7lofbthrkajrzrr.jpg"
+    },
+    {
+      "public_id": "rcc75cr2rrtujklqpfia",
+      "url": "https://res.cloudinary.com/drtsskg28/image/upload/v1703322556/rcc75cr2rrtujklqpfia.jpg"
+    }
+  ],
+  "shipping": "Yes",
+  "color": "Black",
+  "brand": "Asus",
+  "createdAt": {
+    "$date": "2023-12-23T09:09:56.274Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-30T15:29:03.231Z"
+  },
+  "__v": 0,
+  "rating": [
+    {
+      "star": 3,
+      "postedBy": {
+        "$oid": "653fbe4ca50435624a180ac0"
+      },
+      "_id": {
+        "$oid": "658fa5bcefe05bcd420f8f9e"
+      }
+    },
+    {
+      "star": 5,
+      "postedBy": {
+        "$oid": "653fe6eed54b478eb0166866"
+      },
+      "_id": {
+        "$oid": "6590373f3cfe91398bc7afff"
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "6586a7074bbe22eeaa93a9a1"
+  },
+  "title": "default product",
+  "slug": "default-product",
+  "description": "default product",
+  "price": 12,
+  "category": {
+    "$oid": "657404bf003f50829321cbc1"
+  },
+  "subCategory": [
+    {
+      "$oid": "657404f6003f50829321cbdc"
+    }
+  ],
+  "quantity": 1,
+  "sold": 0,
+  "images": [],
+  "shipping": "Yes",
+  "color": "Silver",
+  "brand": "Asus",
+  "createdAt": {
+    "$date": "2023-12-23T09:23:19.733Z"
+  },
+  "updatedAt": {
+    "$date": "2024-02-05T16:15:41.376Z"
+  },
+  "__v": 0,
+  "rating": [
+    {
+      "star": 3,
+      "postedBy": {
+        "$oid": "65ab1875bfb69d9d56da0a55"
+      },
+      "_id": {
+        "$oid": "65c109ad4e0660f02b9302fc"
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "65c0768bdf921ed13a616045"
+  },
+  "title": "lenovo",
+  "slug": "lenovo",
+  "description": "lenovo laptop",
+  "price": 1231,
+  "category": {
+    "$oid": "657404bf003f50829321cbc1"
+  },
+  "subCategory": [
+    {
+      "$oid": "657404f1003f50829321cbd7"
+    },
+    {
+      "$oid": "657404f6003f50829321cbdc"
+    }
+  ],
+  "quantity": 1,
+  "sold": 0,
+  "images": [
+    {
+      "public_id": "mjmofj4focgtwrvwjw0j",
+      "url": "https://res.cloudinary.com/drtsskg28/image/upload/v1707112053/mjmofj4focgtwrvwjw0j.jpg"
+    }
+  ],
+  "shipping": "Yes",
+  "color": "Brown",
+  "brand": "Lenovo",
+  "rating": [
+    {
+      "star": 4,
+      "postedBy": {
+        "$oid": "65ab1875bfb69d9d56da0a55"
+      },
+      "_id": {
+        "$oid": "65c109a14e0660f02b9302d5"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-02-05T05:47:55.103Z"
+  },
+  "updatedAt": {
+    "$date": "2024-02-05T16:15:29.909Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65c0cefd195affed63b75ee1"
+  },
+  "title": "c mouse",
+  "slug": "c-mouse",
+  "description": "c mouse",
+  "price": 132,
+  "category": {
+    "$oid": "65740533003f50829321cbe2"
+  },
+  "subCategory": [
+    {
+      "$oid": "6574054e003f50829321cbf3"
+    }
+  ],
+  "quantity": 1,
+  "sold": 0,
+  "images": [
+    {
+      "public_id": "igzboidda7hnjzwtn3pv",
+      "url": "https://res.cloudinary.com/drtsskg28/image/upload/v1707134676/igzboidda7hnjzwtn3pv.jpg"
+    }
+  ],
+  "shipping": "Yes",
+  "color": "Brown",
+  "brand": "Samsung",
+  "rating": [
+    {
+      "star": 5,
+      "postedBy": {
+        "$oid": "65ab1875bfb69d9d56da0a55"
+      },
+      "_id": {
+        "$oid": "65c1099a4e0660f02b9302b1"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-02-05T12:05:17.314Z"
+  },
+  "updatedAt": {
+    "$date": "2024-02-05T16:15:22.230Z"
+  },
+  "__v": 0
+}]

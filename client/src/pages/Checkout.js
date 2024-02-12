@@ -6,7 +6,7 @@ const Checkout = () => {
   const saveAddressToDb = () => {};
   const handleCoupon = () => {};
   const handleCouponChange = (e) => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     setCoupon(e.target.value);
   };
 

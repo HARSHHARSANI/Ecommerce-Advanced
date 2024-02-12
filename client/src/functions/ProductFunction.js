@@ -2,11 +2,11 @@ import axios from "axios";
 
 export const getproducts = async (req, res) => {
   try {
-    console.log("im inside getproducts");
+    // console.log("im inside getproducts");
     const response = await axios.get(
       `${process.env.REACT_APP_API}/product/products`
     );
-    console.log("Sending Response from getproducts", response);
+    // console.log("Sending Response from getproducts", response);
     return response;
   } catch (error) {
     console.log(error);
@@ -15,11 +15,11 @@ export const getproducts = async (req, res) => {
 
 export const getSingleProduct = async (slug) => {
   try {
-    console.log("im inside getSingleProduct");
+    // console.log("im inside getSingleProduct");
     const response = await axios.get(
       `${process.env.REACT_APP_API}/product/product/${slug}`
     );
-    console.log("sending response from getSingleProduct", response);
+    // console.log("sending response from getSingleProduct", response);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -28,7 +28,7 @@ export const getSingleProduct = async (slug) => {
 
 export const createProduct = async (product, authtoken) => {
   try {
-    console.log("inside createProduct");
+    //  console.log("inside createProduct");
     const response = await axios.post(
       `${process.env.REACT_APP_API}/product/product`,
       product,
@@ -38,7 +38,7 @@ export const createProduct = async (product, authtoken) => {
         },
       }
     );
-    console.log("createProduct response :->", response);
+    // console.log("createProduct response :->", response);
     return response;
   } catch (error) {
     console.log(error);
@@ -47,11 +47,11 @@ export const createProduct = async (product, authtoken) => {
 
 export const getProductByCount = async (count) => {
   try {
-    console.log("im inside getProductByCount ");
+    // console.log("im inside getProductByCount ");
     const productsByCount = await axios.get(
       `${process.env.REACT_APP_API}/product/products/${count}`
     );
-    console.log(productsByCount);
+    // console.log(productsByCount);
     return productsByCount;
   } catch (error) {
     console.log(error);
@@ -68,7 +68,7 @@ export const removeProduct = async (slug, authtoken) => {
         },
       }
     );
-    console.log("inside removeProduct", removedproduct);
+    // console.log("inside removeProduct", removedproduct);
     return removedproduct.data;
   } catch (error) {
     console.log(error);
@@ -95,13 +95,13 @@ export const updateProduct = async (slug, product, authtoken) => {
 
 export const getSortedProducts = async (sort, order, page) => {
   try {
-    console.log("im inside getSortedProducts");
+    // console.log("im inside getSortedProducts");
     const response = await axios.post(
       `${process.env.REACT_APP_API}/product/sortedProducts`,
       { sort, order, page }
     );
 
-    console.log("Sending Response from getSortedProducts", response);
+    // console.log("Sending Response from getSortedProducts", response);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -109,11 +109,11 @@ export const getSortedProducts = async (sort, order, page) => {
 };
 
 export const totalProducts = async (req, res) => {
-  console.log("inside totalProducts");
+  // console.log("inside totalProducts");
   const response = await axios.get(
     `${process.env.REACT_APP_API}/product/products/total`
   );
-  console.log("Sending response from totalProducts", response);
+  // console.log("Sending response from totalProducts", response);
 
   return response;
 };
@@ -129,7 +129,7 @@ export const updateProductRating = async (productId, star, authtoken) => {
         },
       }
     );
-    console.log("response form updateProductRating", updatedProductRating.data);
+    // console.log("response form updateProductRating", updatedProductRating.data);
     return updatedProductRating;
   } catch (error) {
     console.log(error);
@@ -142,7 +142,7 @@ export const getRelatedProducts = async (productId) => {
       `${process.env.REACT_APP_API}/product/products/related/${productId}`
     );
 
-    console.log(response);
+    // console.log(response);
     return response;
   } catch (error) {
     console.log(error);
@@ -151,12 +151,12 @@ export const getRelatedProducts = async (productId) => {
 
 export const searchProducts = async (args) => {
   try {
-    console.log("im inside searchProducts");
+    // console.log("im inside searchProducts");
     const response = await axios.post(
       `${process.env.REACT_APP_API}/product/search/filters`,
       args
     );
-    console.log(response);
+    // console.log(response);
     return response;
   } catch (error) {
     console.log(error);

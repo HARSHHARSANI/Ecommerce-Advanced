@@ -9,10 +9,10 @@ export const AverageRating = (product) => {
 
     ratingArray.map((r) => total.push(r.star));
     let totalReduced = total.reduce((p, n) => p + n, 0);
-    console.log("totalReduced", totalReduced);
+    // console.log("totalReduced", totalReduced);
 
     const result = totalReduced / length;
-    console.log(result);
+    // console.log(result);
 
     return (
       <div className="text-center pt-1 pb-3">

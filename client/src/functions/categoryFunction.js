@@ -2,11 +2,11 @@ import axios from "axios";
 
 export const getCategories = async () => {
   try {
-    console.log("im inside getCategories");
+    // console.log("im inside getCategories");
     const response = await axios.get(
       `${process.env.REACT_APP_API}/category/categories`
     );
-    console.log("Sending response from getCategories", response);
+    // console.log("Sending response from getCategories", response);
     return response;
   } catch (error) {
     console.log(error);
@@ -14,11 +14,11 @@ export const getCategories = async () => {
 };
 export const getSingleCategories = async (slug) => {
   try {
-    console.log("i am inside getSingleCategories");
+    // console.log("i am inside getSingleCategories");
     const response = await axios.get(
       `${process.env.REACT_APP_API}/category/category/${slug}`
     );
-    console.log("Sending response from getSingleCategories", response);
+    // console.log("Sending response from getSingleCategories", response);
     return response;
   } catch (error) {
     console.log(error);
@@ -51,7 +51,7 @@ export const removeCategory = async (slug, authtoken) => {
         },
       }
     );
-    console.log("Remove CAtegory Response :->", response);
+    // console.log("Remove CAtegory Response :->", response);
     return response;
   } catch (error) {
     console.log(error);
@@ -59,7 +59,7 @@ export const removeCategory = async (slug, authtoken) => {
 };
 export const updateCategory = async (slug, name, authtoken) => {
   try {
-    console.log("inside updateCategory");
+    // console.log("inside updateCategory");
     const response = await axios.put(
       `${process.env.REACT_APP_API}/category/category/${slug}`,
       name,
@@ -69,7 +69,7 @@ export const updateCategory = async (slug, name, authtoken) => {
         },
       }
     );
-    console.log("returing response from updateCategory", response);
+    // console.log("returing response from updateCategory", response);
     return response;
   } catch (error) {
     console.log(error);
@@ -78,14 +78,14 @@ export const updateCategory = async (slug, name, authtoken) => {
 
 export const getSubCategoryBasedOnParentId = async (_id) => {
   try {
-    console.log("i am inside getSubCategoryBasedOnParentId");
+    // console.log("i am inside getSubCategoryBasedOnParentId");
     const response = await axios.get(
       `${process.env.REACT_APP_API}/category/category/subcategory/${_id}`
     );
-    console.log(
-      "Sending response from getSubCategoryBasedOnParentId",
-      response
-    );
+    // console.log(
+    //   "Sending response from getSubCategoryBasedOnParentId",
+    //   response
+    // );
     return response;
   } catch (error) {
     console.log("error -------->", error.message);
@@ -94,12 +94,12 @@ export const getSubCategoryBasedOnParentId = async (_id) => {
 
 export const getProductsBasedOnCategory = async (slug) => {
   try {
-    console.log("im inside getProductsBasedOnCategory");
+    // console.log("im inside getProductsBasedOnCategory");
     const response = await axios.get(
       `${process.env.REACT_APP_API}/category/categoryproducts/${slug}`
     );
 
-    console.log(response);
+    // console.log(response);
     return response;
   } catch (error) {
     console.log(error);

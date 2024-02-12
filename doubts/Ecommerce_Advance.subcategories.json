@@ -1,0 +1,306 @@
+[{
+  "_id": {
+    "$oid": "657404f1003f50829321cbd7"
+  },
+  "name": "gaming laptop",
+  "slug": "gaming-laptop",
+  "parent": {
+    "$oid": "657404bf003f50829321cbc1"
+  },
+  "createdAt": {
+    "$date": "2023-12-09T06:10:57.395Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-09T06:10:57.395Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "657404f6003f50829321cbdc"
+  },
+  "name": "normal laptop",
+  "slug": "normal-laptop",
+  "parent": {
+    "$oid": "657404bf003f50829321cbc1"
+  },
+  "createdAt": {
+    "$date": "2023-12-09T06:11:02.979Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-09T06:11:02.979Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65740540003f50829321cbe9"
+  },
+  "name": "gaming mouse",
+  "slug": "gaming-mouse",
+  "parent": {
+    "$oid": "65740533003f50829321cbe2"
+  },
+  "createdAt": {
+    "$date": "2023-12-09T06:12:16.616Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-09T06:12:16.616Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65740547003f50829321cbee"
+  },
+  "name": "gaming keyboard",
+  "slug": "gaming-keyboard",
+  "parent": {
+    "$oid": "65740533003f50829321cbe2"
+  },
+  "createdAt": {
+    "$date": "2023-12-09T06:12:23.606Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-09T06:12:23.606Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6574054e003f50829321cbf3"
+  },
+  "name": "wireless mouse",
+  "slug": "wireless-mouse",
+  "parent": {
+    "$oid": "65740533003f50829321cbe2"
+  },
+  "createdAt": {
+    "$date": "2023-12-09T06:12:30.331Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-09T06:12:30.331Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65740554003f50829321cbf8"
+  },
+  "name": "wireless keyboard",
+  "slug": "wireless-keyboard",
+  "parent": {
+    "$oid": "65740533003f50829321cbe2"
+  },
+  "createdAt": {
+    "$date": "2023-12-09T06:12:36.283Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-09T06:12:36.283Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6574055c003f50829321cbfd"
+  },
+  "name": "mechanical keyboard",
+  "slug": "mechanical-keyboard",
+  "parent": {
+    "$oid": "65740533003f50829321cbe2"
+  },
+  "createdAt": {
+    "$date": "2023-12-09T06:12:44.458Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-09T06:12:44.458Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6574064d003f50829321cc12"
+  },
+  "name": "macbook laptop",
+  "slug": "macbook-laptop",
+  "parent": {
+    "$oid": "657404bf003f50829321cbc1"
+  },
+  "createdAt": {
+    "$date": "2023-12-09T06:16:45.702Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-09T06:16:45.702Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65740653003f50829321cc17"
+  },
+  "name": "surface book laptop",
+  "slug": "surface-book-laptop",
+  "parent": {
+    "$oid": "657404bf003f50829321cbc1"
+  },
+  "createdAt": {
+    "$date": "2023-12-09T06:16:51.446Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-09T06:16:51.446Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6574068b003f50829321cc1c"
+  },
+  "name": "iphone",
+  "slug": "iphone",
+  "parent": {
+    "$oid": "657404c4003f50829321cbc6"
+  },
+  "createdAt": {
+    "$date": "2023-12-09T06:17:47.755Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-09T06:17:47.755Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6574068f003f50829321cc21"
+  },
+  "name": "android",
+  "slug": "android",
+  "parent": {
+    "$oid": "657404c4003f50829321cbc6"
+  },
+  "createdAt": {
+    "$date": "2023-12-09T06:17:51.995Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-09T06:17:51.995Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "657406d3003f50829321cc26"
+  },
+  "name": "foldable phone",
+  "slug": "foldable-phone",
+  "parent": {
+    "$oid": "657404c4003f50829321cbc6"
+  },
+  "createdAt": {
+    "$date": "2023-12-09T06:18:59.476Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-09T06:18:59.476Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "657406da003f50829321cc2b"
+  },
+  "name": "keypad phone",
+  "slug": "keypad-phone",
+  "parent": {
+    "$oid": "657404c4003f50829321cbc6"
+  },
+  "createdAt": {
+    "$date": "2023-12-09T06:19:06.220Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-09T06:19:06.220Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "657406e9003f50829321cc30"
+  },
+  "name": "wireless earbuds",
+  "slug": "wireless-earbuds",
+  "parent": {
+    "$oid": "657404cb003f50829321cbcb"
+  },
+  "createdAt": {
+    "$date": "2023-12-09T06:19:21.480Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-09T06:19:21.480Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "657406f0003f50829321cc35"
+  },
+  "name": "wired earbuds",
+  "slug": "wired-earbuds",
+  "parent": {
+    "$oid": "657404cb003f50829321cbcb"
+  },
+  "createdAt": {
+    "$date": "2023-12-09T06:19:28.467Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-09T06:19:28.467Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "657406fa003f50829321cc3a"
+  },
+  "name": "bluetooth speakers",
+  "slug": "bluetooth-speakers",
+  "parent": {
+    "$oid": "657404cf003f50829321cbd0"
+  },
+  "createdAt": {
+    "$date": "2023-12-09T06:19:38.783Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-09T06:19:38.783Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65740704003f50829321cc3f"
+  },
+  "name": "wireless speaker",
+  "slug": "wireless-speaker",
+  "parent": {
+    "$oid": "657404cf003f50829321cbd0"
+  },
+  "createdAt": {
+    "$date": "2023-12-09T06:19:48.530Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-09T06:19:48.530Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65740709003f50829321cc47"
+  },
+  "name": "wired speaker",
+  "slug": "wired-speaker",
+  "parent": {
+    "$oid": "657404cf003f50829321cbd0"
+  },
+  "createdAt": {
+    "$date": "2023-12-09T06:19:53.103Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-09T06:19:53.103Z"
+  },
+  "__v": 0
+}]

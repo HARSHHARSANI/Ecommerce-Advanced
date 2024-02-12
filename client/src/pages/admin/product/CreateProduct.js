@@ -53,7 +53,7 @@ const CreateProduct = () => {
 
   const loadCategories = () => {
     getCategories().then((response) => {
-      console.log(response);
+      // console.log(response);
       setvalues({ ...values, categories: response.data });
     });
   };
@@ -66,7 +66,7 @@ const CreateProduct = () => {
     e.preventDefault();
     createProduct(values, user.token)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         toast.success(`${values.title} Created Successfully`);
         // window.location.reload();
       })
@@ -77,19 +77,19 @@ const CreateProduct = () => {
   };
   const handleChange = (e) => {
     setvalues({ ...values, [e.target.name]: e.target.value });
-    console.log(e.target.name, "------>", e.target.value);
+    // console.log(e.target.name, "------>", e.target.value);
   };
 
   const handleCategoryChange = (e) => {
     e.preventDefault();
-    console.log("Clicked Category", e.target.value);
+    // console.log("Clicked Category", e.target.value);
     setvalues({
       ...values,
       category: e.target.value,
       subCategory: [],
     });
     getSubCategoryBasedOnParentId(e.target.value).then((res) => {
-      console.log("SubOptions On getSingleCategoryBasedOnParentId", res);
+      // console.log("SubOptions On getSingleCategoryBasedOnParentId", res);
       console.log(res);
       setsubOption(res.data.subcategory);
     });

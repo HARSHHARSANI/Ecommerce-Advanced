@@ -49,7 +49,7 @@ const SingleProductPage = () => {
       ///load single product
       setSingleProductValues({ ...SingleProductValues, ...response.product });
 
-      getRelatedProducts(response.product._id).then((res) => {
+      getRelatedProducts(response?.product?._id).then((res) => {
         // console.log(res);
         setRelatedProducts(res.data);
       });
@@ -81,6 +81,7 @@ const SingleProductPage = () => {
 
   return (
     <>
+      {JSON.stringify(SingleProductValues)}
       <div className="conatainer">
         <div className="row pt-4">
           <SingleProductCard

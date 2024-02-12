@@ -81,7 +81,7 @@ const SingleProductPage = () => {
 
   return (
     <>
-      {JSON.stringify(SingleProductValues)}
+      {/* {JSON.stringify(SingleProductValues)} */}
       <div className="conatainer">
         <div className="row pt-4">
           <SingleProductCard

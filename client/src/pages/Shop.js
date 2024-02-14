@@ -330,11 +330,10 @@ const Shop = () => {
   };
   return (
     <>
-      {JSON.stringify(selectedColor)}
       <div className="container-fluid">
         <div className="row">
-          <div className="col-md-3 pt-3">
-            <h3 clas>Filter Menu</h3>
+          <div className="col-md-3 pt-3 mx-2">
+            <h3 className="mb-3 pb-3 ">Filter Menu</h3>
             <hr />
             <Menu mode="inline" defaultOpenKeys={["1", "2"]}>
               <SubMenu
@@ -417,16 +416,19 @@ const Shop = () => {
                 <div style={{ marginTop: "-10px" }}>{showShipping()}</div>
               </SubMenu>
             </Menu>
-          </div>
-          <div className="col-md-9 pt-3">
+          </div>{" "}
+          <div className="col">
             {loading ? (
               <h4 className="text-danger">Loading....!</h4>
             ) : (
-              <h4 className="text-danger">Products</h4>
+              <h4 className="text-danger pt-3 ">Products</h4>
             )}
-            <div className="row pb-3">
+            <div className="row pb-3 px-5 ">
               {products?.map((product, id) => (
-                <div key={id} className="col-md-5 pb-4 pt-2">
+                <div
+                  className="col-md-5 pb-4 mx-3 px-2 pt-2"
+                  style={{ marginLeft: "20px" }}
+                >
                   <ProductCard product={product} />
                 </div>
               ))}

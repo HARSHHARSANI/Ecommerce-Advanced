@@ -29,7 +29,11 @@ const SideDrawer = () => {
               <>
                 <img
                   src={cartItem.images[0].url}
-                  style={{ height: "220px", width: "100%", objectFit: "cover" }}
+                  style={{
+                    height: "220px",
+                    width: "100%",
+                    objectFit: "contain",
+                  }}
                 />
                 <p
                   className="text-center bg-secondary text-light  mt-2 "
@@ -43,7 +47,11 @@ const SideDrawer = () => {
                 <img
                   src={laptop}
                   alt="laptopImage"
-                  style={{ height: "220px", width: "100%", objectFit: "cover" }}
+                  style={{
+                    height: "220px",
+                    width: "100%",
+                    objectFit: "contain",
+                  }}
                 />{" "}
                 <p className="text-center bg-secondary text-light  mt-2 ">
                   {cartItem.title} X {cartItem.count}

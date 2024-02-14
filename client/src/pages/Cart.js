@@ -61,9 +61,10 @@ const Cart = () => {
 
   return (
     <>
-      {/* {JSON.stringify(cart)} */}
       <div className="container-fluid">
-        <div className="row ">Cart / {cart.length} products </div>
+        <div className="row mx-auto text fw-semibold mb-2 mt-2 fs-4">
+          Cart / {cart.length} products{" "}
+        </div>
         <div className="row">
           <div className="col-md-8 pt-2 mt-2">
             {!cart.length ? (
@@ -76,7 +77,10 @@ const Cart = () => {
             )}
           </div>
           <div className="col-md-4">
-            <div className="order-summary-container">
+            <div
+              className="order-summary-container"
+              style={{ marginTop: "-30px" }}
+            >
               <h4>Order Summary</h4>
               <hr />
               <div className="order-summary-content">

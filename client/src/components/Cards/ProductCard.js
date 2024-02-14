@@ -82,17 +82,21 @@ const ProductCard = ({ product }) => {
           />
         }
         actions={[
-          <Link to={`/products/${slug}`}>
-            <EyeOutlined className="text-warning" onClick={() => {}} />
-            <br />
-            View Product
-          </Link>,
+          <div onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+            <Link to={`/products/${slug}`}>
+              <EyeOutlined className="text-warning" />
+              <br />
+              View Product
+            </Link>
+          </div>,
 
           <Tooltip title={tooltip}>
             <a onClick={handleAddToCart}>
               <ShoppingCartOutlined
                 className="text-danger"
-                onClick={() => {}}
+                onClick={() => {
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }}
               />
               <br />
               Add to Cart

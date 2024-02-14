@@ -112,7 +112,7 @@ const CreateProduct = () => {
 
           {/* {JSON.stringify(values.categories)} */}
 
-          {JSON.stringify(values.images)}
+          {/* {JSON.stringify(values.images)} */}
 
           <div className="p-3">
             <FileUpload

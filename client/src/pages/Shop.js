@@ -9,6 +9,7 @@ import { Menu, Slider, Checkbox } from "antd";
 import { DollarOutlined, DownSquareOutlined } from "@ant-design/icons";
 import { getCategories } from "../functions/categoryFunction";
 import Star from "../components/forms/Star";
+import { LoadingOutlined } from "@ant-design/icons";
 
 const { SubMenu, ItemGroup } = Menu;
 
@@ -419,19 +420,24 @@ const Shop = () => {
           </div>{" "}
           <div className="col">
             {loading ? (
-              <h4 className="text-danger">Loading....!</h4>
+              <LoadingOutlined className="text-center  justify-content-center " />
             ) : (
               <h4 className="text-danger pt-3 ">Products</h4>
             )}
-            <div className="row pb-3 px-5 ">
-              {products?.map((product, id) => (
-                <div
-                  className="col-md-5 pb-4 mx-3 px-2 pt-2"
-                  style={{ marginLeft: "30px" }}
-                >
-                  <ProductCard product={product} />
-                </div>
-              ))}
+            <div className="row pb-3 px-5">
+              {loading ? (
+                <LoadingOutlined className="text-center justify-content-center" />
+              ) : (
+                products?.map((product, id) => (
+                  <div
+                    key={id}
+                    className="col-md-5 pb-4 mx-3 px-2 pt-2"
+                    style={{ marginLeft: "30px" }}
+                  >
+                    <ProductCard product={product} />
+                  </div>
+                ))
+              )}
             </div>
           </div>
         </div>

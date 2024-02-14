@@ -92,7 +92,7 @@ const SingleProductCard = ({ product, onStarClick, star }) => {
         </Tabs>
       </div>
       <div className="col-md-5">
-        <h1 className="text-bg-info">{title}</h1>
+        <h1 className="text-center ">{title}</h1>
         {product && product.rating && product.rating.length > 0 ? (
           AverageRating(product)
         ) : (

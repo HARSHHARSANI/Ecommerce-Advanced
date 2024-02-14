@@ -60,8 +60,20 @@ const SingleProductCard = ({ product, onStarClick, star }) => {
     <>
       <div className="col-md-7">
         {images && images.length ? (
-          <Carousel showArrows={true} autoPlay infiniteLoop>
-            {images && images.map((i) => <img src={i.url} key={i.public_id} />)}
+          <Carousel
+            showArrows={true}
+            autoPlay
+            infiniteLoop
+            dynamicHeight={true}
+          >
+            {images &&
+              images.map((i) => (
+                <img
+                  src={i.url}
+                  key={i.public_id}
+                  style={{ maxWidth: " 60%", height: "auto" }}
+                />
+              ))}
           </Carousel>
         ) : (
           <Card
@@ -72,7 +84,7 @@ const SingleProductCard = ({ product, onStarClick, star }) => {
         )}
         <Tabs type="card">
           <TabPane tab="description" key={1} className="h5">
-            {description && description}
+            {description}
           </TabPane>
           <TabPane tab="More" key={2} className="fw-bold h5">
             Contact Us on harshharsani007@gmail.com for any other info

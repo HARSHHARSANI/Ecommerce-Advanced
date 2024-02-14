@@ -427,7 +427,7 @@ const Shop = () => {
               {products?.map((product, id) => (
                 <div
                   className="col-md-5 pb-4 mx-3 px-2 pt-2"
-                  style={{ marginLeft: "20px" }}
+                  style={{ marginLeft: "30px" }}
                 >
                   <ProductCard product={product} />
                 </div>

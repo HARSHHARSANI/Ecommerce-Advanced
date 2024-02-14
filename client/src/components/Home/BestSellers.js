@@ -31,7 +31,6 @@ const BestSellers = () => {
   }, []);
   return (
     <>
-      {JSON.stringify(ProductsCount)}
       <div className="container">
         {loading ? (
           <LoadingCard count={6} />

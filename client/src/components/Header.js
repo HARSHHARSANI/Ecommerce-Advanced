@@ -61,7 +61,7 @@ const Header = () => {
 
     {
       label: <Search />,
-      style: { marginLeft: "auto" },
+      style: { marginLeft: "auto", marginTop: "auto", marginBottom: "auto" },
     },
 
     {

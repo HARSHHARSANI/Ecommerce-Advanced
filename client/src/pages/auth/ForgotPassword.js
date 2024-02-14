@@ -29,7 +29,9 @@ const ForgotPassword = () => {
       }
       setEmail("");
       setLoading(false);
-      toast.success("Password reset link has been sent To your email");
+      toast.success("Password reset link has been sent To your email", {
+        position: "top-center",
+      });
     } catch (error) {
       console.log(error);
       setLoading(false);

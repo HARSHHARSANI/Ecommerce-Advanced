@@ -35,7 +35,9 @@ const RatingModel = ({ children }) => {
         visible={modalVisible}
         onOk={() => {
           setModalVisible(false);
-          toast.success("Thanks For your Review ,  It will Apprear Sooon!!");
+          toast.success("Thanks For your Review ,  It will Apprear Sooon!!", {
+            position: "top-center",
+          });
         }}
         onCancel={() => {
           setModalVisible(false);

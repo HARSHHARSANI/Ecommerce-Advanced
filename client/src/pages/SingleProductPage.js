@@ -61,12 +61,18 @@ const SingleProductPage = () => {
   }, [slug]);
 
   useEffect(() => {
-    const existingRatingObject = SingleProductValues?.rating?.find(
+    if (!user || !user.id) {
+      setstar(0);
+      return;
+    }
+    let existingRatingObject = SingleProductValues?.rating?.find(
       (ele) => ele.postedBy.toString() === user.id.toString()
     );
 
     if (existingRatingObject) {
       setstar(existingRatingObject.star);
+    } else {
+      setstar(0);
     }
   }, [SingleProductValues.rating, user]);
 
@@ -81,7 +87,7 @@ const SingleProductPage = () => {
 
   return (
     <>
-        <div className="conatainer">
+      <div className="conatainer">
         <div className="row pt-4">
           <SingleProductCard
             product={SingleProductValues}

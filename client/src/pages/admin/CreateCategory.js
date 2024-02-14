@@ -40,7 +40,9 @@ const CreateCategory = () => {
         setName("");
         // console.log("API Response:", response);
         if (response && response.data && response.data.message) {
-          toast.success(response.data.message);
+          toast.success(response.data.message, {
+            position: "top-center",
+          });
           loadCategories(); // Reload the categories after creating a new one
         } else {
           console.error("Invalid response format:", response);

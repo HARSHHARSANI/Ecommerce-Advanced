@@ -102,7 +102,9 @@ const UpdatedProductPage = () => {
     updateProduct(slug, SingleProductValues, user.token)
       .then((res) => {
         setLoading(false);
-        toast.success(`${res.data.title} is updated`);
+        toast.success(`${res.data.title} is updated`, {
+          position: "top-center",
+        });
         navigate("/admin/products");
       })
       .catch((err) => console.log(err));

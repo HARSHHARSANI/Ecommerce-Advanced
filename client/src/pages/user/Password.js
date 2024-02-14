@@ -15,7 +15,9 @@ const Password = () => {
       await auth.currentUser.updatePassword(password);
 
       setLoading(false);
-      toast.success("Password Updated");
+      toast.success("Password Updated", {
+        position: "top-center",
+      });
       console.log("Password Updated");
       setPassword("");
     } catch (error) {

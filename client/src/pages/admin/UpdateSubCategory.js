@@ -49,7 +49,9 @@ const UpdateSubCategory = () => {
         setName("");
         // console.log("API Response:", response);
         if (response && response.data && response.data.message) {
-          toast.success(response.data.message);
+          toast.success(response.data.message, {
+            position: "top-center",
+          });
         } else {
           console.error("Invalid response format:", response);
         }

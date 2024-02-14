@@ -67,7 +67,9 @@ const CreateProduct = () => {
     createProduct(values, user.token)
       .then((response) => {
         // console.log(response);
-        toast.success(`${values.title} Created Successfully`);
+        toast.success(`${values.title} Created Successfully`, {
+          position: "top-center",
+        });
         // window.location.reload();
       })
       .catch((error) => {

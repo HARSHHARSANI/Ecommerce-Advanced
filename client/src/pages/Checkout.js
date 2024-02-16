@@ -16,9 +16,10 @@ const Checkout = () => {
         <h4>Dilevery Address</h4>
         <br />
         <br />
-        <textarea name="address" id="" cols="30" rows="10">
+        <textarea name="address" id="" cols="30" rows="6" className="w-100 ">
           {" "}
         </textarea>
+        <br />
         <button className="btn btn-primary " onClick={saveAddressToDb}>
           Save
         </button>
@@ -55,7 +56,6 @@ const Checkout = () => {
             </button>
           </div>
           <div className="col-md-6">
-            {" "}
             <div className="col-md-6">
               <button className="btn btn-danger  btn-block d-block ">
                 Empty Cart

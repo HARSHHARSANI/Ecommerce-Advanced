@@ -105,7 +105,12 @@ const ProductCard = ({ product }) => {
         ]}
       >
         <Meta
-          title={`${title} - $${price}`}
+          title={
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <span>{title}</span>
+              <span style={{ marginLeft: "auto" }}>${price}</span>
+            </div>
+          }
           description={`${description && description.substring(0, 80)}...`}
         />
       </Card>

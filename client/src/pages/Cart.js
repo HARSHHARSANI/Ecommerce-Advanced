@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import ProductCardDuringCheckout from "./ProductCardDuringCheckout";
-import { userCart } from "../functions/User";
+import { userCart } from "../functions/UserFunction";
 
 const Cart = () => {
   const { user, cart } = useSelector((state) => ({ ...state }));

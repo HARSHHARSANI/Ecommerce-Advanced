@@ -1,12 +1,12 @@
 import mongoose, { mongo } from "mongoose";
-const { objectId } = mongoose.Schema;
+const { ObjectId } = mongoose.Schema;
 
 const cartSchema = new mongoose.Schema(
   {
     products: [
       {
         product: {
-          type: objectId,
+          type: ObjectId,
           ref: "products",
         },
 
@@ -17,7 +17,7 @@ const cartSchema = new mongoose.Schema(
     ],
     cartTotal: Number,
     totalAfterDiscount: Number,
-    orderdBy: { type: objectId, ref: "Users" },
+    orderdBy: { type: ObjectId, ref: "Users" },
   },
   { timestamps: true }
 );

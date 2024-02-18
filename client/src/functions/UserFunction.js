@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const userCart = async (cart, authtoken) => {
   const response = await axios.post(
-    `${process.env.REACT_APP_API}/product/user/cart`,
+    `${process.env.REACT_APP_API}/user/user/cart`,
     { cart },
     {
       headers: {
@@ -11,7 +11,7 @@ export const userCart = async (cart, authtoken) => {
     }
   );
 
-  // console.log("response from userCart", response);
+    console.log("response from userCart", response);
 
   return response;
 };

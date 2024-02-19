@@ -137,7 +137,10 @@ export const postUserAddressController = async (req, res) => {
       { new: true }
     );
     console.log("address updated successfully", user);
-    res.status(200).json(user);
+    res.status(200).json({
+      user,
+      success: true,
+    });
   } catch (error) {
     console.log(error);
     return res.status(400).send({

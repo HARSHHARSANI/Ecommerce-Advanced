@@ -6,12 +6,15 @@ import {
 } from "../functions/UserFunction";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 const Checkout = () => {
   const [coupon, setCoupon] = useState("");
   const [userCartItems, setUserCartItems] = useState([]);
   const [userCartTotal, setUserCartTotal] = useState("");
   const [address, setAddress] = useState("");
+  const [addressSaved, setAddressSaved] = useState(false);
 
   const { cart, user } = useSelector((state) => ({ ...state }));
   const dispatch = useDispatch();
@@ -20,6 +23,10 @@ const Checkout = () => {
     e.preventDefault();
     addUserAddress(user.token, address).then((response) => {
       // console.log(response.data);
+      if (response.data.success) {
+        setAddressSaved(true);
+        toast.success("Address Saved Successfully", { position: "top-center" });
+      }
     });
   };
 
@@ -70,15 +77,16 @@ const Checkout = () => {
       <div className="row">
         <div className="col-md-6">
           <h4>Delivery Address</h4>
-          <textarea
+          {/* <textarea
             name="address"
             id=""
             cols="30"
             rows="6"
             className="w-100"
             value={address}
-            onChange={(e) => setAddress(e.target.value)}
-          />
+            onChange={() => setAddress(e.target.value)}
+          /> */}
+          <ReactQuill theme="snow" value={address} onChange={setAddress} />
           <br />
           <button className="btn btn-primary" onClick={saveAddressToDb}>
             Save
@@ -119,7 +127,12 @@ const Checkout = () => {
           <p className="mx-1 fw-bold">Cart Total: {userCartTotal}</p>
           <div className="row">
             <div className="col-md-6">
-              <button className="btn btn-primary btn-block">Place Order</button>
+              <button
+                className="btn btn-primary btn-block"
+                disabled={!addressSaved || !userCartItems.length}
+              >
+                Place Order
+              </button>
             </div>
             <div className="col-md-6">
               <button

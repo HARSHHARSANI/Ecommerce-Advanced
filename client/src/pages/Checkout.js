@@ -41,22 +41,23 @@ const Checkout = () => {
   }, [user]);
 
   const handleEmptyCart = () => {
-    // const answer = window.confirm("Do you Really want to Empty the cart??");
-    // if (answer) {
-    //   deleteUserCart(user.token).then(() => {
-    //     dispatch({
-    //       type: "ADD_TO_CART",
-    //       payload: [],
-    //     });
-    //     window.localStorage.setItem("cart", JSON.stringify([]));
-    //     setUserCartItems([]);
-    //     setUserCartTotal("");
-    // });
+    const answer = window.confirm("Do you Really want to Empty the cart??");
+    if (answer) {
+      deleteUserCart(user.token).then(() => {
+        dispatch({
+          type: "ADD_TO_CART",
+          payload: [],
+        });
+        window.localStorage.setItem("cart", JSON.stringify([]));
+        setUserCartItems([]);
+        setUserCartTotal("");
+      });
+    }
   };
 
   return (
     <>
-      {JSON.stringify(userCartItems)}
+      {/* {JSON.stringify(userCartItems)} */}
       <div className="row">
         <div className="col-md-6">
           <h4>Delivery Address</h4>

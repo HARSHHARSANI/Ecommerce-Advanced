@@ -33,9 +33,9 @@ export const getUserCart = async (authtoken) => {
   }
 };
 
-export const deleteUserCart = async (user, authtoken) => {
+export const deleteUserCart = async (authtoken) => {
   try {
-    const response = await axios.put(
+    const response = await axios.delete(
       `${process.env.REACT_APP_API}/user/user/cart`,
       {
         headers: {

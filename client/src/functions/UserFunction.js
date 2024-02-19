@@ -11,7 +11,41 @@ export const userCart = async (cart, authtoken) => {
     }
   );
 
-    console.log("response from userCart", response);
+  console.log("response from userCart", response);
 
   return response;
+};
+
+export const getUserCart = async (authtoken) => {
+  try {
+    const response = await axios.get(
+      `${process.env.REACT_APP_API}/user/user/cart`,
+      {
+        headers: {
+          authtoken,
+        },
+      }
+    );
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteUserCart = async (user, authtoken) => {
+  try {
+    const response = await axios.put(
+      `${process.env.REACT_APP_API}/user/user/cart`,
+      {
+        headers: {
+          authtoken,
+        },
+      }
+    );
+
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
 };

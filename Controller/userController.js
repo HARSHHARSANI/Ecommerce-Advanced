@@ -64,3 +64,58 @@ export const postUserCartDetailsController = async (req, res) => {
     });
   }
 };
+
+export const getUserCartController = async (req, res) => {
+  try {
+    const user = await userModel.findOne({ email: req.user.email });
+    console.log("user from getUserCartController ", user);
+
+    const cartItems = await cartModel
+      .findOne({ orderdBy: user._id })
+      .populate("products.product");
+
+    console.log("cartItems Of Users", cartItems);
+
+    res.status(200).json(cartItems);
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({
+      message: "Error in getUserCartController",
+      error,
+    });
+  }
+};
+
+export const deleteUserCartController = async (req, res) => {
+  try {
+    console.log("im inside deleteUserCartController");
+    const user = await userModel.findOne({ email: req.user.email });
+    if (!user) {
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
+    }
+
+    console.log(user);
+    const cartItems = await cartModel.findOneAndRemove({ orderdBy: user._id });
+
+    if (!cartItems) {
+      return res
+        .status(404)
+        .json({ success: false, message: "No cart items found for this user" });
+    }
+
+    console.log("cartItems deleted Successfully", cartItems );
+    res.status(200).json({
+      success: true,
+      message: "Cart successfully deleted",
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      success: false,
+      message: "Error deleting cart",
+      error: error.message,
+    });
+  }
+};

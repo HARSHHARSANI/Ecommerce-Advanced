@@ -11,12 +11,12 @@ const Cart = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  console.log(user);
+
   const handleCheckout = () => {
     try {
-      // console.log("cart", JSON.stringify(cart, null, 4));
       userCart(cart, user.token).then((response) => {
-        // console.log("response", response);
-        if (response.data.sucess) {
+        if (response.data.ok) {
           navigate("/checkout");
         }
       });

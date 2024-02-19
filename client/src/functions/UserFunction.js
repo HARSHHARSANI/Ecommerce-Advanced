@@ -49,3 +49,21 @@ export const deleteUserCart = async (authtoken) => {
     console.log(error);
   }
 };
+
+export const addUserAddress = async (authtoken, address) => {
+  try {
+    const response = await axios.post(
+      `${process.env.REACT_APP_API}/user/user/checkout/address`,
+      { address },
+      {
+        headers: {
+          authtoken,
+        },
+      }
+    );
+
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};

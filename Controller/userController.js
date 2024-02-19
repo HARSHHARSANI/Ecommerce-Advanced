@@ -105,10 +105,10 @@ export const deleteUserCartController = async (req, res) => {
         .json({ success: false, message: "No cart items found for this user" });
     }
 
-    console.log("cartItems deleted Successfully", cartItems );
+    console.log("cartItems deleted Successfully", cartItems);
     res.status(200).json({
       success: true,
-      message: "Cart successfully deleted",
+      message: "Cart Successfully Deleted , Continue Shopping",
     });
   } catch (error) {
     console.log(error);
@@ -116,6 +116,33 @@ export const deleteUserCartController = async (req, res) => {
       success: false,
       message: "Error deleting cart",
       error: error.message,
+    });
+  }
+};
+
+export const postUserAddressController = async (req, res) => {
+  try {
+    const { address } = req.body;
+    if (address === "") {
+      return res.status(200).json({
+        success: false,
+        message: "no address found",
+      });
+    }
+    const user = await userModel.findOneAndUpdate(
+      { email: req.user.email },
+      {
+        address,
+      },
+      { new: true }
+    );
+    console.log("address updated successfully", user);
+    res.status(200).json(user);
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send({
+      success: false,
+      message: "Error in postUserAddressController",
     });
   }
 };

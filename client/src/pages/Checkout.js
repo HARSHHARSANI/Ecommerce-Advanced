@@ -1,22 +1,29 @@
 import React, { useEffect, useState } from "react";
-import { getUserCart, deleteUserCart } from "../functions/UserFunction";
+import {
+  getUserCart,
+  deleteUserCart,
+  addUserAddress,
+} from "../functions/UserFunction";
 import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 const Checkout = () => {
   const [coupon, setCoupon] = useState("");
   const [userCartItems, setUserCartItems] = useState([]);
   const [userCartTotal, setUserCartTotal] = useState("");
+  const [address, setAddress] = useState("");
 
   const { cart, user } = useSelector((state) => ({ ...state }));
   const dispatch = useDispatch();
 
-  const saveAddressToDb = () => {
-    // Implement saving address logic here
+  const saveAddressToDb = (e) => {
+    e.preventDefault();
+    addUserAddress(user.token, address).then((response) => {
+      // console.log(response.data);
+    });
   };
 
-  const handleCoupon = () => {
-    // Implement coupon handling logic here
-  };
+  const handleCoupon = () => {};
 
   const handleCouponChange = (e) => {
     setCoupon(e.target.value);
@@ -43,21 +50,23 @@ const Checkout = () => {
   const handleEmptyCart = () => {
     const answer = window.confirm("Do you Really want to Empty the cart??");
     if (answer) {
-      deleteUserCart(user.token).then(() => {
+      deleteUserCart(user.token).then((response) => {
         dispatch({
           type: "ADD_TO_CART",
           payload: [],
         });
-        window.localStorage.setItem("cart", JSON.stringify([]));
+
+        window.localStorage.removeItem("cart");
         setUserCartItems([]);
         setUserCartTotal("");
+
+        toast.success(response.data.message, { position: "top-center" });
       });
     }
   };
 
   return (
     <>
-      {/* {JSON.stringify(userCartItems)} */}
       <div className="row">
         <div className="col-md-6">
           <h4>Delivery Address</h4>
@@ -67,7 +76,9 @@ const Checkout = () => {
             cols="30"
             rows="6"
             className="w-100"
-          ></textarea>
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+          />
           <br />
           <button className="btn btn-primary" onClick={saveAddressToDb}>
             Save
@@ -112,6 +123,7 @@ const Checkout = () => {
             </div>
             <div className="col-md-6">
               <button
+                disabled={!userCartItems.length}
                 className="btn btn-danger btn-block"
                 onClick={handleEmptyCart}
               >

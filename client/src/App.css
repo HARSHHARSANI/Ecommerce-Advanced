@@ -13,3 +13,18 @@ p {
   align-items: center; /* Align items vertically */
   margin-right: 10px; /* Add margin to create space */
 }
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.action-buttons {
+  text-align: right;
+}

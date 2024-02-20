@@ -35,6 +35,7 @@ import ProductsBasedOnCategory from "./pages/ProductsBasedOnCategory";
 import Shop from "./pages/Shop";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
+import CreateCoupon from "./components/Home/CreateCoupon.js";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -106,8 +107,7 @@ const App = () => {
             element={<UpdateSubCategory />}
           />
 
-          <Route path="/admin/product" element={<CreateProduct />} />
-          <Route path="/admin/coupons" element={<AdminDashboard />} />
+          <Route path="/admin/coupons" element={<CreateCoupon />} />
           <Route path="/admin/password" element={<AdminDashboard />} />
           <Route path="/admin/category/:slug" element={<UpdateCategory />} />
         </Route>

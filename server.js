@@ -12,6 +12,7 @@ import SubCategoryRoutes from "./Routes/SubCategoryRoutes.js";
 import productRoutes from "./Routes/ProductRoutes.js";
 import cloudinaryRoutes from "./Routes/cloudinaryRoutes.js";
 import userRoutes from "./Routes/userRoutes.js";
+import couponRoutes from "./Routes/CouponRoutes.js";
 
 dotenv.config();
 
@@ -34,6 +35,8 @@ app.use("/api/v1/subcategory", SubCategoryRoutes);
 app.use("/api/v1/product", productRoutes);
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/cloudinary", cloudinaryRoutes);
+app.use("/api/v1/coupon", couponRoutes);
+
 // app.use("/api/v1/products", ProductRoutes);
 
 const port = process.env.PORT || 8080;

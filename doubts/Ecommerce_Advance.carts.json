@@ -1,0 +1,30 @@
+[{
+  "_id": {
+    "$oid": "65d5aa9b4efc3c871b28d90e"
+  },
+  "products": [
+    {
+      "product": {
+        "$oid": "65cc7fcc0bc430effd10f732"
+      },
+      "count": 1,
+      "color": "Black",
+      "price": 1399,
+      "_id": {
+        "$oid": "65d5aa9b4efc3c871b28d90f"
+      }
+    }
+  ],
+  "cartTotal": 1399,
+  "orderdBy": {
+    "$oid": "65ab1875bfb69d9d56da0a55"
+  },
+  "createdAt": {
+    "$date": "2024-02-21T07:47:39.576Z"
+  },
+  "updatedAt": {
+    "$date": "2024-02-21T07:48:48.660Z"
+  },
+  "__v": 0,
+  "totalAfterDiscount": 1231.12
+}]

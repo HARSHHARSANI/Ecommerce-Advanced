@@ -70,3 +70,30 @@ export const deleteCouponController = async (req, res) => {
     });
   }
 };
+
+export const updateCouponController = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { updatedData } = req.body;
+    const { name, discount, expiry } = updatedData;
+    const updatedCoupon = await couponModel.findByIdAndUpdate(id, {
+      name: req.body.name || name,
+      expiry: req.body.expiry || expiry,
+      discount: req.body.discount || discount,
+    });
+
+    res.status(200).json(updatedCoupon);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getSingleCouponContrller = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const coupon = await couponModel.findOne({ _id: id });
+    return res.status(200).json(coupon);
+  } catch (error) {
+    console.log(error);
+  }
+};

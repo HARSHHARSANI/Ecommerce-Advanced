@@ -67,3 +67,22 @@ export const addUserAddress = async (authtoken, address) => {
     console.log(error);
   }
 };
+
+export const applyCoupon = async (coupon, authtoken) => {
+  try {
+    const response = await axios.post(
+      `${process.env.REACT_APP_API}/user/user/cart/coupon`,
+      { coupon },
+      {
+        headers: {
+          authtoken,
+        },
+      }
+    );
+
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};

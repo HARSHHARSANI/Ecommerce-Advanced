@@ -37,3 +37,29 @@ export const deleteCoupon = async (id, authtoken) => {
   console.log(response);
   return response;
 };
+
+export const updateCoupon = async (id, authtoken, updatedData) => {
+  const response = await axios.patch(
+    `${process.env.REACT_APP_API}/coupon/coupon/${id}`,
+    {
+      updatedData,
+    },
+    {
+      headers: {
+        authtoken,
+      },
+    }
+  );
+
+  console.log(response);
+  return response;
+};
+
+export const getSingleCoupon = async (id) => {
+  const response = await axios.get(
+    `${process.env.REACT_APP_API}/coupon/coupon/${id}`
+  );
+
+  console.log(response);
+  return response;
+};

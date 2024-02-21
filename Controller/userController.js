@@ -1,6 +1,7 @@
 import cartModel from "../Models/cartModel.js";
 import userModel from "../Models/userModel.js";
 import ProductModel from "../Models/ProductModel.js";
+import couponModel from "../Models/couponModel.js";
 
 export const postUserCartDetailsController = async (req, res) => {
   try {
@@ -147,5 +148,69 @@ export const postUserAddressController = async (req, res) => {
       success: false,
       message: "Error in postUserAddressController",
     });
+  }
+};
+
+export const postCouponController = async (req, res) => {
+  try {
+    const { coupon } = req.body;
+
+    if (coupon === "") {
+      return res.status(400).send({
+        success: false,
+        message: "No Coupon Found",
+      });
+    }
+    //// check if coupon is valid or expired
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const applyCouponToUserCart = async (req, res) => {
+  try {
+    const { coupon } = req.body;
+
+    console.log("Couponssss ---->", coupon);
+    const validCoupon = await couponModel.findOne({ name: coupon });
+
+    if (!validCoupon) {
+      return res.status(200).json({
+        success: false,
+        message: "Invalid Coupon",
+      });
+    }
+    const user = await userModel.findOne({ email: req.user.email });
+    console.log(user);
+    const { products, cartTotal } = await cartModel
+      .findOne({
+        orderdBy: user._id,
+      })
+      .populate("products.product", "_id title price");
+
+    console.log(
+      "cartTotal --->",
+      cartTotal,
+      "discount % --->",
+      validCoupon.discount
+    );
+
+    const totalAfterDiscount = (
+      cartTotal -
+      (cartTotal * validCoupon.discount) / 100
+    ).toFixed(2);
+
+    await cartModel.findOneAndUpdate(
+      { orderdBy: user._id },
+      { totalAfterDiscount },
+      { new: true }
+    );
+
+    return res.status(200).json({
+      totalAfterDiscount,
+      success: true,
+    });
+  } catch (error) {
+    console.log(error);
   }
 };

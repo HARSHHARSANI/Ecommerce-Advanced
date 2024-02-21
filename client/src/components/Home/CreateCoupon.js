@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import {
   getCoupons,
   createCoupon,
   deleteCoupon,
+  getSingleCoupon,
+  updateCoupon,
 } from "../../functions/couponFunction";
 import AdminNav from "../AdminNav";
 import { DeleteOutlined } from "@ant-design/icons";
@@ -18,12 +19,13 @@ const CreateCoupon = () => {
   const [discount, setDiscount] = useState("");
   const [loading, setLoading] = useState(false);
   const [allcoupon, setAllcoupon] = useState([]);
+  const [SingleCouponData, setSingleCouponData] = useState("");
   const dispatch = useDispatch();
   const { user } = useSelector((state) => ({ ...state }));
 
   useEffect(() => {
     loadAllTheCoupons();
-  }, [user]);
+  }, []);
 
   const loadAllTheCoupons = () => {
     getCoupons().then((response) => {
@@ -56,17 +58,17 @@ const CreateCoupon = () => {
     if (answer) {
       deleteCoupon(_id, user.token).then((response) => {
         console.log(response.data);
+        toast.error("Coupon Deleted Successfully", {
+          position: "top-center",
+        });
         loadAllTheCoupons();
       });
     }
   };
 
-  const handleSelected = (_id) => {
-    console.log(_id);
-  };
-
   return (
     <>
+      {JSON.stringify(name)}
       <div className="container-fluid ">
         <div className="row">
           <div className="col-md-2">
@@ -85,27 +87,27 @@ const CreateCoupon = () => {
                 handleSubmit={handleSubmit}
               />
 
-              <div>
+              <div className="mt-3 ">
                 <table className="table table-bordered">
                   <thead>
                     <tr>
                       <th>Coupon</th>
+                      <th>Expiry</th>
+                      <th>Discount</th>
                       <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
                     {allcoupon.map((coupon) => (
                       <tr key={coupon._id}>
-                        <td onClick={handleSelected(coupon._id)}>
-                          {coupon.name}
-                        </td>
+                        <td>{coupon.name}</td>
+                        <td>{new Date(coupon.expiry).toLocaleDateString()}</td>
+                        <td>{coupon.discount} %</td>
                         <td>
-                          <button
-                            className="btn btn-danger"
+                          <DeleteOutlined
+                            className="text-danger "
                             onClick={() => handleDeleteCoupon(coupon._id)}
-                          >
-                            Delete
-                          </button>
+                          />
                         </td>
                       </tr>
                     ))}

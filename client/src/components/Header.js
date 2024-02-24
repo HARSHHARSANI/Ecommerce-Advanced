@@ -5,7 +5,6 @@ import {
   SettingOutlined,
   UsergroupAddOutlined,
   LogoutOutlined,
-  ShoppingCartOutlined,
   ShoppingOutlined,
 } from "@ant-design/icons";
 import { Badge, Menu } from "antd";
@@ -184,7 +183,7 @@ const Header = () => {
     } else if (e.key === "setting:1") {
       // Check the user's role and navigate accordingly
       if (user && user.token) {
-        if (user.role === "admin") {  
+        if (user.role === "admin") {
           navigate("/admin/dashboard");
         } else {
           navigate("/user/history");

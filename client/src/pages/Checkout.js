@@ -10,6 +10,8 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { applyCoupon } from "../functions/UserFunction";
 import { useNavigate } from "react-router-dom";
+import { createPaymentIntentRazorpay } from "../functions/StripeFunction";
+import axios from "axios";
 
 const Checkout = () => {
   const [coupon, setCoupon] = useState("");
@@ -156,6 +158,39 @@ const Checkout = () => {
     </>
   );
 
+  const handlePlaceOrder = async () => {
+    const key = await axios.get(`http://localhost:8080/api/getkey`);
+    console.log(key);
+    createPaymentIntentRazorpay(user.token, userCartTotal).then((response) => {
+      console.log(response.data);
+
+      const options = {
+        key: process.env.RAZORPAY_API_KEY,
+        amount: response.data.order.amaount * 100,
+        currency: "INR",
+        name: "HARSH HARSANI",
+        description: "Test Transaction",
+        image: "https://example.com/your_logo",
+        order_id: response.data.order.id,
+        callback_url:
+          "http://locahost:8080/api/v1/razorpay/paymentVerification",
+        prefill: {
+          name: "Gaurav Kumar",
+          email: "gaurav.kumar@example.com",
+          contact: "9000090000",
+        },
+        notes: {
+          address: "Razorpay Corporate Office",
+        },
+        theme: {
+          color: "#3399cc",
+        },
+      };
+      const rzp1 = new window.Razorpay(options);
+      rzp1.open();
+    });
+  };
+
   return (
     <>
       {/* {JSON.stringify(coupon)} */}
@@ -188,7 +223,7 @@ const Checkout = () => {
               <button
                 className="btn btn-primary btn-block"
                 disabled={!addressSaved || !userCartItems.length}
-                onClick={() => navigate("/payments")}
+                onClick={handlePlaceOrder}
               >
                 Place Order
               </button>

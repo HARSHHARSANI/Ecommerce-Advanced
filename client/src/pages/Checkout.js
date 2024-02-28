@@ -156,7 +156,9 @@ const Checkout = () => {
     </>
   );
 
-  const handlePlaceOrder = async () => {};
+  const handlePlaceOrder = async () => {
+    navigate("/payments");
+  };
   return (
     <>
       {/* {JSON.stringify(coupon)} */}

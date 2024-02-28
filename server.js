@@ -15,7 +15,6 @@ import userRoutes from "./Routes/userRoutes.js";
 import couponRoutes from "./Routes/CouponRoutes.js";
 import stripeRoutes from "./Routes/StripeRoutes.js";
 import Razorpay from "razorpay";
-import RazorpayRoutes from "./Routes/RazorpayRoutes.js";
 
 dotenv.config();
 
@@ -33,7 +32,6 @@ app.use(cors());
 ///routes
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/stripe", stripeRoutes);
-app.use("/api/v1/razorpay", RazorpayRoutes);
 app.use("/api/v1/category", categoryRoutes);
 app.use("/api/v1/subcategory", SubCategoryRoutes);
 app.use("/api/v1/product", productRoutes);

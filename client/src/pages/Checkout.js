@@ -10,8 +10,6 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { applyCoupon } from "../functions/UserFunction";
 import { useNavigate } from "react-router-dom";
-import { createPaymentIntentRazorpay } from "../functions/StripeFunction";
-import axios from "axios";
 
 const Checkout = () => {
   const [coupon, setCoupon] = useState("");
@@ -158,13 +156,7 @@ const Checkout = () => {
     </>
   );
 
-  const handlePlaceOrder = async () => {
-    const key = await axios.get(`http://localhost:8080/api/getkey`);
-    console.log(key);
-    createPaymentIntentRazorpay(user.token).then((response) => {
-      console.log(response.data);
-    });
-  };
+  const handlePlaceOrder = async () => {};
   return (
     <>
       {/* {JSON.stringify(coupon)} */}

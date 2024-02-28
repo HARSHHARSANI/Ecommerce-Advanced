@@ -4,7 +4,6 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import StripeCheckout from "../components/StripeCheckout.js";
 import "../Stripe.module.css";
-import Razorpay from "../components/Razorpay.js";
 
 const promise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
 

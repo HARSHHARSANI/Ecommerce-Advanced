@@ -18,11 +18,12 @@ export const createPaymentIntent = async (authtoken) => {
   }
 };
 
-export const createPaymentIntentRazorpay = async (authtoken, amount) => {
+export const createPaymentIntentRazorpay = async (authtoken) => {
   try {
+    console.log("inside createPaymentIntentRazorpay");
     const response = await axios.post(
       `${process.env.REACT_APP_API}/razorpay/paymentOptions`,
-      { amount },
+      {},
       {
         headers: {
           authtoken,
@@ -36,3 +37,5 @@ export const createPaymentIntentRazorpay = async (authtoken, amount) => {
     console.log(error);
   }
 };
+
+export const verifyPaymentData = async (amount) => {};

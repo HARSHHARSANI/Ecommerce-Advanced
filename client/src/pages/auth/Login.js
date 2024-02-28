@@ -21,9 +21,9 @@ const Login = () => {
   const roleBaseRedirect = (response) => {
     try {
       if (response.role === "admin") {
-        navigate(location.state?.from || "/admin/dashboard");
+        navigate(location.state?.from || "/");
       } else {
-        navigate(location.state?.from || "/user/history");
+        navigate(location.state?.from || "/");
       }
     } catch (error) {
       console.log(error);

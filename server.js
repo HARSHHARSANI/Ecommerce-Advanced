@@ -26,7 +26,10 @@ connectDB();
 
 ///middlewares
 app.use(morgan("dev"));
-app.use(bodyParser.json({ limit: "2mb" }));
+app.use(bodyParser.json());
+/// i have made this change for payment verification controller
+app.use(express.urlencoded({ extended: false }));
+
 app.use(cors());
 
 ///routes
@@ -39,10 +42,35 @@ app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/cloudinary", cloudinaryRoutes);
 app.use("/api/v1/coupon", couponRoutes);
 
-// export const instance = new Razorpay({
-//   key_id: process.env.RAZORPAY_API_KEY,
-//   key_secret: process.env.RAZORPAY_API_SECRET,
-// });
+// Handle the callback from Razorpay
+app.post("/api/v1/razorpay/paymentVerification", (req, res) => {
+  try {
+    // Extract data from the request body
+    const {
+      razorpay_payment_id,
+      razorpay_order_id,
+      razorpay_signature,
+      ...otherData
+    } = req.body;
+
+    // Log the received data
+    console.log("Received Payment Verification Data:", {
+      payment_id: razorpay_payment_id,
+      order_id: razorpay_order_id,
+      signature: razorpay_signature,
+      otherData, // Other data sent by Razorpay
+    });
+
+    // Handle the payment verification logic here
+
+    // Send a success response
+    res.status(200).json({ success: true });
+  } catch (error) {
+    // Handle errors
+    console.error("Error in paymentVerification:", error);
+    res.status(500).json({ success: false, error: "Internal Server Error" });
+  }
+});
 
 app.get("/api/getkey", (req, res) =>
   res.status(200).json({ key: process.env.RAZORPAY_API_KEY })

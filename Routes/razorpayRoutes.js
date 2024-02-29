@@ -8,6 +8,6 @@ import {
 const router = express.Router();
 
 router.post("/create-payment-intent", authCheck, createPaymentIntentController);
-router.post("/paymentVerification", authCheck, paymentVerification);
+router.post("/paymentVerification", paymentVerification);
 
 export default router;

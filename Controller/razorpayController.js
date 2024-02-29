@@ -9,13 +9,25 @@ export const createPaymentIntentController = async (req, res) => {
   try {
     console.log("inside createPaymentIntentController");
 
+    const userEmail = req.user.email;
+    const user = await userModel.findOne({ email: userEmail });
+    if (!user) {
+      return;
+    }
+
+    const cart = await cartModel.findOne({ orderdBy: user._id });
+    if (!cart) {
+      return;
+    }
+    console.log(cart);
+
     const instance = new Razorpay({
       key_id: process.env.RAZORPAY_API_KEY,
       key_secret: process.env.RAZORPAY_API_SECRET,
     });
 
     const options = {
-      amount: 50000,
+      amount: Math.round((cart.totalAfterDiscount || cart.cartTotal) * 100),
       currency: "INR",
     };
 
@@ -34,14 +46,10 @@ export const createPaymentIntentController = async (req, res) => {
   }
 };
 
-export const paymentVerification = (req, res) => {
-  try {
-    console.log("inside paymentVerification");
-    console.log(req.body);
-    res.status(200).json({
-      success: true,
-    });
-  } catch (error) {
-    console.log(error);
-  }
+export const paymentVerification = async (req, res) => {
+  console.log("im inside paymentVerification");
+  console.log(req.body);
+  res.status(200).json({
+    success: true,
+  });
 };

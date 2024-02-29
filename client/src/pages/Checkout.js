@@ -172,32 +172,34 @@ const Checkout = () => {
         {
           headers: {
             authtoken: user.token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
           },
         }
       );
 
-      console.log(order);
+      console.log("order", order);
 
       const options = {
         key: key,
         amount: order.amount,
         currency: "INR",
-        name: "Harsh Harsani",
-        description: "Test Transaction",
+        name: "Digi Store",
+        description: "Ecommerce Purchase",
         image: "https://example.com/your_logo",
         order_id: order.id,
         callback_url:
           "http://localhost:8080/api/v1/razorpay/paymentVerification",
         prefill: {
-          name: "Gaurav Kumar",
-          email: "gaurav.kumar@example.com",
+          name: user.name,
+          email: `${user.email}`,
           contact: "9000090000",
         },
         notes: {
           address: "Razorpay Corporate Office",
         },
         theme: {
-          color: "#3399cc",
+          color: "#3399cc", 
         },
       };
 

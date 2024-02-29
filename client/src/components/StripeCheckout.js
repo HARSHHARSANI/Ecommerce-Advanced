@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createPaymentIntent } from "../functions/StripeFunction";
 import "../stripe.css";
 import { Link } from "react-router-dom";
-
+import { loadStripe } from "@stripe/stripe-js";
 const StripeCheckout = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => ({ ...state }));
@@ -29,45 +29,45 @@ const StripeCheckout = () => {
     });
   }, []);
 
- const handleSubmit = async (e) => {
-   e.preventDefault();
-   setProcessing(true);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setProcessing(true);
 
-   const payload = await stripe.confirmCardPayment(clientSecret, {
-     payment_method: {
-       card: elements.getElement(CardElement),
-       billing_details: {
-         name: e.target.name.value,
-       },
-     },
-   });
+    //  const payload = await stripe.confirmCardPayment(clientSecret, {
+    //    payment_method: {
+    //      card: elements.getElement(CardElement),
+    //      billing_details: {
+    //        name: e.target.name.value,
+    //      },
+    //    },
+    //  });
 
-   if (payload.error) {
-     setError(`Payment Failed ${payload.error.message}`);
-     setProcessing(false);
-   } else if (
-     payload.paymentIntent &&
-     payload.paymentIntent.status === "requires_action"
-   ) {
-     // Redirect the customer to the provided URL
-     window.location.replace(
-       payload.paymentIntent.next_action.redirect_to_url.url
-     );
-   } else if (
-     payload.paymentIntent &&
-     payload.paymentIntent.status === "requires_payment_method"
-   ) {
-     // Handle payment method required, prompt user to provide payment method
-     // Display an error message or UI prompt to collect payment method
-     setError("Payment method required");
-     setProcessing(false);
-   } else {
-     console.log(JSON.stringify(payload, null, 4));
-     setError(null);
-     setProcessing(false);
-     setSucceeded(true);
-   }
- };
+    //  if (payload.error) {
+    //    setError(`Payment Failed ${payload.error.message}`);
+    //    setProcessing(false);
+    //  } else if (
+    //    payload.paymentIntent &&
+    //    payload.paymentIntent.status === "requires_action"
+    //  ) {
+    //    // Redirect the customer to the provided URL
+    //    window.location.replace(
+    //      payload.paymentIntent.next_action.redirect_to_url.url
+    //    );
+    //  } else if (
+    //    payload.paymentIntent &&
+    //    payload.paymentIntent.status === "requires_payment_method"
+    //  ) {
+    //    // Handle payment method required, prompt user to provide payment method
+    //    // Display an error message or UI prompt to collect payment method
+    //    setError("Payment method required");
+    //    setProcessing(false);
+    //  } else {
+    //    console.log(JSON.stringify(payload, null, 4));
+    //    setError(null);
+    //    setProcessing(false);
+    //    setSucceeded(true);
+    //  }
+  };
 
   const handleChange = async (e) => {
     setDisabled(e.empty); ///disable button if error

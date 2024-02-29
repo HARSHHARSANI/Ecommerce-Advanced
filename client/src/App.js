@@ -37,6 +37,7 @@ import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import CreateCoupon from "./components/Home/CreateCoupon.js";
 import Payments from "./pages/Payments.js";
+import Success from "./pages/Success.js";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -83,6 +84,8 @@ const App = () => {
         <Route path="/cart" element={<Cart />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/success" element={<Success />} />
+        <Route path="/cancel" element={<Checkout />} />
         <Route
           path="/subcategory/:slug"
           element={<ProductBasedOnSubcategory />}

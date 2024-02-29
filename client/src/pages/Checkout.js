@@ -10,6 +10,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { applyCoupon } from "../functions/UserFunction";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Checkout = () => {
   const [coupon, setCoupon] = useState("");
@@ -157,8 +158,57 @@ const Checkout = () => {
   );
 
   const handlePlaceOrder = async () => {
-    navigate("/payments");
+    try {
+      console.log(window);
+      const keyResponse = await axios.get("http://localhost:8080/api/getkey");
+      const key = keyResponse.data;
+      console.log("key", key);
+
+      const {
+        data: { order },
+      } = await axios.post(
+        "http://localhost:8080/api/v1/razorpay/create-payment-intent",
+        {},
+        {
+          headers: {
+            authtoken: user.token,
+          },
+        }
+      );
+
+      console.log(order);
+
+      const options = {
+        key: key,
+        amount: order.amount,
+        currency: "INR",
+        name: "Harsh Harsani",
+        description: "Test Transaction",
+        image: "https://example.com/your_logo",
+        order_id: order.id,
+        callback_url:
+          "http://localhost:8080/api/v1/razorpay/paymentVerification",
+        prefill: {
+          name: "Gaurav Kumar",
+          email: "gaurav.kumar@example.com",
+          contact: "9000090000",
+        },
+        notes: {
+          address: "Razorpay Corporate Office",
+        },
+        theme: {
+          color: "#3399cc",
+        },
+      };
+
+      const rzp1 = new window.Razorpay(options);
+      rzp1.open();
+    } catch (error) {
+      console.error("Error in handlePlaceOrder:", error);
+      // Handle error if necessary
+    }
   };
+
   return (
     <>
       {/* {JSON.stringify(coupon)} */}

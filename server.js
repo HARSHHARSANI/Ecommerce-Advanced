@@ -13,7 +13,7 @@ import productRoutes from "./Routes/ProductRoutes.js";
 import cloudinaryRoutes from "./Routes/cloudinaryRoutes.js";
 import userRoutes from "./Routes/userRoutes.js";
 import couponRoutes from "./Routes/CouponRoutes.js";
-import stripeRoutes from "./Routes/StripeRoutes.js";
+import razorpayRoutes from "./Routes/razorpayRoutes.js";
 import Razorpay from "razorpay";
 
 dotenv.config();
@@ -31,7 +31,7 @@ app.use(cors());
 
 ///routes
 app.use("/api/v1/auth", authRoutes);
-app.use("/api/v1/stripe", stripeRoutes);
+app.use("/api/v1/razorpay", razorpayRoutes);
 app.use("/api/v1/category", categoryRoutes);
 app.use("/api/v1/subcategory", SubCategoryRoutes);
 app.use("/api/v1/product", productRoutes);
@@ -39,10 +39,10 @@ app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/cloudinary", cloudinaryRoutes);
 app.use("/api/v1/coupon", couponRoutes);
 
-export const instance = new Razorpay({
-  key_id: process.env.RAZORPAY_API_KEY,
-  key_secret: process.env.RAZORPAY_API_SECRET,
-});
+// export const instance = new Razorpay({
+//   key_id: process.env.RAZORPAY_API_KEY,
+//   key_secret: process.env.RAZORPAY_API_SECRET,
+// });
 
 app.get("/api/getkey", (req, res) =>
   res.status(200).json({ key: process.env.RAZORPAY_API_KEY })

@@ -160,6 +160,7 @@ const Checkout = () => {
   const handlePlaceOrder = async () => {
     try {
       console.log(window);
+      // const keyResponse = await axios.get("http://13.232.19.181/api/api/getkey");  for amazon server
       const keyResponse = await axios.get("http://localhost:8080/api/getkey");
       const key = keyResponse.data;
       console.log("key", key);
@@ -167,7 +168,7 @@ const Checkout = () => {
       const {
         data: { order },
       } = await axios.post(
-        "http://localhost:8080/api/v1/razorpay/create-payment-intent",
+        `${process.env.REACT_APP_API}/razorpay/create-payment-intent`,
         {},
         {
           headers: {
@@ -188,8 +189,7 @@ const Checkout = () => {
         description: "Ecommerce Purchase",
         image: "https://example.com/your_logo",
         order_id: order.id,
-        callback_url:
-          "http://localhost:8080/api/v1/razorpay/paymentVerification",
+        callback_url: `${process.env.REACT_APP_API}/razorpay/paymentVerification`,
         prefill: {
           name: user.name,
           email: `${user.email}`,
@@ -199,7 +199,7 @@ const Checkout = () => {
           address: "Razorpay Corporate Office",
         },
         theme: {
-          color: "#3399cc", 
+          color: "#3399cc",
         },
       };
 

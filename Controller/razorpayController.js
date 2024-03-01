@@ -4,6 +4,13 @@ import cartModel from "../Models/cartModel.js";
 import couponModel from "../Models/couponModel.js";
 import ProductModel from "../Models/ProductModel.js";
 import Razorpay from "razorpay";
+import orderModel from "../Models/orderModel.js";
+import crypto from "crypto";
+
+// Define the hmac_sha256 function
+function hmac_sha256(data, key) {
+  return crypto.createHmac("sha256", key).update(data).digest("hex");
+}
 
 export const createPaymentIntentController = async (req, res) => {
   try {
@@ -12,14 +19,13 @@ export const createPaymentIntentController = async (req, res) => {
     const userEmail = req.user.email;
     const user = await userModel.findOne({ email: userEmail });
     if (!user) {
-      return;
+      return res.status(404).json({ error: "User not found" });
     }
 
     const cart = await cartModel.findOne({ orderdBy: user._id });
     if (!cart) {
-      return;
+      return res.status(404).json({ error: "Cart not found" });
     }
-    console.log(cart);
 
     const instance = new Razorpay({
       key_id: process.env.RAZORPAY_API_KEY,
@@ -31,25 +37,69 @@ export const createPaymentIntentController = async (req, res) => {
       currency: "INR",
     };
 
-    instance.orders.create(options, (err, order) => {
+    instance.orders.create(options, async (err, razorpayOrder) => {
       if (err) {
         console.error("Error creating Razorpay order:", err);
-        res.status(500).send({ error: "Failed to create Razorpay order" });
+        return res
+          .status(500)
+          .json({ error: "Failed to create Razorpay order" });
       } else {
-        console.log("Razorpay order created:", order);
-        res.status(200).json({ success: true, order });
+        console.log("Razorpay order created:", razorpayOrder);
+
+        // Map the products in the cart to the required format
+        const productsInOrder = cart.products.map((product) => ({
+          product: product.product,
+          count: product.count,
+          color: product.color,
+          price: product.price,
+        }));
+
+        const order = new orderModel({
+          user: user._id,
+          products: productsInOrder,
+          totalPrice: Math.round(
+            (cart.totalAfterDiscount || cart.cartTotal) * 100
+          ),
+          razorpay_order_id: razorpayOrder.id,
+        });
+
+        await order.save();
+
+        res.status(200).json({ success: true, order: razorpayOrder });
       }
     });
   } catch (error) {
     console.error("Error creating payment intent:", error);
-    res.status(500).send({ error: "Failed to create payment intent" });
+    res.status(500).json({ error: "Failed to create payment intent" });
   }
 };
 
 export const paymentVerification = async (req, res) => {
   console.log("im inside paymentVerification");
   console.log(req.body);
-  res.status(200).json({
-    success: true,
-  });
+
+  const secret = `${process.env.RAZORPAY_API_SECRET}`;
+
+  const { razorpay_payment_id, razorpay_order_id, razorpay_signature } =
+    req.body;
+
+  const requiredOrderId = await orderModel.find({ razorpay_order_id });
+
+  if (!requiredOrderId) {
+    return res.status(404).json({ error: "Order not found" });
+  }
+
+  const generated_signature = hmac_sha256(
+    razorpay_order_id + "|" + razorpay_payment_id,
+    secret
+  );
+
+  if (generated_signature === razorpay_signature) {
+    return res.json({
+      success: true,
+      message: "Verified",
+    });
+  } else {
+    return res.status(400).json({ error: "Signature verification failed" });
+  }
 };

@@ -202,8 +202,14 @@ const Checkout = () => {
           color: "#3399cc",
         },
       };
-
+      console.log("window", window);
       const rzp1 = new window.Razorpay(options);
+      rzp1.on("payment.success", function (response) {
+        navigate("/success");
+      });
+      rzp1.on("payment.error", function (response) {
+        navigate("/failure");
+      });
       rzp1.open();
     } catch (error) {
       console.error("Error in handlePlaceOrder:", error);

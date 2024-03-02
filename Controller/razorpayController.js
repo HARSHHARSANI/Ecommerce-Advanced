@@ -64,6 +64,22 @@ export const createPaymentIntentController = async (req, res) => {
           razorpay_order_id: razorpayOrder.id,
         });
 
+        /// to decrease the quantity from store and increase the sold quantity
+        const bulkOption = order.products.map((item) => {
+          return {
+            updateOne: {
+              filter: { _id: item.product },
+              update: { $inc: { quantity: -item.count, sold: +item.count } },
+            },
+          };
+        });
+
+        let updated = await ProductModel.bulkWrite(bulkOption, {});
+        console.log(
+          "Product Quantity decreased and Sold Quantity Increased",
+          updated
+        );
+
         await order.save();
 
         console.log("New Order Saved", order);

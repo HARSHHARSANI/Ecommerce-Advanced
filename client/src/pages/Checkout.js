@@ -209,13 +209,16 @@ const Checkout = () => {
         payload: [],
       });
 
+      // dispatch({
+      //   type: "COUPON_ADDED",
+      //   payload: false,
+      // });
+
       window.localStorage.removeItem("cart");
 
       const rzp1 = new window.Razorpay(options);
 
       rzp1.open();
-
-      // window.location.href("/success");
     } catch (error) {
       console.error("Error in handlePlaceOrder:", error);
       // Handle error if necessary

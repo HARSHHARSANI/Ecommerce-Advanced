@@ -16,6 +16,7 @@ import couponRoutes from "./Routes/CouponRoutes.js";
 import razorpayRoutes from "./Routes/razorpayRoutes.js";
 import Razorpay from "razorpay";
 import path from "path";
+import orderRoutes from "./Routes/OrderRoutes.js";
 
 dotenv.config();
 
@@ -42,7 +43,7 @@ app.use("/api/v1/product", productRoutes);
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/cloudinary", cloudinaryRoutes);
 app.use("/api/v1/coupon", couponRoutes);
-
+app.use("/api/v1/orders", orderRoutes);
 // // Handle the callback from Razorpay
 // app.post("/api/v1/razorpay/paymentVerification", (req, res) => {
 //   try {

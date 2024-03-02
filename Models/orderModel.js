@@ -12,7 +12,7 @@ const orderSchema = new mongoose.Schema({
     {
       product: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Product",
+        ref: "products",
         required: true,
       },
       count: {
@@ -28,15 +28,13 @@ const orderSchema = new mongoose.Schema({
         required: true,
       },
     },
-    ],
-  
-  
+  ],
+
   totalPrice: {
     type: Number,
     required: true,
-    },
-  
-  
+  },
+
   orderStatus: {
     type: String,
     default: "Not Processed",
@@ -47,26 +45,23 @@ const orderSchema = new mongoose.Schema({
       "Cancelled",
       "Completed",
     ],
-    },
-  
+  },
+
   //   razorpay_signature: {
   //     type: String,
   //     required: true,
-    //   },
-  
-  
+  //   },
+
   razorpay_order_id: {
     type: String,
     required: true,
-    },
-  
-  
+  },
+
   //   razorpay_payment_id: {
   //     type: String,
   //     required: true,
-    //   },
-  
-  
+  //   },
+
   createdAt: {
     type: Date,
     default: Date.now,

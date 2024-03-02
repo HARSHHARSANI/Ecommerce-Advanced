@@ -53,7 +53,7 @@ export const getAllOrderController = async (req, res) => {
   try {
     const userEmail = req.user.email;
 
-    const user = await userModel.find({ email: userEmail });
+    const user = await userModel.findOne({ email: userEmail });
 
     if (!user) {
       return res.status(500).json({
@@ -62,7 +62,12 @@ export const getAllOrderController = async (req, res) => {
       });
     }
 
-    const userOrders = await orderModel.find({ orderdBy: user._id });
+    const userId = user._id.toString();
+
+    const userOrders = await orderModel
+      .find({ orderdBy: userId })
+      .populate("products.product");
+
     console.log("userOrders", userOrders);
 
     return res.status(200).json(userOrders);

@@ -99,7 +99,7 @@ const ProductCard = ({ product }) => {
                 }}
               />
               <br />
-              Add to Cart
+              "Add to Cart"
             </a>
           </Tooltip>,
         ]}

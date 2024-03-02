@@ -66,7 +66,13 @@ export const createPaymentIntentController = async (req, res) => {
 
         await order.save();
 
-        // await paymentVerification(req, res);
+        console.log("New Order Saved", order);
+
+        const userCart = await cartModel.findOneAndDelete({
+          orderdBy: user._id,
+        });
+
+        console.log(userCart, "userCart");
 
         res.status(200).json({ success: true, order: razorpayOrder });
       }

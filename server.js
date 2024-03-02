@@ -15,6 +15,7 @@ import userRoutes from "./Routes/userRoutes.js";
 import couponRoutes from "./Routes/CouponRoutes.js";
 import razorpayRoutes from "./Routes/razorpayRoutes.js";
 import Razorpay from "razorpay";
+import path from "path";
 
 dotenv.config();
 
@@ -76,9 +77,11 @@ app.get("/api/getkey", (req, res) =>
   res.status(200).json({ key: process.env.RAZORPAY_API_KEY })
 );
 
-// app.get("/success", (req, res) => {
-//   res.sendFile(path.join(__dirname, "path_to_your_success_html_file"));
-// });
+app.use(express.static(path.join(process.cwd(), "public")));
+
+app.get("/success", (req, res) => {
+  res.sendFile(path.join(process.cwd(), "public", "success.html"));
+});
 
 const port = process.env.PORT || 8080;
 

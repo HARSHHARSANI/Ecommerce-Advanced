@@ -6,6 +6,7 @@ import ProductModel from "../Models/ProductModel.js";
 import Razorpay from "razorpay";
 import orderModel from "../Models/orderModel.js";
 import crypto from "crypto";
+import { v4 as uuidv4 } from "uuid";
 
 // Define the hmac_sha256 function
 function hmac_sha256(data, key) {
@@ -55,7 +56,7 @@ export const createPaymentIntentController = async (req, res) => {
         }));
 
         const order = new orderModel({
-          user: user._id,
+          orderdBy: user._id,
           products: productsInOrder,
           totalPrice: Math.round(
             (cart.totalAfterDiscount || cart.cartTotal) * 100
@@ -64,6 +65,8 @@ export const createPaymentIntentController = async (req, res) => {
         });
 
         await order.save();
+
+        // await paymentVerification(req, res);
 
         res.status(200).json({ success: true, order: razorpayOrder });
       }
@@ -95,10 +98,7 @@ export const paymentVerification = async (req, res) => {
   );
 
   if (generated_signature === razorpay_signature) {
-    return res.json({
-      success: true,
-      message: "Verified",
-    });
+    return res.redirect("/success");
   } else {
     return res.status(400).json({ error: "Signature verification failed" });
   }

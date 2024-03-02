@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payment Success</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        text-align: center;
+        padding: 50px;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        color: #4caf50;
+      }
+
+      p {
+        font-size: 18px;
+        color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Payment Successful!</h1>
+      <p>Your payment was successful. Thank you for your purchase.</p>
+      <p>You will be redirected to Home page Now</p>
+    </div>
+
+    <script>
+      // Redirect to http://localhost:3000/ after 3 seconds
+      setTimeout(function () {
+        window.location.href = "http://localhost:3000/";
+      }, 3000);
+    </script>
+  </body>
+</html>

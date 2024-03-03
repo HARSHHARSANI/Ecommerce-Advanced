@@ -5,17 +5,17 @@ const UserNav = () => {
   return (
     <nav>
       <ul className="nav flex-column">
-        <li className="nav-item">
+        <li className="nav-item mt-3 mx-3 ">
           <Link to={"/user/history"} className="nav-link">
             History
           </Link>
         </li>
-        <li className="nav-item">
+        <li className="nav-item mt-3 mx-3">
           <Link to={"/user/password"} className="nav-link">
             Password
           </Link>
         </li>
-        <li className="nav-item">
+        <li className="nav-item mt-3 mx-3">
           <Link to={"/user/wishlist"} className="nav-link">
             Wishlist
           </Link>

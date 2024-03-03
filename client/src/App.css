@@ -28,3 +28,8 @@ p {
 .action-buttons {
   text-align: right;
 }
+
+.thead-dark {
+  background-color: #4f5153; /* Grey color from Bootstrap */
+  color: white; /* Text color for better contrast */
+}

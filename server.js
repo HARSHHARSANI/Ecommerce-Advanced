@@ -17,6 +17,7 @@ import razorpayRoutes from "./Routes/razorpayRoutes.js";
 import Razorpay from "razorpay";
 import path from "path";
 import orderRoutes from "./Routes/OrderRoutes.js";
+import AdminRoutes from "./Routes/AdminRoutes.js";
 
 dotenv.config();
 
@@ -41,6 +42,7 @@ app.use("/api/v1/category", categoryRoutes);
 app.use("/api/v1/subcategory", SubCategoryRoutes);
 app.use("/api/v1/product", productRoutes);
 app.use("/api/v1/user", userRoutes);
+app.use("/api/v1/admin", AdminRoutes);
 app.use("/api/v1/cloudinary", cloudinaryRoutes);
 app.use("/api/v1/coupon", couponRoutes);
 app.use("/api/v1/orders", orderRoutes);

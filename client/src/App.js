@@ -36,7 +36,6 @@ import Shop from "./pages/Shop";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import CreateCoupon from "./components/Home/CreateCoupon.js";
-import Payments from "./pages/Payments.js";
 import Success from "./pages/Success.js";
 
 const App = () => {
@@ -95,7 +94,6 @@ const App = () => {
           <Route path="/user/history" element={<History />} />
           <Route path="/user/password" element={<Password />} />
           <Route path="/user/wishlist" element={<Wishlist />} />
-          <Route path="/payments" element={<Payments />} />
         </Route>
         <Route path="/" element={<AdminRoute />}>
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
@@ -116,7 +114,6 @@ const App = () => {
           <Route path="/admin/coupons" element={<CreateCoupon />} />
           <Route path="/admin/password" element={<AdminDashboard />} />
           <Route path="/admin/category/:slug" element={<UpdateCategory />} />
-          <Route path="/payments" element={<Payments />} />
         </Route>
       </Routes>
     </>

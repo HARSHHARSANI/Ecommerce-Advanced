@@ -4,6 +4,27 @@ import { getAllOrders } from "../../functions/orderFunctions";
 import { useSelector } from "react-redux";
 import { CloseCircleOutlined, CheckCircleOutlined } from "@ant-design/icons";
 import toast from "react-toastify";
+import {
+  PDFDownloadLink,
+  PDFViewer,
+  Page,
+  Text,
+  View,
+  Document,
+  StyleSheet,
+} from "@react-pdf/renderer";
+
+const styles = StyleSheet.create({
+  page: {
+    flexDirection: "row",
+    backgroundColor: "#E4E4E4",
+  },
+  section: {
+    margin: 10,
+    padding: 10,
+    flexGrow: 1,
+  },
+});
 
 const History = () => {
   const [userOrders, setUserOrders] = useState([]);
@@ -16,6 +37,41 @@ const History = () => {
       setUserOrders(response.data);
     });
   }, []);
+
+  const generateInvoicePDF = (order) => {
+    const MyDocument = (
+      <Document>
+        <Page size="A4" style={styles.page}>
+          <View style={styles.section}>
+            <Text>Invoice for Order ID: {order._id}</Text>
+            <Text>Date: {order.createdAt}</Text>
+            <Text>Customer: {user.email}</Text>
+            <Text>--------------------------</Text>
+            <Text>Products:</Text>
+            <View>
+              {order.products.map((product, index) => (
+                <Text key={index}>
+                  {product.product?.title} - ₹{product.price.toFixed(2)}
+                </Text>
+              ))}
+            </View>
+            <Text>Total Price: ₹{(order.totalPrice / 100).toFixed(2)}</Text>
+          </View>
+        </Page>
+      </Document>
+    );
+
+    return (
+      <PDFDownloadLink
+        document={MyDocument}
+        fileName={`invoice_${order._id}.pdf`}
+      >
+        {({ blob, url, loading, error }) =>
+          loading ? "Loading document..." : "Download PDF"
+        }
+      </PDFDownloadLink>
+    );
+  };
 
   const showEachOrders = () => {
     return userOrders.map((order, i) => {
@@ -30,15 +86,14 @@ const History = () => {
           </p>
           {showOrderInTable(order)}
           <div className="row">
-            <div className="col">
-              <p>PDF Download</p>
+            <div className="col text-center">
+              <p>{generateInvoicePDF(order)}</p>
             </div>
           </div>
         </div>
       );
     });
   };
-
   const showOrderInTable = (order) => {
     return (
       <table className="table table-bordered">
@@ -101,7 +156,7 @@ const History = () => {
             <UserNav />
           </div>
           <div className="col text-center ">
-            <h4>
+            <h4 className="mt-4 " style={{ marginBottom: " -15px" }}>
               {" "}
               {userOrders.length ? "User History Page" : "No Orders Yet"}
             </h4>

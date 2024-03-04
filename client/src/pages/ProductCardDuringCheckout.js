@@ -144,14 +144,14 @@ const ProductCardDuringCheckout = ({ product }) => {
             className="form-control"
           />
         </td>
-        <td>
+        <td className="text-center ">
           {shipping === "Yes" ? (
             <CheckCircleOutlined className="text-success text-center " />
           ) : (
             <CloseCircleOutlined className="text-danger text-center " />
           )}
         </td>
-        <td>
+        <td className="text-center ">
           <CloseOutlined
             onClick={handleRemove}
             className="text-danger text-center "

@@ -185,9 +185,10 @@ const Checkout = () => {
         key: key,
         amount: order.amount,
         currency: "INR",
-        name: "Digi Store",
+        name: "Digital Store",
         description: "Ecommerce Purchase",
-        image: "https://example.com/your_logo",
+        image:
+          "https://img.squadhelp.com/story_images/visual_images/1620320512-digitalstore.png?class=show",
         order_id: order.id,
         callback_url: `${process.env.REACT_APP_API}/razorpay/paymentVerification`,
         prefill: {
@@ -209,10 +210,13 @@ const Checkout = () => {
         payload: [],
       });
 
-      // dispatch({
-      //   type: "COUPON_ADDED",
-      //   payload: false,
-      // });
+      setUserCartItems([]);
+      setUserCartTotal("");
+
+      dispatch({
+        type: "COUPON_ADDED",
+        payload: false,
+      });
 
       window.localStorage.removeItem("cart");
 

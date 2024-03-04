@@ -49,7 +49,7 @@ const AdminDashboard = () => {
       <tr key={index}>
         <td>{order._id}</td>
         <td>{order.orderdBy.name}</td>
-        <td>${(order.totalPrice / 100).toFixed(2)}</td>
+        <td>{(order.totalPrice / 100).toFixed(2)}</td>
         <td>
           <select
             value={order.status} // Use the order's status

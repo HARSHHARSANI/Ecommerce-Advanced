@@ -53,6 +53,7 @@ const AdminDashboard = () => {
         <td>
           <select
             value={order.status} // Use the order's status
+            className="form-control"
             onChange={(e) => handleOrderAction(order._id, e.target.value)}
           >
             {/* Render order status options */}

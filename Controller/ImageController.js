@@ -3,7 +3,7 @@ export const allimagesController = async (req, res) => {
     const response = {
       123456789: {
         ImageURL:
-          "https://mir-s3-cdn-cf.behance.net/project_modules/1400/706c66103003811.5f43ca98674fe.jpg",
+          "https://drive.google.com/file/d/13Wm3jwcDsXHqMQLm1JYJ_IB5MUvrX-8_/view?usp=sharing",
         Count: "5",
       },
     };

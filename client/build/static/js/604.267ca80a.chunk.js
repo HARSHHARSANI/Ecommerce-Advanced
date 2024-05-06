@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkclient=self.webpackChunkclient||[]).push([[604],{2604:(e,t,c)=>{c.r(t),c.d(t,{default:()=>a});var n=c(69060),s=c(51560),u=c(4992),r=c(35780),l=c(59956),o=c(82496);const a=e=>{let{children:t,...c}=e;const{user:a}=(0,u.w1)((e=>({...e}))),[h,k]=(0,n.useState)(!1);return(0,n.useEffect)((()=>{a&&a.token&&(0,l.Ku)(a.token).then((e=>{k(!0)})).catch((e=>console.log("Admin Route Error",e)))}),[a]),h?(0,o.jsx)(s.yY,{}):(0,o.jsx)(r.c,{})}}}]);
+//# sourceMappingURL=604.267ca80a.chunk.js.map

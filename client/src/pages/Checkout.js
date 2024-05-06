@@ -161,7 +161,9 @@ const Checkout = () => {
     try {
       console.log(window);
       // const keyResponse = await axios.get("http://13.232.19.181/api/api/getkey");  for amazon server
-      const keyResponse = await axios.get("http://localhost:8080/api/getkey");
+      const keyResponse = await axios.get(
+        `${process.env.REACT_APP_API}/api/getkey`
+      );
       const key = keyResponse.data;
       console.log("key", key);
 

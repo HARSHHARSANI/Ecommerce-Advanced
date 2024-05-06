@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkclient=self.webpackChunkclient||[]).push([[540],{37540:(e,t,c)=>{c.r(t),c.d(t,{default:()=>r});var s=c(69060),n=c(51560),i=c(82496);const r=()=>{const e=(0,n.i6)();return(0,s.useEffect)((()=>{const t=setTimeout((()=>{e("/")}),3e3);return()=>clearTimeout(t)}),[e]),(0,i.jsxs)("div",{children:[(0,i.jsx)("h2",{children:"Payment Successful"}),(0,i.jsx)("p",{children:"Redirecting to the home page..."})]})}}}]);
+//# sourceMappingURL=540.6c4e5a0d.chunk.js.map

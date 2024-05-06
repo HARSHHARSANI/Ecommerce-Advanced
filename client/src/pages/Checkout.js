@@ -162,7 +162,7 @@ const Checkout = () => {
       console.log(window);
       // const keyResponse = await axios.get("http://13.232.19.181/api/api/getkey");  for amazon server
       const keyResponse = await axios.get(
-        `${process.env.REACT_APP_API}/api/getkey`
+        `https://ecommerce-advanced.onrender.com/api/getkey`
       );
       const key = keyResponse.data;
       console.log("key", key);
